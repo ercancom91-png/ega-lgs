@@ -1,0 +1,478 @@
+[
+ {
+  "no_pdf": 5,
+  "sayfa": 3,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. MATEMATİK A A SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV 2018-2019 EĞİTİM - ÖĞRETİM YILI A (ÖDSGM) 3 Diğer sayfaya geçiniz. 1. Bir otelin her bir katındaki oda sayısının, oda­ ların bulunduğu katın numarasına göre değişi­ mini gösteren tablo aşağıda verilmiştir. Tablo: Kat Numarasına Göre Kattaki Oda Sayısı Kat Numarası (x) Kattaki Oda Sayısı 1 # x 1 4 90 - 10x 4 # x 1 7 50 - 5x Buna göre bu otelde 2. kattaki oda sayısı 5. kattaki oda sayısından kaç fazladır?",
+  "secenekler": {
+   "A": "40",
+   "B": "45",
+   "C": "50",
+   "D": "55"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 2,
+  "sayfa": 3,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. MATEMATİK A A SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV 2018-2019 EĞİTİM - ÖĞRETİM YILI A (ÖDSGM) 3 Diğer sayfaya geçiniz. 1. Bir otelin her bir katındaki oda sayısının, oda­ ların bulunduğu katın numarasına göre değişi­ mini gösteren tablo aşağıda verilmiştir. Tablo: Kat Numarasına Göre Kattaki Oda Sayısı Kat Numarası (x) Kattaki Oda Sayısı 1 # x 1 4 90 - 10x 4 # x 1 7 50 - 5x Buna göre bu otelde 2. kattaki oda sayısı 5. kattaki oda sayısından kaç fazladır? A) 40 B) 45 C) 50 D) 55 2. a, b, c birer gerçek sayı ve b $ 0 olmak üzere a b a b 2 = ( ) a b c b a c b b b b + = + ( ) . a c a c dir - = - Aşağıdaki şekildeki gibi bir vincin havada tuttuğu inşaat malzemesinin yerden yüksekliği 125 m ve malzemenin vincin koluna uzaklığı 45 mʼdir. Yer Vinç kolu 45 m 125 m Vincin kolunun yerden yüksekliği sabit kalmak üzere malzeme şekildeki konumdayken 5 m yukarı çekiliyor. Buna göre son durumda malzemenin yer­ den yüksekliği, malzemenin vincin koluna uzaklığından kaç metre fazladır?",
+  "secenekler": {
+   "A": "2 5",
+   "B": "3 5",
+   "C": "4 5",
+   "D": "5 5"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 3,
+  "sayfa": 4,
+  "metin": "Bir ondalık gösterimin, basamak değerleri toplamı şeklinde yazılmasına ondalık gösterimin çözümlen­ mesi denir. Uçakla seyahat eden bir yolcu, kütlesi 8 kg'dan az olan valizini kabine alabilmektedir. Aycan'ın valizinin kütlesi 9,08 kg'dır. Bu valizdeki bazı eşyaların kütlelerinin çözümlenmiş şekli aşağı­ daki tabloda verilmiştir. Tablo: Valizdeki Eşyalardan Bazılarının Kütleleri Eşya Kütlesi (kg) Ayakkabı 9.10-1 + 8.10-2 Kitap 1.100 + 1.10-1 Mont 9.10-1 + 5.10-3 Tablet 1.100 + 9.10-3 Aycan, valizinden bu dört eşyadan hangisini çıkarırsa valizini kabine alabilir?",
+  "secenekler": {
+   "A": "Tablet",
+   "B": "Ayakkabı",
+   "C": "Kitap",
+   "D": "Mont"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 4,
+  "sayfa": 5,
+  "metin": "Aşağıda dikdörtgen şeklindeki A, B, C kartonlarının her birinden dörder adet verilmiştir. x cm 2x cm C 2x cm 2x cm B 2x cm 4x cm A Bu kartonların kenarları çakıştırılarak iki tane kare prizma oluşturuluyor. Bu prizmalardan biri aşağıda verilmiştir. C C B Kartonların tamamı kullanıldığına göre diğer prizmanın yüzey alanı kaç santimetrekaredir?",
+  "secenekler": {
+   "A": "16x2",
+   "B": "26x2",
+   "C": "32x2",
+   "D": "40x2"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 5,
+  "sayfa": 6,
+  "metin": "Dik üçgenlerde 90° lik açının karşısındaki kenara hipotenüs denir. Bir dik üçgende dik kenarların uzunluklarının kareleri toplamı, hipotenüsün uzunluğunun karesine eşittir. c b a C B A a2 + c2 = b2 Geometri tahtası, bir zeminin üzerine eşit aralıklarla yerleştirilmiş çivilerden oluşur. Şekil I Şekil II Şekil I'deki geometri tahtasında oluşturulan karenin alanı 4x2 + 8x + 4 birimkaredir. Bu geometri tahtasında ùeNiO ,,'deki gibi oluşturulan üçgenin çevre uzunluğu x cinsinden kaç birimdir?",
+  "secenekler": {
+   "A": "12x + 12",
+   "B": "14x + 14",
+   "C": "x 12 2 12 2 +",
+   "D": "12(x + 1)2"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 6,
+  "sayfa": 7,
+  "metin": "35 cm2 77 cm2 110 cm2 Kenarlarının uzunlukları santimetre cinsinden 1ʼden büyük tam sayı olan dikdörtgen şeklindeki kartonlar ve bu kartonların bir yüzlerinin alanları yukarıda verilmiştir. Bu kartonlardan yüzey alanları farklı olan ikisi seçilip 3 cmʼlik kısımları üst üste yapıştırılarak aşağıdaki gibi bir dikdörtgen karton oluşturulacaktır. 3 cm 3 cm Bu şekilde oluşturulan kartonun bir yüzünün alanı en fazla kaç santimetrekaredir?",
+  "secenekler": {
+   "A": "91",
+   "B": "130",
+   "C": "154",
+   "D": "187"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 7,
+  "sayfa": 8,
+  "metin": "F E D C B A 1 birim 1 birim Yukarıdaki kareli zeminde verilen şekilde A, B, C noktaları sırasıyla D, E, F noktalarıyla birleştirilerek [AD], [BE] ve [CF] çiziliyor. Buna göre aşağıdakilerden hangisi elde edilen üçgenlerden benzer olan herhangi ikisinin benzerlik oranı olamaz?",
+  "secenekler": {
+   "A": "1",
+   "B": "3 2",
+   "C": "2 1",
+   "D": "3 1"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 8,
+  "sayfa": 8,
+  "metin": "F E D C B A 1 birim 1 birim Yukarıdaki kareli zeminde verilen şekilde A, B, C noktaları sırasıyla D, E, F noktalarıyla birleştirilerek [AD], [BE] ve [CF] çiziliyor. Buna göre aşağıdakilerden hangisi elde edilen üçgenlerden benzer olan herhangi ikisinin benzerlik oranı olamaz? A) 1 B) 3 2 C) 2 1 D) 3 1 8. a, b birer gerçek sayı ve b $ 0 olmak üzere a b a b 2 = dir. Dikdörtgen şeklindeki bir kâğıt aşağıdaki gibi kesilerek kare ve dikdörtgen şeklinde iki kâğıt elde ediliyor. Elde edilen kare şeklindeki kâğıdın bir yüzünün alanı 27 cm2 olup dikdört­ gen şeklindeki kâğıdın bir yüzünün alanının 3 katına eşittir. Buna göre elde edilen dikdörtgen şeklin­ deki kâğıdın kısa kenarının uzunluğu kaç santimetredir?",
+  "secenekler": {
+   "A": "9",
+   "B": "3 2",
+   "C": "3",
+   "D": "3"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 3,
+  "sayfa": 8,
+  "metin": "F E D C B A 1 birim 1 birim Yukarıdaki kareli zeminde verilen şekilde A, B, C noktaları sırasıyla D, E, F noktalarıyla birleştirilerek [AD], [BE] ve [CF] çiziliyor. Buna göre aşağıdakilerden hangisi elde edilen üçgenlerden benzer olan herhangi ikisinin benzerlik oranı olamaz? A) 1 B) 3 2 C) 2 1 D) 3 1 8. a, b birer gerçek sayı ve b $ 0 olmak üzere a b a b 2 = dir. Dikdörtgen şeklindeki bir kâğıt aşağıdaki gibi kesilerek kare ve dikdörtgen şeklinde iki kâğıt elde ediliyor. Elde edilen kare şeklindeki kâğıdın bir yüzünün alanı 27 cm2 olup dikdört­ gen şeklindeki kâğıdın bir yüzünün alanının 3 katına eşittir. Buna göre elde edilen dikdörtgen şeklin­ deki kâğıdın kısa kenarının uzunluğu kaç santimetredir? A) 9 B) 3 2 C) 3 D) 3 9. Eğim, dikey uzunluğun yatay uzunluğa oranıdır. YATAY 4. Durak 3. Durak 2. Durak 1. Durak DİKEY A E D C B I H G F N M L K Yukarıdaki kareli zeminde verilen A nokta­ sından yola çıkan bir hareketli, eğimi 1 olan yolu izleyerek 2. duraktaki noktalardan birine ulaştıktan sonra bu noktadan eğimi 2 olan yolu izleyerek 3. duraktaki noktalardan birine ulaşıyor. Ardışık iki durak arasında izlediği yollar doğrusal olduğuna göre bu hareketli, 3. durakta bulunduğu noktadan eğimi 3 olan yolu izleyerek 4. duraktaki hangi noktaya ulaşır?",
+  "secenekler": {
+   "A": "K",
+   "B": "L",
+   "C": "M",
+   "D": "N"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 11,
+  "sayfa": 10,
+  "metin": "Eşit uzunluktaki iki çubuğun birinden 8 cmʼlik bir parça kesilerek kalan kısım iki eş parçaya, diğerinden 5 cmʼlik bir parça kesilerek kalan kısım üç eş parçaya aşağıdaki gibi ayrılıyor. 8 cm 5 cm Bu parçalardan birer tanesi ile bir kitabın aynı kenarı aşağıdaki gibi ölçüldüğünde parçalardan birinin uzunluğu kitabın kenar uzunluğundan 10 cm fazla, diğerinin uzunluğu ise 1 cm eksik oluyor. 10 cm 1 cm KİTAP KİTAP Buna göre kesilmeden önce çubuklardan birinin uzunluğu kaç santimetredir?",
+  "secenekler": {
+   "A": "85",
+   "B": "80",
+   "C": "75",
+   "D": "70"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 2,
+  "sayfa": 11,
+  "metin": "İstenilen olası durumların sayısı Tüm olası durumların sayısı Bir olayın olma olasılığı = 1. Torba 2. Torba KUTU İçinde kırmızı veya sarı renkli 5 topun bulunduğu 1. torbadan rastgele çekilen bir topun kırmızı olma olasılığı daha fazladır. Ayrıca mavi veya sarı renkli 7 topun bulunduğu 2. torbadan rastgele çekilen bir topun sarı olma olasılığı daha azdır. 1. ve 2. torbadaki topların tamamı boş bir kutuya atılıp karıştırılı­ yor. Topların tamamı renkleri dışında özdeş olduğuna göre bu kutudan rastgele çekilen bir topun sarı olma olasılığı en fazla kaçtır?",
+  "secenekler": {
+   "A": "6 1",
+   "B": "4 1",
+   "C": "12 5",
+   "D": "12 7"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 13,
+  "sayfa": 12,
+  "metin": "Dik üçgenlerde 90° lik açının karşısındaki kenara hipotenüs denir. Bir dik üçgende dik kenarların uzunluklarının kareleri toplamı, hipotenüsün uzunluğunun karesine eşittir. c b a C B A a2 + c2 = b2 ABCD dikdörtgeni biçimindeki bir kâğıt parça­ sının bir yüzüne aşağıdaki gibi 10 eş dikdört­ gen çizilip bu dikdörtgenler boyanıyor. D C B A Kâğıdın bu yüzündeki boyanmayan böl­ gelerin alanları toplamı 30 cm2 olduğuna göre ABCD dikdörtgeninin köşegenlerinden birinin uzunluğu kaç santimetredir?",
+  "secenekler": {
+   "A": "3 10",
+   "B": "5 26",
+   "C": "10 13",
+   "D": "26 10"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 14,
+  "sayfa": 12,
+  "metin": "Dik üçgenlerde 90° lik açının karşısındaki kenara hipotenüs denir. Bir dik üçgende dik kenarların uzunluklarının kareleri toplamı, hipotenüsün uzunluğunun karesine eşittir. c b a C B A a2 + c2 = b2 ABCD dikdörtgeni biçimindeki bir kâğıt parça­ sının bir yüzüne aşağıdaki gibi 10 eş dikdört­ gen çizilip bu dikdörtgenler boyanıyor. D C B A Kâğıdın bu yüzündeki boyanmayan böl­ gelerin alanları toplamı 30 cm2 olduğuna göre ABCD dikdörtgeninin köşegenlerinden birinin uzunluğu kaç santimetredir? A) 3 10 B) 5 26 C) 10 13 D) 26 10 14. Yükseklikleri eşit olan dik dairesel silindir şeklindeki iki eş pakete kakaolu ve vanilyalı bisküviler, tabanları çakışacak şekilde aşağı­ daki gibi tek sıra hâlinde yerleştiriliyor. Kakaolu bisküvi Vanilyalı bisküvi 10 cm 14 cm Kakaolu bir bisküvinin yüksekliği vanilyalı bir bisküvinin yüksekliğinin yarısı kadardır. Paket­ lerden birine üç vanilyalı, iki kakaolu bisküvi konulduğunda paketin boş kalan kısmının yüksekliği 10 cm; diğer pakete bir vanilyalı, iki kakaolu bisküvi konulduğunda paketin boş kalan kısmının yüksekliği 14 cm oluyor. Tam dolu bir paketteki vanilyalı bisküvi sa­ yısı kakaolu bisküvi sayısına eşit olduğuna göre bu pakette kaç tane bisküvi vardır?",
+  "secenekler": {
+   "A": "10",
+   "B": "12",
+   "C": "16",
+   "D": "18"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 15,
+  "sayfa": 13,
+  "metin": "Bir televizyon kanalında 24 saat boyunca yayımlanacak programların sürelerine göre dağılımı ve yayın sırası aşağıdaki daire grafiğinde gösterilmiştir. Bu daire grafiğine uygun 24 saatlik yayın akışını göste­ ren aşağıdaki gibi bir tablo oluşturulacaktır. 15° 15° 15° 30° 30° 45° 60° 60° 10 9 8 7 6 5 4 3 2 1 45° 45° Grafik: Yayımlanacak Programların Sürelere Göre Dağılımı Tablo: 24 Saatlik Yayın Akışı Sıra Program Adı Yayın Saati 1 El Emeği Göz Nuru 08.00 - ... 2 Başarının Sırrı ... - ... 3 Anadolu'da Lezzet Durakları ... - ... 4 Piramitlerin Gizemi ... - ... 5 Çanakkale Destanı ... - ... 6 Ata Sporlarımız ... - ... 7 Doğanın Gücü ... - ... 8 Dünya Atletizm Şampiyonası ... - ... 9 Bilgisayar Dünyası ... - ... 10 Notaların Dili ... - ... Verilenlere göre \"Ata Sporlarımız\" adlı programın yayın saati aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "19.00 - 20.00",
+   "B": "01.00 - 02.00",
+   "C": "20.00 - 21.00",
+   "D": "02.00 - 03.00"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 16,
+  "sayfa": 14,
+  "metin": "a, b, c, d birer gerçek sayı ve b $ 0, d $ 0 olmak üzere ( ) a b c d a c b d $ $ $ = a b a b 2 = dir. 12 20 9 A 27 3 2 28 Tablo 1 Tablo 2 Tablo 1ʼde verilen ifadelerin her biri Tablo 2ʼde verilen ifadelerin her biri ile birer kez çarpılıyor. Bu şekilde elde edilen sayıların her biri, bir karta bir sayı gelecek şekilde özdeş kartlara yazılarak boş bir torbaya atılıyor. Torbadan rastgele çekilen bir kartın üzerin­ de yazan sayının doğal sayı olma olasılığı­ nın 8 1 olması için A yerine aşağıdakilerden hangisi yazılmalıdır?",
+  "secenekler": {
+   "A": "2",
+   "B": "3",
+   "C": "5",
+   "D": "7"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 17,
+  "sayfa": 14,
+  "metin": "a, b, c, d birer gerçek sayı ve b $ 0, d $ 0 olmak üzere ( ) a b c d a c b d $ $ $ = a b a b 2 = dir. 12 20 9 A 27 3 2 28 Tablo 1 Tablo 2 Tablo 1ʼde verilen ifadelerin her biri Tablo 2ʼde verilen ifadelerin her biri ile birer kez çarpılıyor. Bu şekilde elde edilen sayıların her biri, bir karta bir sayı gelecek şekilde özdeş kartlara yazılarak boş bir torbaya atılıyor. Torbadan rastgele çekilen bir kartın üzerin­ de yazan sayının doğal sayı olma olasılığı­ nın 8 1 olması için A yerine aşağıdakilerden hangisi yazılmalıdır? A) 2 B) 3 C) 5 D) 7 17. a ! 0 ve m, n tam sayılar olmak üzere an.am = an+m ve a a a n m m n = - (an)m = an.m dir. Aşağıda sadece ön yüzlerinde birer üslü ifadenin yazılı olduğu 4 mavi ve 4 kırmızı kart verilmiştir. Mavi Kartlar 2-2 23 2-1 24 Kırmızı Kartlar 4-1 4-3 42 40 Mavi kartlardaki her bir üslü ifade kırmızı kart­ lardaki kendisine denk olmayan her bir üslü ifade ile birer kez çarpılarak yeni üslü ifadeler elde ediliyor. Elde edilen bu üslü ifadelerden ikisinin birbirine oranı en çok kaçtır?",
+  "secenekler": {
+   "A": "212",
+   "B": "215",
+   "C": "216",
+   "D": "217"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 18,
+  "sayfa": 15,
+  "metin": "Dik üçgenlerde 90° lik açının karşısındaki kenara hipotenüs denir. Bir dik üçgende dik kenarların uzunluklarının kareleri toplamı hipotenüsün uzunluğunun karesine eşittir. c b a C B A a2 + c2 = b2 Taban ayrıtlarının uzunlukları 10 cm ve 24 cm olan dikdörtgenler prizması biçimindeki tahta blok Şekil I'deki gibi taban köşegenleri boyunca tabanlara dik olacak şekilde kesilerek iki eş parçaya ayrı­ lıyor. Elde edilen iki parça üst üste yapıştırılarak Şekil II'deki dik üçgen dik prizma biçiminde bir tahta blok oluşturuluyor. Şekil I 24 cm 10 cm Şekil II Elde edilen dik üçgen dik prizma ile başlangıçta verilen dikdörtgenler prizmasının ayrıtlarının uzunluk­ ları toplamı birbirine eşittir. Buna göre dikdörtgenler prizması şeklindeki tahta bloğun yüksekliği kaç santimetredir?",
+  "secenekler": {
+   "A": "8",
+   "B": "9",
+   "C": "16",
+   "D": "22"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 20,
+  "sayfa": 17,
+  "metin": "30 TL 50 TL B Marka Kedi Maması A Marka Kedi Maması Zeynep parasının yarısı ile paketi 30 lira olan A marka ve diğer yarısı ile paketi 50 lira olan B marka kedi mamalarından alıyor. Bu paketlerden markası aynı olan 6 tanesini evinde beslediği kedileri için ayırdıktan sonra kalan paketleri bir hayvan barınağına veriyor. Zeynep'in hayvan barınağına verdiği A marka ve B marka mamaların paketlerinin sayıları eşit olduğuna göre Zeynep mamalar için toplam kaç lira harcamıştır?",
+  "secenekler": {
+   "A": "300",
+   "B": "600",
+   "C": "700",
+   "D": "900 MATEMATİK TESTİ BİTTİ. FEN BİLİMLERİ TESTİNE GEÇİNİZ."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 2,
+  "sayfa": 18,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. A A SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV 2018-2019 EĞİTİM - ÖĞRETİM YILI A (ÖDSGM) 18 )EN %İLİMLERİ 1. Karasal bir ekosistemdeki besin zinciri şekilde­ ki gibidir. Ot Çekirge Kertenkele Yılan Bu besin zincirindeki canlıların yaşadıkları ortamdaki birey sayıları farklı boyutlardaki tahta bloklar ile eşleştirilecektir. Bu blokların boyutları birey sayısını temsil etmektedir. Büyük olan bloklar birey sayısının çok, küçük olanlar ise birey sayısının az olduğunu göstermektedir. > > > Buna göre, bu besin zincirindeki canlıların birey sayılarını temsil eden tahta blokların dizilimi aşağıdakilerin hangisindeki gibi olmalıdır? A) B) C) D) Yılan Kertenkele Çekirge Ot Yılan Kertenkele Çekirge Ot Yılan Kertenkele Çekirge Ot Yılan Kertenkele Çekirge Ot 2. Göz organının gelişimini kontrol eden genler sayesinde canlı türlerine özgü göz çeşitleri ortaya çıkmıştır. Bir bilim insanı çeşitli hayvan­ larda göz oluşumunu kontrol eden genlerin bir bölümünü aşağıdaki şekilde göstermiştir. DNA: A A A A A A A T T T T T T C C GGG GG ....... DNA: A A A A A A A T T T T T T C C GGG GG ....... DNA: A A A A A A A A T T T T C C C C GGG G ....... .............. .............. Verilen bilgilere göre gen kavramı ile ilgili aşağıdakilerden hangisi söylenemez?",
+  "secenekler": {
+   "A": "Genler, DNA üzerindeki bir grup nükleotid dizisinden oluşur.",
+   "B": "Farklı canlılardaki bir organın gelişimini kontrol eden genler, ortak nükleotid dizileri içerebilir.",
+   "C": "Farklı canlılarda yer alan gözlerin oluşma­ sında işlev gören genlerin nükleotid dizi­ limlerinin birbiriyle aynı olma zorunluluğu yoktur.",
+   "D": "Canlılardaki genlerin farklı olması nükleotid dizilimindeki farklılıklardan değil, nükleotid bazlarının farklı olmasından kaynaklanır."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 4,
+  "sayfa": 20,
+  "metin": "Bir öğretmen doğadaki azot döngüsü şemasını ve döngüde işlev görebilecek çam kozalağı mantarı hakkındaki bilgiyi öğrencilerine şu şekilde sunmuştur: \"Çam kozalağı mantarı, çürüyen kozalaklardan beslenir ve kozalak yapısını oluşturan molekül­ lerin doğaya dönüşümünü sağlar.\" 2 Yıldırım Azot Azot bağlayan canlılar Organik atıklar Azotu havaya aktaran canlılar 1 4 3 Organik atık ayrıştıran canlılar Buna göre çam kozalağı mantarı, şemada numaralanarak verilmiş canlılardan hangi­ sinin azot döngüsünde üstlendiği göreve benzer bir işleve sahiptir?",
+  "secenekler": {
+   "A": "1",
+   "B": "2",
+   "C": "3",
+   "D": "4"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 5,
+  "sayfa": 20,
+  "metin": "Bir öğretmen doğadaki azot döngüsü şemasını ve döngüde işlev görebilecek çam kozalağı mantarı hakkındaki bilgiyi öğrencilerine şu şekilde sunmuştur: \"Çam kozalağı mantarı, çürüyen kozalaklardan beslenir ve kozalak yapısını oluşturan molekül­ lerin doğaya dönüşümünü sağlar.\" 2 Yıldırım Azot Azot bağlayan canlılar Organik atıklar Azotu havaya aktaran canlılar 1 4 3 Organik atık ayrıştıran canlılar Buna göre çam kozalağı mantarı, şemada numaralanarak verilmiş canlılardan hangi­ sinin azot döngüsünde üstlendiği göreve benzer bir işleve sahiptir? A) 1 B) 2 C) 3 D) 4 5. Tatlı su kaynakları Dünya'daki su kaynaklarının yaklaşık %3'ü kadardır. Bazı araştırmacılar bu kaynakların bilinçsiz kullanımının devam etme­ si hâlinde yakın bir gelecekte Dünya üzerinde su kıtlığı yaşanacağını öngörmektedirler. Buna göre aşağıdakilerden hangisi araştır­ macıların öne sürdüğü bu sorunu önlemeye yönelik uygulamalardan biri olamaz?",
+  "secenekler": {
+   "A": "Yağmur sularının depolanarak bahçe sulamasında kullanılmasına yönelik sistem tasarlanması",
+   "B": "Tarlaların zamanından önce ve fazla su­ lanmasını engellemek için toprağın nemini ölçen bir araç geliştirilmesi",
+   "C": "Barajlarda toplanan suyun dağıtım sistemi­ ne gönderilmeden önce arıtma sistemine alınması",
+   "D": "Lavabo giderlerinden akan suyun toplana­ rak arıtılması ve bahçelerde kullanılabilecek hâle getirilmesi"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 6,
+  "sayfa": 21,
+  "metin": "Bir araştırmada bezelye bitkisinin gövde uzun­ luğunun kalıtımı incelenmiştir. Bu araştırmada; • Önce iki uzun boylu bezelye çaprazlanarak birinci kuşak elde edilmiştir. • Daha sonra birinci kuşaktan alınan iki uzun boylu bezelye çaprazlanmıştır. • Bu çaprazlama sonucunda ikinci kuşakta uzun boylu bezelyelerin yanı sıra kısa boylu bezelyelerin de ortaya çıktığı görülmüştür. Verilen bilgilere göre aşağıdaki yorumlar­ dan hangisi yapılabilir?",
+  "secenekler": {
+   "A": "Birinci kuşaktaki bezelyelerin tamamı saf döldür.",
+   "B": "İkinci çaprazlama için seçilen bezelyelerin genotipi heterozigottur.",
+   "C": "İkinci çaprazlama sonucu oluşan bezelye­ lerin genotiplerinin heterozigot olma ihtimali yoktur.",
+   "D": "İkinci kuşakta kısa boylu bezelyelerin ortaya çıkmasının tek nedeni mutasyon geçirmiş olmalarıdır."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 7,
+  "sayfa": 21,
+  "metin": "Bir araştırmada bezelye bitkisinin gövde uzun­ luğunun kalıtımı incelenmiştir. Bu araştırmada; • Önce iki uzun boylu bezelye çaprazlanarak birinci kuşak elde edilmiştir. • Daha sonra birinci kuşaktan alınan iki uzun boylu bezelye çaprazlanmıştır. • Bu çaprazlama sonucunda ikinci kuşakta uzun boylu bezelyelerin yanı sıra kısa boylu bezelyelerin de ortaya çıktığı görülmüştür. Verilen bilgilere göre aşağıdaki yorumlar­ dan hangisi yapılabilir? A) Birinci kuşaktaki bezelyelerin tamamı saf döldür. B) İkinci çaprazlama için seçilen bezelyelerin genotipi heterozigottur. C) İkinci çaprazlama sonucu oluşan bezelye­ lerin genotiplerinin heterozigot olma ihtimali yoktur. D) İkinci kuşakta kısa boylu bezelyelerin ortaya çıkmasının tek nedeni mutasyon geçirmiş olmalarıdır. 7. Resimde bir deniz anemonu ile onun uzantıları arasında yaşayan palyaço balığı verilmiştir. Palyaço balığı Anemon Bu anemonlar, uzantıları üzerinde bulunan zehirli iğnelerini kullanarak yakınlarına kadar gelen küçük balıkları sokup zehirler ve onlarla beslenebilir. Palyaço balıkları, vücut yüze­ yindeki kaygan mukus tabakası sayesinde anemonun zehrinden etkilenmez. Böylece, palyaço balıkları anemonun uzantıları arasında rahatça dolaşır, düşmanlarından saklanır ve güvenli bir şekilde beslenir. Verilen durumla ilgili olarak aşağıdaki çıka­ rımlardan hangisi yanlıştır?",
+  "secenekler": {
+   "A": "Deniz anemonunun yaşadığı ortamdaki balıklar arasında, anemonun zehirli iğnele­ rinden etkilenme özelliği farklı olan balıklar vardır.",
+   "B": "Deniz anemonunun zehri, kendisiyle birlikte yaşayan balık türünün seçiliminde etkili olmuştur.",
+   "C": "Palyaço balıkları, deniz anemonlarının zehrinden etkilenmeyecek bir adaptasyona sahiptir.",
+   "D": "Deniz anemonlarının zehri, palyaço balıkla­ rının genotipini etkilemeden fenotiplerinde gözlemlenebilir bir değişiklik yapmıştır."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 8,
+  "sayfa": 22,
+  "metin": "Elektriksel yük cinsleri farklı olan cisimler yaklaştırıldıklarında birbirlerini çekerken yük cinsleri aynı olan cisimler yaklaştırıldıklarında birbirini iter. Bu durumu gözlemlemek isteyen öğrenci yük cinsi ve miktarını bilmediği bir alüminyum top, bir ebonit çubuk ve bir cam çubuk kullanarak tablodaki gibi iki farklı uygulama yaparak göz­ lemlerini yazıyor. Uygulamalar Gözlenen Sonuçlar I. Alüminyum top ve ebonit çubuk birbirine yaklaştırılıyor. Alüminyum top ve ebonit çubuk birbirini itiyor. II. Ebonit ve cam çubuk­ lar birbirine yaklaştı­ rılıyor. Ebonit ve cam çubuk birbirini çekiyor. Buna göre bu cisimlerin yüklerinin cinsleri aşağıda verilenlerden hangisi olabilir? Alüminyum top Ebonit çubuk Cam çubuk",
+  "secenekler": {
+   "A": "Negatif (-) Negatif (-) Pozitif (+)",
+   "B": "Pozitif (+) Pozitif (+) Pozitif (+)",
+   "C": "Negatif (-) Pozitif (+) Negatif (-)",
+   "D": "Negatif (-) Negatif (-) Negatif (-)"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 9,
+  "sayfa": 22,
+  "metin": "Elektriksel yük cinsleri farklı olan cisimler yaklaştırıldıklarında birbirlerini çekerken yük cinsleri aynı olan cisimler yaklaştırıldıklarında birbirini iter. Bu durumu gözlemlemek isteyen öğrenci yük cinsi ve miktarını bilmediği bir alüminyum top, bir ebonit çubuk ve bir cam çubuk kullanarak tablodaki gibi iki farklı uygulama yaparak göz­ lemlerini yazıyor. Uygulamalar Gözlenen Sonuçlar I. Alüminyum top ve ebonit çubuk birbirine yaklaştırılıyor. Alüminyum top ve ebonit çubuk birbirini itiyor. II. Ebonit ve cam çubuk­ lar birbirine yaklaştı­ rılıyor. Ebonit ve cam çubuk birbirini çekiyor. Buna göre bu cisimlerin yüklerinin cinsleri aşağıda verilenlerden hangisi olabilir? Alüminyum top Ebonit çubuk Cam çubuk A) Negatif (-) Negatif (-) Pozitif (+) B) Pozitif (+) Pozitif (+) Pozitif (+) C) Negatif (-) Pozitif (+) Negatif (-) D) Negatif (-) Negatif (-) Negatif (-) 9. Genç bir girişimci olan Ali, beyaz eşyaların metal yüzeylerini boyama işine giriyor. Öğren­ diklerini uygulamak isteyen Ali ilk denemede negatif (-) yükle yüklediği beyaz eşyanın metal yüzeyine nötr boya tanecikleri püskürt­ tüğünde boyanın bu metalin yüzeyine düzgün dağılmadığını, bazı bölgelerde koyu ve açık renklerin oluştuğunu görüyor. Bu sorunu çözmek için Ali ikinci denemede, birinci denemedekiyle özdeş olan metal bir yü­ zeyi yine negatif (-) yükle yükleyerek metalin yüzeyine bu kez pozitif (+) yüklü boya tanecik­ lerini püskürttüğünde boyanın yüzeye düzgün dağıldığını görüyor. Buna göre ikinci denemede beyaz eşyanın metal yüzeyine boyanın düzgün dağılmasının sebebi aşağıdakilerden hangisi ile açıklanır?",
+  "secenekler": {
+   "A": "Nötr cisimlerin yüklü cisimler tarafından çekilmesi",
+   "B": "Zıt yüklü cisimlerin birbirini çekmesi",
+   "C": "Aynı yüklü cisimlerin birbirini itmesi",
+   "D": "Nötr bir cismin başka bir nötr cisim tarafın­ dan etkilenmemesi"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 11,
+  "sayfa": 24,
+  "metin": "Bir deneyde Şekil I'deki gibi su sızdırmaz hareketli pistona bağlı yayın bulunduğu kap; Şekil II'deki gibi içinde su bulunan bir kaba konulduğunda yayın bir miktar sıkıştığı, Şekil III 'teki gibi kaptaki su miktarı artırıldığında ise yayın daha fazla sıkıştığı gözlenmiştir. Şekil III Yer (yatay) Yer (yatay) Yer (yatay) Hareketli piston Yay Su Su Şekil II Şekil I Su Kap Hava Kap Suyun sıkışmadığı kabul edilen bu deneyden yararlanarak aşağıdaki hipotezlerden hangisi test edilebilir?",
+  "secenekler": {
+   "A": "Sıvılar, üzerine uygulanan kuvveti her yöne eşit büyüklükte iletir.",
+   "B": "Suyun basıncı, içinde bulunduğu kabın genişliğine bağlıdır.",
+   "C": "Suyun yoğunluğu arttıkça basıncı da artar.",
+   "D": "Suyun derinliği arttıkça basıncı da artar."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 12,
+  "sayfa": 24,
+  "metin": "Bir deneyde Şekil I'deki gibi su sızdırmaz hareketli pistona bağlı yayın bulunduğu kap; Şekil II'deki gibi içinde su bulunan bir kaba konulduğunda yayın bir miktar sıkıştığı, Şekil III 'teki gibi kaptaki su miktarı artırıldığında ise yayın daha fazla sıkıştığı gözlenmiştir. Şekil III Yer (yatay) Yer (yatay) Yer (yatay) Hareketli piston Yay Su Su Şekil II Şekil I Su Kap Hava Kap Suyun sıkışmadığı kabul edilen bu deneyden yararlanarak aşağıdaki hipotezlerden hangisi test edilebilir? A) Sıvılar, üzerine uygulanan kuvveti her yöne eşit büyüklükte iletir. B) Suyun basıncı, içinde bulunduğu kabın genişliğine bağlıdır. C) Suyun yoğunluğu arttıkça basıncı da artar. D) Suyun derinliği arttıkça basıncı da artar. 12. Nötr bir elektroskobun topuzuna bir cisim dokunduran Mustafa, elektroskobun yapraklarının açıldığını gözlemliyor. Bu gözlemine dayalı olarak Mustafa, dokundurduğu cismin pozitif (+) yüklü olduğunu iddia ediyor. Zeynep ise cismin yük cinsinin belirlenmesi için Mustafa'nın gözleminin yetersiz olduğunu öne sürüyor. Buna göre Zeynep aşağıdakilerden hangisini yaparsa kendi düşüncesini destekler?",
+  "secenekler": {
+   "A": "Negatif (-) yüklü olduğu bilinen bir cismi nötr bir elektroskobun topuzuna dokundurursa",
+   "B": "Pozitif (+) yüklü olduğu bilinen bir cismi nötr bir elektroskobun topuzuna dokundurursa",
+   "C": "Nötr bir cismi, nötr bir elektroskobun topuzuna dokundurursa",
+   "D": "Yaprakları açık bir elektroskobu topuzundan topraklarsa"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 13,
+  "sayfa": 25,
+  "metin": "Şekillerde Dünya'nın Güneş etrafında dolanırken oluşan iki farklı konumu, tabloda ise hangi yarım kürede oldukları belirtilmeyen eş yükseltilerdeki K ve L şehirlerinin ocak ve temmuz aylarındaki sıcaklık ortalamaları verilmiştir. II. Konum Güney Ekvator Ekvator I. Konum Kuzey Kuzey Güney Güneş Güneş Şehirler Ocak Ayı Sıcaklık Ortalaması (°C) Temmuz Ayı Sıcaklık Ortalaması (°C) K -6 21 L 23 -4 Buna göre tablodaki verilerden ve Dünya'nın konumlarından yararlanarak K ve L şehirleri ile ilgili aşağıdaki yargılardan hangisine ulaşılabilir?",
+  "secenekler": {
+   "A": "I. konumundayken L şehrinde yaz mevsimi yaşanır.",
+   "B": "II. konumundayken K şehrinde kış mevsimi yaşanır.",
+   "C": "I. konumundayken L şehri, Güneş ışınlarını K şehrinden daha dik açı ile alır.",
+   "D": "II. konumundayken K şehri, Güneş ışınlarını L şehrinden daha dik açı ile alır."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 15,
+  "sayfa": 26,
+  "metin": "Mert, bir kutuyu; özdeş makaralar, ipler ve eşit bölmeli kaldıraç çubukları kullanarak kuvvet- ten kazanç sağlayacak şekilde yerden yukarı çıkarmak istiyor. Makara ve ip ağırlıkları ile sürtünmenin önemsenmediği aşağıdaki düzeneklerden hangisi Mert'in amacına uygun değildir? B) Kuvvet Kutu Yer (yatay) D) Yer (yatay) Kuvvet Kutu Yer (yatay) Kuvvet Kutu A) C) Yer (yatay) Kuvvet Kutu 15. Bir ucu L çubuğuna bağlanarak sabitlenen ip, şekildeki gibi Ahmet ve Mehmet tarafından tutulan K ve L çubuklarının etrafına sarılıyor. Ayşe ise Ahmet ve Mehmet'in çubuklara uy- guladığı kuvvetlerden daha az kuvvet uygu- layarak ipin boşta kalan ucundan çektiğinde çubukların birbirine yaklaştığını görüyor. K L İp Ahmet Mehmet Ayşe Bu sistemde kuvvet kazancını sağlayan basit makine aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "Sabit makara",
+   "B": "Eğik düzlem",
+   "C": "Kaldıraç",
+   "D": "Hareketli makara"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 2,
+  "sayfa": 27,
+  "metin": "Yapılan iki farklı işlem ve bu işlemlere ait gözlemler tablodaki gibidir. Yapılan işlem Gözlemler 1. Nitrik asit (HNO3) içerisine bakır (Cu) parçaları atılıp karıştırılır. • Renkli bir gaz çıkışı gözlendi. • Çözelti maviye döndü. • Tepkime kabı ısındı. • Suyun rengi değişti. • Katı iyot parçaları bir miktar çözündü. 2. Katı iyot parçaları suyun içerisine atılıp karıştırılır. Buna göre; I. tepkime kabının ısınması, II. gaz çıkışının olması, III. iyotun suda çözünmesi gözlemlerinden hangileri kesinlikle bir kimyasal değişim olduğunu gösterir?",
+  "secenekler": {
+   "A": "Yalnız I.",
+   "B": "Yalnız III.",
+   "C": "I ve II.",
+   "D": "II ve III."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 17,
+  "sayfa": 28,
+  "metin": "Bir çözeltinin asidik ya da bazik olma durumu­ na göre renk değiştiren maddelere indikatör veya ayıraç denir. Bilgi: Bir bitki kullanılarak hazırlanan K çözeltisi; asidik ortamda açık pembe, bazik ortamda sarı renk alır. Bu bilgiyi deneyerek gözlemlemek isteyen bir öğrenci, şekildeki gibi iki farklı çözelti hazırlıyor ve bunların üzerine eşit miktarlarda K çözeltisi ilave ediyor. I. çözelti II. çözelti K çözeltisi ilave ediliyor. I. çözeltinin açık pembe, II. çözeltinin sarı renge dönüştüğünü gözlemleyen öğrenci­ nin başlangıçta hazırladığı çözeltiler aşağı­ dakilerden hangisi olabilir? I. çözelti II. çözelti",
+  "secenekler": {
+   "A": "Sabunlu su Maden suyu",
+   "B": "Limon suyu Elma suyu",
+   "C": "Amonyak Turşu suyu",
+   "D": "Portakal suyu Deterjanlı su"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 18,
+  "sayfa": 28,
+  "metin": "Bir çözeltinin asidik ya da bazik olma durumu­ na göre renk değiştiren maddelere indikatör veya ayıraç denir. Bilgi: Bir bitki kullanılarak hazırlanan K çözeltisi; asidik ortamda açık pembe, bazik ortamda sarı renk alır. Bu bilgiyi deneyerek gözlemlemek isteyen bir öğrenci, şekildeki gibi iki farklı çözelti hazırlıyor ve bunların üzerine eşit miktarlarda K çözeltisi ilave ediyor. I. çözelti II. çözelti K çözeltisi ilave ediliyor. I. çözeltinin açık pembe, II. çözeltinin sarı renge dönüştüğünü gözlemleyen öğrenci­ nin başlangıçta hazırladığı çözeltiler aşağı­ dakilerden hangisi olabilir? I. çözelti II. çözelti A) Sabunlu su Maden suyu B) Limon suyu Elma suyu C) Amonyak Turşu suyu D) Portakal suyu Deterjanlı su 18. Bir öğrenci, saf bir maddenin sıcaklık değişimi­ nin kütleye bağlı olduğunu gözlemlemek için iki ayrı düzenek oluşturup bu düzenekleri belirli bir süre ısıtıyor. Aşağıdakilerden hangisi öğrencinin hazırla­ yacağı deney düzeneklerinde sabit tuttuğu (kontrollü) değişkenlerden biri olamaz?",
+  "secenekler": {
+   "A": "Kullanılan maddelerin miktarı",
+   "B": "Düzeneklerde yer alan ısıtıcıların sayısı",
+   "C": "Kullanılan maddelerin cinsi",
+   "D": "Düzenekleri ısıtma süresi"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 19,
+  "sayfa": 29,
+  "metin": "Periyodik tablo düzenlenirken elementler belirli özelliklerine göre gruplandırılır. Bu tablonun oluşturul­ masında geçen tarihsel süreçte ortaya atılan görüşlerden ikisi şöyledir: I. görüş : Elementler, artan atom kütlelerine göre sıralanır. II. görüş : Elementler, artan atom numaralarına göre sıralanır. Günümüzde geçerli olan II. görüşün savunduğu kurala göre düzenlenen periyodik tablodaki bazı ele­ mentler şekilde verilmiştir. 1 H 1.00 3 Li 6.94 4 Be 9.01 5 B 10.81 6 C 12.01 7 N 14.00 8 O 15.99 9 F 18.99 10 Ne 20.17 2 He 4.00 13 Al 26.98 14 Si 28.08 15 P 30.97 16 S 32.06 17 Cl 35.45 18 Ar 39.94 11 Na 22.98 11 Na 22.98 12 Mg 24.30 19 K 39.09 20 Ca 40.07 Atom numarası Ortalama atom kütlesi Buna göre aşağıdaki element çiftlerinden hangisi I. görüşün ortaya koyduğu kurala uymayan bir örnek olarak gösterilebilir?",
+  "secenekler": {
+   "A": "H - He",
+   "B": "Ar - K",
+   "C": "Na - Mg",
+   "D": "N - O"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ },
+ {
+  "no_pdf": 20,
+  "sayfa": 30,
+  "metin": "Bir öğrenci, ilk sıcaklıkları aynı olan saf bir sıvıyı özdeş kaplarda, özdeş ısıtıcılarla eşit süre ısıtarak yaptığı iki ayrı deneyin sonucunda şekildeki sıcaklık-zaman grafiklerini elde ediyor. Sıcaklık (°C) Zaman (dakika) 105 45 25 10 20 50 I. Grafik Sıcaklık (°C) Zaman (dakika) 45 25 20 50 40 55 II. Grafik Buna göre grafiklerde taranmış olarak gösterilen alanda geçen sürenin II. grafikte daha uzun olmasını, bu saf sıvının aşağıdaki özelliklerinden hangisi etkilemiştir? (Isı alışverişinin sadece sıvılar ve ısıtıcılar arasında olduğu düşünülecektir.)",
+  "secenekler": {
+   "A": "Öz ısısı",
+   "B": "Kütlesi",
+   "C": "Donma noktası",
+   "D": "Kaynama noktası TEST BİTTİ. CEVAPLARINIZI KONTROL EDİNİZ."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2019_SAYISAL_BOLUM.pdf"
+ }
+]

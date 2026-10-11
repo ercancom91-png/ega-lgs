@@ -1,0 +1,548 @@
+[
+ {
+  "no_pdf": 1,
+  "sayfa": 3,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV A \u0015\u0013\u0015\u0015\u0010\u0015\u0013\u0015\u0016 EĞİTİM \u0010 ÖĞRETİM <ILI 3 Diğer sayfaya geçiniz. 1. Kırmızı Mavi Yeşil Mor -10 -5 5 10 0 1-5, (-3)2, 2-3, -32 üslü ifadeleri yukarıdaki sayı doğrusunda, değerlerine karşılık gelen noktala- ra yerleştirilecektir. Buna göre, hangi renkteki doğru parçası üzerine en fazla sayıda üslü ifade yerleştirilir?",
+  "secenekler": {
+   "A": "Kırmızı",
+   "B": "Mavi",
+   "C": "Yeşil",
+   "D": "Mor"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 2,
+  "sayfa": 3,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV A \u0015\u0013\u0015\u0015\u0010\u0015\u0013\u0015\u0016 EĞİTİM \u0010 ÖĞRETİM <ILI 3 Diğer sayfaya geçiniz. 1. Kırmızı Mavi Yeşil Mor -10 -5 5 10 0 1-5, (-3)2, 2-3, -32 üslü ifadeleri yukarıdaki sayı doğrusunda, değerlerine karşılık gelen noktala- ra yerleştirilecektir. Buna göre, hangi renkteki doğru parçası üzerine en fazla sayıda üslü ifade yerleştirilir? A) Kırmızı B) Mavi C) Yeşil D) Mor 2. I. çuval 46 kg 12 kg II. çuval Yukarıda iki adet un çuvalı ve bu çuvallarda bulunan un miktarları verilmiştir. Bu çuvallara belli mik- tarlarda un eklendiğinde çuvallardaki un miktarlarının kilogram cinsinden değerleri, aralarında asal olmaktadır. Buna göre, çuvallara eklenen un miktarlarının kilogram cinsinden değerleri aşağıdakilerin hangisi olabilir? I. çuval II. çuval",
+  "secenekler": {
+   "A": "5 4",
+   "B": "8 6",
+   "C": "3 2",
+   "D": "9 3 MATEMATİK"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 3,
+  "sayfa": 4,
+  "metin": "a, b birer doğal sayı olmak üzere a b a b 2 = dir. Yükseklikleri 5 m ve 6 m olan A ile B direkleri arasına, boyu 2 m olan bir fidan dikilmiştir. Zemin A 5 m 6 m 2 m B Bir süre sonra bu fidanın boyu A direğinin yüksekliğinden fazla, B direğinin yüksekliğinden az olmuş- tur. Buna göre bu fidan, dikildikten sonra kaç metre uzamış olabilir?",
+  "secenekler": {
+   "A": "2 2",
+   "B": "2 3",
+   "C": "3 2",
+   "D": "2 6"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 4,
+  "sayfa": 5,
+  "metin": "a, b, c, d birer doğal sayı olmak üzere a b a b 2 = ( ) . a b c d b d dir a c $ $ $ = ' 45 72 100 150 80 K 18 L 36 M 30 N Mavi kutucuklar Sarı kutucuklar Yukarıdaki bölme işlemi tablosunda K, L, M ve N harflerine karşılık gelen sayılar, bu harflerle aynı sütunda bulunan mavi kutucuktaki kareköklü ifadenin bu harflerle aynı satırda bulunan sarı kutucuk- taki kareköklü ifadeye bölünmesiyle elde edilmiştir. Buna göre, bu harflerden hangisi bir irrasyonel sayı belirtmektedir?",
+  "secenekler": {
+   "A": "K",
+   "B": "L",
+   "C": "M",
+   "D": "N"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 5,
+  "sayfa": 6,
+  "metin": "İstenilen olası durumların sayısı Tüm olası durumların sayısı Bir olayın olma olasılığı = Aşağıda verilen abaküste üç basamaklı 423 sayısı modellenmiştir. 4 2 3 Bu abaküsteki boncuklardan bir tanesi, bulunduğu çubuktan çıkarılarak diğer çubuklardan birine takılıyor. Buna göre, abaküste modellenen yeni sayının 500'den büyük olma olasılığı kaçtır?",
+  "secenekler": {
+   "A": "2 1",
+   "B": "3 1",
+   "C": "6 1",
+   "D": "9 1"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 6,
+  "sayfa": 7,
+  "metin": "a, b birer doğal sayı olmak üzere a b a b 2 = dir. 3 12 6 5 10 7 Kartlar Yukarıdaki kartların ön yüzlerinde birer kareköklü ifade verilmiştir. Her bir kartın arka yüzünde ise ön yüzünde yazan kareköklü ifadenin a b biçimindeki farklı bir gösterimi yazmaktadır. Buna göre, aşağıdakilerden hangisi bu kartlardan herhangi birinin arka yüzünde yazılı olamaz?",
+  "secenekler": {
+   "A": "5 28",
+   "B": "2 27",
+   "C": "2 70",
+   "D": "3 20"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 7,
+  "sayfa": 7,
+  "metin": "a, b birer doğal sayı olmak üzere a b a b 2 = dir. 3 12 6 5 10 7 Kartlar Yukarıdaki kartların ön yüzlerinde birer kareköklü ifade verilmiştir. Her bir kartın arka yüzünde ise ön yüzünde yazan kareköklü ifadenin a b biçimindeki farklı bir gösterimi yazmaktadır. Buna göre, aşağıdakilerden hangisi bu kartlardan herhangi birinin arka yüzünde yazılı olamaz? A) 5 28 B) 2 27 C) 2 70 D) 3 20 7. Efe ve Kuzey'in her ikisinin de bilye sayıları 50'den fazla ve birbirine eşittir. Efe, bilyelerinin tamamı- nı her birinde eşit sayıda bilye olacak şekilde 3 torbaya; Kuzey ise bilyelerinin tamamını her birinde eşit sayıda bilye olacak şekilde 4 torbaya aşağıdaki gibi yerleştirmiştir. Efe'nin bilyeleri Kuzey'in bilyeleri Efe ile Kuzey, birer torba bilyelerini değiştiklerinde Kuzey'in toplam bilye sayısı en az kaç olur?",
+  "secenekler": {
+   "A": "55",
+   "B": "65",
+   "C": "78",
+   "D": "80"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 8,
+  "sayfa": 8,
+  "metin": "Dikdörtgen şeklindeki bir tarlanın kenarlarının uzunlukları Şekil I'de verilmiştir. Bu tarlanın iç bölge- sine, üç kenarı boyunca kenarlara paralel olacak biçimde Şekil II'de gösterildiği gibi bir yol yapıla- caktır. (x + 10) m (2x + 13) m Şekil I 6 m Şekil II 6 m 8 m Buna göre, yol için ayrılan bölgenin alanını metrekare cinsinden veren cebirsel ifade aşağı- dakilerden hangisidir?",
+  "secenekler": {
+   "A": "4(7x + 32)",
+   "B": "28(x + 8)",
+   "C": "2(17x + 66)",
+   "D": "2(7x + 16)"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 9,
+  "sayfa": 9,
+  "metin": "A B 40 5 Toplam Toplam 40 sayısının pozitif tam sayı çarpanlarının tamamı yukarıdaki gibi iki gruba ayrıldığında A grubunda- ki sayıların toplamı, B grubundaki sayıların toplamına eşit olmaktadır. A grubundaki sayılardan biri 40 ve B grubundaki sayılardan biri 5 olduğuna göre, B grubun- daki en küçük sayı kaçtır?",
+  "secenekler": {
+   "A": "1",
+   "B": "2",
+   "C": "4",
+   "D": "5"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 10,
+  "sayfa": 9,
+  "metin": "A B 40 5 Toplam Toplam 40 sayısının pozitif tam sayı çarpanlarının tamamı yukarıdaki gibi iki gruba ayrıldığında A grubunda- ki sayıların toplamı, B grubundaki sayıların toplamına eşit olmaktadır. A grubundaki sayılardan biri 40 ve B grubundaki sayılardan biri 5 olduğuna göre, B grubun- daki en küçük sayı kaçtır? A) 1 B) 2 C) 4 D) 5 10. Dört farklı markaya ait televizyonun TL cinsinden fiyatlarının asal çarpanlarının çarpımı şeklinde yazılışı aşağıda gösterilmiştir. Bu asal çarpanlardan küçük olanı a'dır. K L M a3 . b5 a4 . b4 a6. b3 a2 . b6 N Bu televizyonlardan birinin fiyatı 10 000 TL olduğuna göre, televizyonların en ucuzu aşağıda- kilerden hangisidir?",
+  "secenekler": {
+   "A": "K",
+   "B": "L",
+   "C": "M",
+   "D": "N"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 11,
+  "sayfa": 10,
+  "metin": "a, b, c birer doğal sayı olmak üzere . a b a b a b c b a c b a b c b a c b dir 2 = + = + - = - _ _ i i 8 dm 128 dm 2 dm Parke Parke Parke Yukarıda verilen dikdörtgen şeklindeki bir zemine parke döşenmektedir. Zeminde döşeli dikdörtgen biçiminde üç özdeş parke ile ilgili bazı ölçüler şekilde verilmiştir. Buna göre, parke döşenmemiş bölgelerin alanları toplamı kaç desimetrekaredir?",
+  "secenekler": {
+   "A": "72",
+   "B": "84",
+   "C": "96",
+   "D": "148"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 3,
+  "sayfa": 11,
+  "metin": "Bir müşterinin alışveriş yaptığı A ve B mağazalarına TL cinsinden ödeyeceği toplam tutarın dağılı- mı, daire grafiğinde; A mağazasına ödeyeceği toplam tutarın taksitleri, birim kareli zeminde verilen sütun grafiğinde gösterilmiştir. Taksitler 0 Miktar (TL) Grafik: A Mağazasına Ödenecek Taksitler 1. taksit 2. taksit 3. taksit Grafik: A ve B Mağazalarına Ödenecek Toplam Tutarın Dağılımı B A 120° Bu müşteri, B mağazasına 1800 TL ödemiştir. Buna göre, bu müşterinin A mağazasına ödeyeceği 1. taksit kaç liradır?",
+  "secenekler": {
+   "A": "450",
+   "B": "600",
+   "C": "750",
+   "D": "900"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 13,
+  "sayfa": 12,
+  "metin": "Alanı (36x2) cm2 olan kare, alanları birbirine eşit olan mavi, sarı ve beyaz renkli üç dikdörtgensel bölgeye aşağıdaki gibi ayrılmıştır. Mavi Sarı Beyaz Buna göre, sarı dikdörtgensel bölgenin çevresinin uzunluğunu santimetre cinsinden veren cebirsel ifade aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "24x",
+   "B": "20x",
+   "C": "14x",
+   "D": "7x"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 14,
+  "sayfa": 12,
+  "metin": "Alanı (36x2) cm2 olan kare, alanları birbirine eşit olan mavi, sarı ve beyaz renkli üç dikdörtgensel bölgeye aşağıdaki gibi ayrılmıştır. Mavi Sarı Beyaz Buna göre, sarı dikdörtgensel bölgenin çevresinin uzunluğunu santimetre cinsinden veren cebirsel ifade aşağıdakilerden hangisidir? A) 24x B) 20x C) 14x D) 7x 14. a ! 0 ve m, n tam sayılar olmak üzere (an)m = an $ m ve an$ am = an+m dir. Bir buğday ekme makinesinin toprağa tohum bırakan 16 adet bölümü vardır. Her bir bölümden her 15 saniyede 45 adet buğday tanesi toprağa ekilmektedir. Bir buğday tanesinin kütlesi 2-5 gramdır. Buna göre, bu makine 60 dakikada kaç gram buğday ekmiştir?",
+  "secenekler": {
+   "A": "15 . 213",
+   "B": "15 . 211",
+   "C": "60 . 213",
+   "D": "60 . 210"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 15,
+  "sayfa": 13,
+  "metin": "a, b, c, d birer doğal sayı olmak üzere . a b c b a c b a b c b a c b a b c d a c b d dir $ $ $ + = + - = - = _ _ _ i i i Her birinin çevresinin uzunluğu 24 2 cm olan eşkenar üçgen şeklindeki 6 adet sarı bayrak, köşele- ri birbirleriyle, kenarları ise iple çakışacak biçimde Şekil I'deki gibi bir ipe dizildiğinde ipin iki ucunda da boşluk kalmamıştır. Şekil I Sarı Sarı Sarı Sarı Sarı Sarı Aynı ipe, Şekil I'de verilen bayraklardan 4 tanesi ve eşkenar üçgen biçimindeki özdeş 3 mavi bay- rak, köşeleri birbirleriyle, kenarları ise iple çakışacak biçimde Şekil II'deki gibi dizildiğinde ipin her iki ucunda da boşluk kalmamıştır. Şekil II Sarı Mavi Sarı Mavi Mavi Sarı Sarı Buna göre, mavi bayraklardan birinin bir kenarının uzunluğu kaç santimetredir?",
+  "secenekler": {
+   "A": "2 2",
+   "B": "8 2 3",
+   "C": "2 4",
+   "D": "16 2 3"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 16,
+  "sayfa": 14,
+  "metin": "Dikdörtgen biçimindeki bir kâğıt, Şekil I'deki gibi kesiliyor. Daha sonra elde edilen parçaların ke- narları Şekil II'deki gibi çakıştırılarak bir yüzünün alanı (16x2) cm2 olan, kare şeklinde bir kâğıt elde ediliyor. Şekil I Şekil II Buna göre, başlangıçta verilen dikdörtgen şeklindeki kâğıdın çevresinin uzunluğunu santimet- re cinsinden veren cebirsel ifade aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "40x",
+   "B": "20x",
+   "C": "16x",
+   "D": "10x"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 17,
+  "sayfa": 14,
+  "metin": "Dikdörtgen biçimindeki bir kâğıt, Şekil I'deki gibi kesiliyor. Daha sonra elde edilen parçaların ke- narları Şekil II'deki gibi çakıştırılarak bir yüzünün alanı (16x2) cm2 olan, kare şeklinde bir kâğıt elde ediliyor. Şekil I Şekil II Buna göre, başlangıçta verilen dikdörtgen şeklindeki kâğıdın çevresinin uzunluğunu santimet- re cinsinden veren cebirsel ifade aşağıdakilerden hangisidir? A) 40x B) 20x C) 16x D) 10x 17. Dokuz eş kareden oluşan kare, Şekil I'de; dört eş dikdörtgenden oluşan dikdörtgen, Şekil II'de veril- miştir. Bu şekillerin yükseklikleri birbirine eşittir. Şekil I Şekil II h Mavi Mavi Sarı h Şekil I'de verilen mavi bölgelerin alanları toplamı, Şekil II'de verilen sarı bölgenin alanına eşittir. Şekil I'in çevresinin uzunluğu (36x + 36) cm olduğuna göre, Şekil II'nin çevresinin uzunluğu- nu santimetre cinsinden veren cebirsel ifade aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "34x + 34",
+   "B": "26x + 26",
+   "C": "18x + 42",
+   "D": "16x + 32"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 18,
+  "sayfa": 15,
+  "metin": "Bir markette başlangıçta eşit kütlelerde kekik, nane, kimyon ve karabiber vardır. Bu ürünlerin belli miktarları satıldıktan sonra kalan kütlelerini gösteren tablo aşağıda verilmiştir. Tablo: Ürünlerin Kalan Kütleleri Ürün Kalan Kütle (kg) Kekik 4810 x 10-3 Nane 155000 x 10-6 Kimyon 0,000232 x 105 Karabiber 0,0379 x 104 Buna göre, başlangıçta bu ürünlerden birinin kilogram cinsinden kütlesi aşağıdakilerden hangisi olabilir?",
+  "secenekler": {
+   "A": "0,0000258 x 107",
+   "B": "0,00625 x 104",
+   "C": "3800000 x 10-5",
+   "D": "5010000 x 10-4"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 19,
+  "sayfa": 16,
+  "metin": "Elektrikli otomobil üreten bir firma, bu otomobillerin tercih edilme nedenlerini araştıran bir anket uy- gulamıştır. Ankete katılan müşterilerin cinsiyetlerine ve verdikleri cevaplara göre dağılımları aşağı- daki daire grafiklerinde gösterilmiştir. Grafik: Ankete Katılanların Cinsiyetlerine Göre Dağılımları Grafik: Ankete Katılanların Verdikleri Cevaplara Göre Dağılımları Erkek Kadın 160° Sağlamlık Ekonomiklik 80° 160° Konfor Anket sonuçlarına göre, • Ekonomikliği tercih eden erkeklerin sayısı, ekonomikliği tercih eden kadınların sayısının 3 katıdır. • Sağlamlığı tercih eden erkeklerin sayısı, sağlamlığı tercih eden kadınların sayısına eşittir. • Konforu tercih eden kadınların sayısı 60'tır. Ankete katılan her bir müşteri, grafikte gösterilen tercih edilme nedenlerinden yalnızca birini seçebildiğine göre, bu ankete katılanların toplam sayısı kaçtır?",
+  "secenekler": {
+   "A": "540",
+   "B": "450",
+   "C": "360",
+   "D": "300"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 20,
+  "sayfa": 17,
+  "metin": "İstenilen olası durumların sayısı Tüm olası durumların sayısı Bir olayın olma olasılığı = Renkleri dışında özdeş olan yeterli sayıda top vardır. Bu toplar, her bir kutuda eşit sayıda top olacak şekilde başlangıçta boş olan I, II, III ve IV numaralı kutulara yerleştiriliyor. I II III IV Kutulardaki toplar, boş olan A, B, C torbalarında tablodaki gibi birleştirilirse bu torbalardan rastgele çekilen birer topun mavi olma olasılıkları tablodaki gibi olmaktadır. Torbalar Birleştirilen Kutular Mavi Top Çekilme Olasılığı A I ve II %100 B I ve III %75 C I ve IV %50 Buna göre, başlangıçta bu dört kutuda bulunan toplam mavi top sayısı aşağıdakilerden han- gisi olabilir?",
+  "secenekler": {
+   "A": "15",
+   "B": "16",
+   "C": "17",
+   "D": "18 MATEMATİK TESTİ BİTTİ. FEN BİLİMLERİ TESTİNE GEÇİNİZ."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 1,
+  "sayfa": 18,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV A (ÖDSGM) A \u0015\u0013\u0015\u0015\u0010\u0015\u0013\u0015\u0016 EĞİTİM \u0010 ÖĞRETİM <ILI 18 )EN %İLİMLERİ 1. Bezelyelerde mor çiçek renginden sorumlu alel (M), beyaz çiçek renginden sorumlu alele (m) baskındır. Buna göre, aşağıdaki çaprazlamalardan hangisi yapıldığında hem mor çiçekli hem de beyaz çiçekli bezelye bitkileri elde edilebilir?",
+  "secenekler": {
+   "A": "Mm  mm",
+   "B": "MM  mm",
+   "C": "Mm  MM",
+   "D": "mm  mm"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 2,
+  "sayfa": 18,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV A (ÖDSGM) A \u0015\u0013\u0015\u0015\u0010\u0015\u0013\u0015\u0016 EĞİTİM \u0010 ÖĞRETİM <ILI 18 )EN %İLİMLERİ 1. Bezelyelerde mor çiçek renginden sorumlu alel (M), beyaz çiçek renginden sorumlu alele (m) baskındır. Buna göre, aşağıdaki çaprazlamalardan hangisi yapıldığında hem mor çiçekli hem de beyaz çiçekli bezelye bitkileri elde edilebilir? A) Mm  mm B) MM  mm C) Mm  MM D) mm  mm 2. Hücre çekirdeğinde bulunan, kalıtımla görevli yapılardan bazıları şekilde gösterilmiştir. DNA Gen Kromozom C G A T A T Nükleotid Buna göre, bu yapılarla ilgili aşağıdakiler- den hangisi doğrudur?",
+  "secenekler": {
+   "A": "Nükleotidlerin her biri belirli kalıtsal özel- liklerin ortaya çıkmasını sağlar.",
+   "B": "Gen; birer şeker, fosfat ve organik bazdan oluşur.",
+   "C": "Bir bireyin genellikle farklı vücut hücreleri farklı sayıda kromozom taşır.",
+   "D": "Genler, hücrede kromozomlarla taşınır."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 3,
+  "sayfa": 19,
+  "metin": "Şekildeki modelde iki zinciri birbirinden ayrıl- maya başlamış bir DNA molekülündeki orga- nik bazlardan bazıları, organik bazın çeşidine göre numaralandırılmıştır. I numaralı organik bazın timin olduğu bilinmektedir. I I II I III IV I II Buna göre, modeldeki organik bazların çeşidi ve bu DNA kendini hatasız eşlerken gerçekleşen olaylarla ilgili aşağıdakiler- den hangisi doğrudur?",
+  "secenekler": {
+   "A": "III adenin olabilir.",
+   "B": "IV sitozin olabilir.",
+   "C": "Kendini eşlerken II'nin karşısına IV gelir.",
+   "D": "Kendini eşlerken III'ün karşısına I gelir."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 4,
+  "sayfa": 19,
+  "metin": "Şekildeki modelde iki zinciri birbirinden ayrıl- maya başlamış bir DNA molekülündeki orga- nik bazlardan bazıları, organik bazın çeşidine göre numaralandırılmıştır. I numaralı organik bazın timin olduğu bilinmektedir. I I II I III IV I II Buna göre, modeldeki organik bazların çeşidi ve bu DNA kendini hatasız eşlerken gerçekleşen olaylarla ilgili aşağıdakiler- den hangisi doğrudur? A) III adenin olabilir. B) IV sitozin olabilir. C) Kendini eşlerken II'nin karşısına IV gelir. D) Kendini eşlerken III'ün karşısına I gelir. 4. Bezelyelerde tohum renginin kalıtımıyla ilgili yapılan iki çaprazlamadan ilkinde oluşan bezelyelerin hepsinin tohum renginin sarı olduğu gözlemlenmiştir. Oluşan bu bezelye- lerden seçilen iki bezelyeyle yapılan ikinci çaprazlamanın sonucunda elde edilen bezel- yelerin bazılarının tohum renginin yeşil olduğu gözlemlenmiştir. Buna göre, her iki çaprazlamada çapraz- lanan bezelyelerle ilgili aşağıdakilerden hangisi kesinlikle doğrudur?",
+  "secenekler": {
+   "A": "İlkindeki bezelyelerin tohum rengi bakımın- dan genotipleri aynıdır.",
+   "B": "İlkindeki bezelyelerin her ikisinde de çeki- nik alel bulunur.",
+   "C": "İkincisindeki bezelyeler, tohum rengi bakı- mından saf döl değildir.",
+   "D": "İkincisindeki bezelyelerden biri, saf baskın genotiptedir."
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 5,
+  "sayfa": 20,
+  "metin": "DNA'daki tek bir nükleotid çiftinin değişmesine yol açan mutasyonlar, hatalı bir protein oluşmasına neden olabilir. Örneğin insanlarda bu şekildeki bir mutasyonun sonucunda oluşan hatalı hemoglobin proteini, normal alyuvar hücrelerine göre daha az oksijen taşınmasına neden olur. Bu durumun ortaya çıkması için mutasyona uğramış alelin, hemoglobin oluşumunu sağlayan genin her iki kopya- sında da bulunması gerekir. Alyuvarda bulunan hemoglobinin oluşumunu sağlayan genin normal ve mutasyona uğramış hâlindeki nükleotid diziliminin bir kısmı şekildeki gibidir. Protein sentezinde kullanılan DNA'nın kalıp zinciri DNA'nın kalıp olmayan zinciri C T T G A A Bu durumda normal protein üretilir. C A T G T A Bu durumda hatalı protein üretilir. Buna göre, bu mutasyonla ilgili aşağıdakilerden hangisi doğrudur?",
+  "secenekler": {
+   "A": "Bu mutasyon, DNA'daki organik bazların karşılıklı hatalı eşleşmesinden kaynaklanır.",
+   "B": "Mutasyona uğramış aleli taşıyan bireyin tüm yavrularında bu durum gözlenmeyebilir.",
+   "C": "Bu mutasyonun sonucunda alyuvar üretimi gerçekleşmez.",
+   "D": "Mutasyona uğramış gendeki organik bazların toplam sayısı azalır."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 7,
+  "sayfa": 22,
+  "metin": "Karaciğer hücreleri kullanılarak gerçekleştirilen bir gen tedavisi uygulaması şu şekildedir: Kalıtsal olarak kan pıhtılaşma proteini üretemeyen bir bireyin karaciğerinden hücreler alınır. Alınan hücreler uygun ortamda büyütülür. Pıhtılaşma proteininin üretiminden sorumlu normal gen, bu hücrelerle bir araya getirilir ve gen aktarımı yapılır. Gen aktarımı yapılmış bu karaciğer hücreleri bireye geri nakledilir. Buna göre, I. Bu uygulamadan sonra bireyin kanında pıhtılaşmayı sağlayan proteinin bulunması beklenir. II. Bu uygulamayla bireyin vücut hücrelerinin tamamının DNA'larındaki nükleotid dizilimi değiş- miştir. III. Bu uygulamayla bireye dışarıdan pıhtılaşma proteini aktarılması sağlanmıştır. yargılarından hangileri doğrudur?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "Yalnız III",
+   "C": "I ve II",
+   "D": "I, II ve III"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 8,
+  "sayfa": 23,
+  "metin": "Balıklarla, penguenlerin yumurtalarıyla ve yavrularıyla beslenebilen bir martı türünün penguenler ve denizlerdeki ölü hayvan leşle- riyle de beslendiği bilinmektedir. Aynı zaman- da bu martı türü çok soğuk iklim bölgelerinde yaşamaya uyum sağlamıştır. Buna göre, bu martı türüyle ilgili aşağıda- kilerden hangisi doğrudur?",
+  "secenekler": {
+   "A": "Bu martı türünün çok soğuk iklim bölgele- rine uyum sağlamasında sadece beslen- me şekli etkili olmuştur.",
+   "B": "Farklı besin çeşitleriyle beslenme, bu martı türünün her seferinde daha fazla yumurta üretmesine ve yavru meydana getirmesine yol açar.",
+   "C": "Beslenme şekli bu martı türünün tüm karasal ekosistemlere yayılmasına neden olmuştur.",
+   "D": "Farklı besin çeşitleriyle beslenme, bu martı türüne çevre koşullarının değişmesi durumunda besin bulmaları bakımından avantaj sağlayabilir."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 9,
+  "sayfa": 23,
+  "metin": "Balıklarla, penguenlerin yumurtalarıyla ve yavrularıyla beslenebilen bir martı türünün penguenler ve denizlerdeki ölü hayvan leşle- riyle de beslendiği bilinmektedir. Aynı zaman- da bu martı türü çok soğuk iklim bölgelerinde yaşamaya uyum sağlamıştır. Buna göre, bu martı türüyle ilgili aşağıda- kilerden hangisi doğrudur? A) Bu martı türünün çok soğuk iklim bölgele- rine uyum sağlamasında sadece beslen- me şekli etkili olmuştur. B) Farklı besin çeşitleriyle beslenme, bu martı türünün her seferinde daha fazla yumurta üretmesine ve yavru meydana getirmesine yol açar. C) Beslenme şekli bu martı türünün tüm karasal ekosistemlere yayılmasına neden olmuştur. D) Farklı besin çeşitleriyle beslenme, bu martı türüne çevre koşullarının değişmesi durumunda besin bulmaları bakımından avantaj sağlayabilir. 9. K, L, M ve N şehirlerinin Yerküre üzerinde bulunduğu yerler ile Yerküre'nin Güneş'e göre olan konumu şekildeki gibidir. Güneş Kuzey L M K N Güney Ekvator Buna göre, bu şehirlerde yaşanan mev- simlerle ilgili aşağıdakilerden hangisi doğrudur?",
+  "secenekler": {
+   "A": "L'de kış yaşanır.",
+   "B": "M'de yaz yaşanır.",
+   "C": "N'de kış yaşanır.",
+   "D": "K'de yaz yaşanır."
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 10,
+  "sayfa": 24,
+  "metin": "Temmuz ayındaki bir günde K ve L şehirlerinde yatay bir yere dik olacak şekilde sabitlenen özdeş iki çubuğun gölge boyları öğle saatinde ölçülüyor. K şehrindeki çubuğun gölge boyunun L şehrinde- ki çubuğun gölge boyundan daha uzun olduğu gözlemleniyor. Buna göre K ve L şehirlerinin Yerküre üzerindeki konumları, I. Ekvator Güney Kuzey L K II. Ekvator Güney Kuzey K L III. Ekvator Güney Kuzey K L verilenlerden hangilerindeki gibi olabilir?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "I ve II",
+   "C": "I ve III",
+   "D": "II ve III"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 11,
+  "sayfa": 24,
+  "metin": "Temmuz ayındaki bir günde K ve L şehirlerinde yatay bir yere dik olacak şekilde sabitlenen özdeş iki çubuğun gölge boyları öğle saatinde ölçülüyor. K şehrindeki çubuğun gölge boyunun L şehrinde- ki çubuğun gölge boyundan daha uzun olduğu gözlemleniyor. Buna göre K ve L şehirlerinin Yerküre üzerindeki konumları, I. Ekvator Güney Kuzey L K II. Ekvator Güney Kuzey K L III. Ekvator Güney Kuzey K L verilenlerden hangilerindeki gibi olabilir? A) Yalnız I B) I ve II C) I ve III D) II ve III 11. Hava olayları, belirli bir bölgede kısa sürelerde etkili olan olaylardır. İklim ise bu hava olaylarının uzun yıllar boyunca daha geniş bölgelerde gözlemlenmesiyle elde edilen verilerin ortalamasıdır. Buna göre, I. Bu yılın kış aylarında kar yağışı az oldu. II. Yaşadığım yerde yazlar sıcak ve kurak, kışlar ılık ve yağışlıdır. III. Bir hafta boyunca şiddetli rüzgâr bekleniyor. yargılarından hangileri iklimle ilgilidir?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "Yalnız II",
+   "C": "I ve II",
+   "D": "II ve III"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 12,
+  "sayfa": 25,
+  "metin": "Katı cisimler ile bulundukları zemin arasında oluşan basıncı etkileyen değişkenleri belirlemek için yapılan bir deneyde K ve L cisimleri kum zemine Şekil I'deki gibi bırakılıyor. Kum zeminde K cismi- nin bırakıldığı yerdeki izin derinliğinin daha fazla olduğu gözlemleniyor. Yer (yatay) Şekil I K L Kum Bu işlemden sonra, özdeş M levhaları aynı kum zeminde farklı bir yere konulup bunların üzerine K ve L cisimleri Şekil II'deki gibi konuluyor. Bu durumda kum zeminde oluşan izlerin derinliklerinin birbirine eşit olduğu gözlemleniyor. Kum Yer (yatay) K L Şekil II M M Buna göre, Şekil II'deki durumda izlerin derinlikleri birbirine eşit olmasına rağmen, Şekil I'deki durumda izlerin derinliklerinin birbirinden farklı olması gözlemlerine dayanılarak çıkarılan, I. K ve L cisimlerinin ağırlıkları birbirine eşittir. II. K ve L cisimlerinin kum zemine temas eden yüzey alanları birbirinden farklıdır. III. K ve L cisimlerinin ağırlıkları birbirinden farklıdır. sonuçlarından hangileri doğrudur?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "Yalnız II",
+   "C": "I ve II",
+   "D": "II ve III"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 13,
+  "sayfa": 26,
+  "metin": "Katı cisimler ile bulundukları zemin arasında oluşan basınçla ilgili bir etkinlikte bir masanın üzerine renkleri dışında özdeş beş kitap şekilde verilen K konumundaki gibi dizilmiştir. Daha sonra bu kitap- lardan iki tanesi, şekilde verilen L konumundaki gibi, üç tanesi de M konumundaki gibi dizilmiştir. Masa (yatay) K L M Beyaz Beyaz Sarı Sarı Kitaplar arasındaki sürtünmeler önemsiz olduğuna göre, bu kitaplar ve masa arasında olu- şan basınçla ilgili aşağıdakilerden hangisi doğrudur?",
+  "secenekler": {
+   "A": "Beyaz kitap ile masa arasında oluşan basınç, K konumunda M konumundakinden fazladır.",
+   "B": "Tüm kitaplar ile masa arasında oluşan basınç, M konumunda K konumundakinden fazladır.",
+   "C": "Tüm kitaplar ile masa arasında oluşan basınç, L konumunda diğer konumlara göre daha azdır.",
+   "D": "Sarı kitap ile masa arasında oluşan basınç, K ve L konumlarında birbirine eşittir."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 14,
+  "sayfa": 27,
+  "metin": "Sıvı basıncıyla ilgili bir deneyde kullanılan özdeş bardaklardan ikisinin düşey olan yan yüzeylerinin ortasına, birinin de tabanına şekildeki gibi basınçölçer takılıyor. I. ve II. bardak birbirine temas edecek şekilde yere konulduktan sonra III. bardak bunların üst yüzeylerine temas edecek şekilde konuluyor. Yer (yatay) I. II. III. Basınçölçer Birim zamanda eşit miktarda su akıtan bir musluk III. bardağın suyla sürekli dolu olma- sını sağlıyor. Bu bardak tamamen doluyken buradaki basınçölçer 1 Pa değerini gösteri- yor. III. bardaktan taşan su ise altındaki I. ve II. bardağı dolduruyor. Buna göre, tüm bardaklar tamamen dol- duğunda I. ve II. bardaktaki basınçölçer- lerin gösterdiği değerler aşağıdakilerden hangisinde doğru verilmiştir? I. bardaktaki II. bardaktaki",
+  "secenekler": {
+   "A": "2 Pa 4 Pa",
+   "B": "1 Pa 2 Pa",
+   "C": "0,5 Pa 0,5 Pa",
+   "D": "0,5 Pa 1 Pa"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 15,
+  "sayfa": 27,
+  "metin": "Sıvı basıncıyla ilgili bir deneyde kullanılan özdeş bardaklardan ikisinin düşey olan yan yüzeylerinin ortasına, birinin de tabanına şekildeki gibi basınçölçer takılıyor. I. ve II. bardak birbirine temas edecek şekilde yere konulduktan sonra III. bardak bunların üst yüzeylerine temas edecek şekilde konuluyor. Yer (yatay) I. II. III. Basınçölçer Birim zamanda eşit miktarda su akıtan bir musluk III. bardağın suyla sürekli dolu olma- sını sağlıyor. Bu bardak tamamen doluyken buradaki basınçölçer 1 Pa değerini gösteri- yor. III. bardaktan taşan su ise altındaki I. ve II. bardağı dolduruyor. Buna göre, tüm bardaklar tamamen dol- duğunda I. ve II. bardaktaki basınçölçer- lerin gösterdiği değerler aşağıdakilerden hangisinde doğru verilmiştir? I. bardaktaki II. bardaktaki A) 2 Pa 4 Pa B) 1 Pa 2 Pa C) 0,5 Pa 0,5 Pa D) 0,5 Pa 1 Pa 15. Belirli bir noktadaki sıvı basıncının ölçülmesi için aynı süre boyunca yapılan çeşitli işlemle- rin sonucunda oluşan basıncın zamana göre değişimini gösteren bir grafik şekildeki gibidir. Basınç (Pa) Zaman (dakika) 3 2 2 1 1 0 Buna göre, bu grafik; I. havuzun tabanından, önce havuzun yüzeyine doğru sonra ilk konumuna doğru yüzen bir kişinin üzerinde oluşan basınç, II. başlangıçta suyla dolu bir şişenin tabanına delik açılarak su boşaltıldıktan sonra delik kapatılıp bu şişe, yoğunluğu sudan küçük bir sıvıyla doldurulduğun- da şişenin tabanında oluşan basınç, III. başlangıçta suyla dolu bir havuzun ta- banında bulunan musluk açıldığında su yüksekliği azaldıkça havuzun tabanın- da oluşan basınç durumlarından hangilerine ait olabilir?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "Yalnız III",
+   "C": "I ve II",
+   "D": "II ve III"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 16,
+  "sayfa": 28,
+  "metin": "Bir kabın tabanında oluşan sıvı basıncının sıvının derinliğine bağlı olup olmadığının kararını vermek için birbirinden bağımsız dört ayrı deneme yapılıyor. Bu denemelerde ha- reketli özdeş K, L ve M parçalarından oluşan şekildeki kap kullanılıyor. Bu kaptaki parça- lardan K ile L sağa ve sola, M yukarı ve aşağı yönde hareket ettirilebiliyor. Bu denemelerde hareketli parçalar başlangıçta tamamen dolu olan bu kaptan sıvı taşmayacak şekilde ve her seferinde eşit mesafede hareket ettiriliyor. Yer (yatay) Sıvı K L M Sol Sağ Yukarı Aşağı Başlangıçta tamamen dolu olan bu kap kulla- nılarak yapılan denemeler şu şekildedir: I. M parçası önce aşağı, sonra yukarı yönde hareket ettiriliyor. II. K parçası sola doğru, M parçası aşağı yönde hareket ettiriliyor. III. K ve L parçaları birlikte sağa doğru hareket ettiriliyor. IV. L parçası sağa doğru hareket ettiriliyor. Her denemenin sonunda kabın tabanında oluşan basınç ölçülerek şekildeki durumda oluşan basınçla karşılaştırılıyor. Buna göre, sıvı basıncının sıvının derin- liğine bağlı olup olmadığıyla ilgili doğru karar verebilmek için numaralandırılmış denemelerden hangileri kullanılabilir?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "II ve III",
+   "C": "II ve IV",
+   "D": "I, III ve IV"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 17,
+  "sayfa": 28,
+  "metin": "Bir kabın tabanında oluşan sıvı basıncının sıvının derinliğine bağlı olup olmadığının kararını vermek için birbirinden bağımsız dört ayrı deneme yapılıyor. Bu denemelerde ha- reketli özdeş K, L ve M parçalarından oluşan şekildeki kap kullanılıyor. Bu kaptaki parça- lardan K ile L sağa ve sola, M yukarı ve aşağı yönde hareket ettirilebiliyor. Bu denemelerde hareketli parçalar başlangıçta tamamen dolu olan bu kaptan sıvı taşmayacak şekilde ve her seferinde eşit mesafede hareket ettiriliyor. Yer (yatay) Sıvı K L M Sol Sağ Yukarı Aşağı Başlangıçta tamamen dolu olan bu kap kulla- nılarak yapılan denemeler şu şekildedir: I. M parçası önce aşağı, sonra yukarı yönde hareket ettiriliyor. II. K parçası sola doğru, M parçası aşağı yönde hareket ettiriliyor. III. K ve L parçaları birlikte sağa doğru hareket ettiriliyor. IV. L parçası sağa doğru hareket ettiriliyor. Her denemenin sonunda kabın tabanında oluşan basınç ölçülerek şekildeki durumda oluşan basınçla karşılaştırılıyor. Buna göre, sıvı basıncının sıvının derin- liğine bağlı olup olmadığıyla ilgili doğru karar verebilmek için numaralandırılmış denemelerden hangileri kullanılabilir? A) Yalnız I B) II ve III C) II ve IV D) I, III ve IV 17. Periyodik sistemde elementler metal, ametal ve yarı metal olarak sınıflandırılabilir. Bir kısmı verilen periyodik sistemdeki elementler bu sınıflandırmaya göre şekildeki gibi farklı desenlerle taranarak gösterilmiştir. metal yarı metal ametal Bu periyodik sistemde atom numaraları ardışık olan herhangi iki elementle ilgili, I. Farklı periyotta yer alırlar. II. Farklı grupta yer alırlar. III. Aynı element sınıfında yer alırlar. yargılarından hangileri kesinlikle doğru- dur?",
+  "secenekler": {
+   "A": "Yalnız II",
+   "B": "I ve II",
+   "C": "I ve III",
+   "D": "II ve III"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 18,
+  "sayfa": 29,
+  "metin": "Bir öğrenci, maddede meydana gelen deği- şimleri gözlemlemek için bir deney yapıyor. Deneyinde beyaz küp şekeri, bir tahta kaşık yardımıyla toz hâline getiriyor. Daha sonra elde ettiği toz şekerin bir kısmını bir kaptaki suyun içine ilave edip karıştırıyor. Bir süre sonra şekerin suda çözündüğünü gözlem- liyor. Toz şekerin kalan kısmını bir kabın içinde ısıttığında bu kabın içinde sıvı hâlde kahverengi başka bir maddenin oluştuğunu gözlemliyor. Bu deneyde şekerde gözlemlenen; I. küp şekerin toz hâline gelmesi, II. ısıtılan toz şekerin renginin değişmesi, III. toz şekerin suda çözünmesi değişimlerinden hangileri sadece fiziksel değişim olarak sınıflandırılır?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "Yalnız II",
+   "C": "Yalnız III",
+   "D": "I ve III"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 19,
+  "sayfa": 29,
+  "metin": "Bir öğrenci, maddede meydana gelen deği- şimleri gözlemlemek için bir deney yapıyor. Deneyinde beyaz küp şekeri, bir tahta kaşık yardımıyla toz hâline getiriyor. Daha sonra elde ettiği toz şekerin bir kısmını bir kaptaki suyun içine ilave edip karıştırıyor. Bir süre sonra şekerin suda çözündüğünü gözlem- liyor. Toz şekerin kalan kısmını bir kabın içinde ısıttığında bu kabın içinde sıvı hâlde kahverengi başka bir maddenin oluştuğunu gözlemliyor. Bu deneyde şekerde gözlemlenen; I. küp şekerin toz hâline gelmesi, II. ısıtılan toz şekerin renginin değişmesi, III. toz şekerin suda çözünmesi değişimlerinden hangileri sadece fiziksel değişim olarak sınıflandırılır? A) Yalnız I B) Yalnız II C) Yalnız III D) I ve III 19. Bir miktar sirkeye kabartma tozu eklenerek yapılan bir deneyin aşamaları şekilde veril- miştir. Kabartma tozu Sirke Sirkeye bir miktar kabartma tozu ekleniyor. Gaz çıkışı gözlemleniyor. Bu deneyde kimyasal değişim gerçekleş- tiğinin kararını verebilmek için aşağıdaki- lerden hangisinin yapılması yeterlidir?",
+  "secenekler": {
+   "A": "Sirkeye kabartma tozu eklendikten sonra toplam kütlenin ölçülmesi",
+   "B": "Sirkeye kabartma tozu eklendikten sonra herhangi bir anda karışımın sıcaklığının ölçülmesi",
+   "C": "Oluşan gazın sirke ve kabartma tozundan farklı bir madde olup olmadığının belirlen- mesi",
+   "D": "Sirkenin başlangıçtaki kütlesinin ölçülmesi"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ },
+ {
+  "no_pdf": 20,
+  "sayfa": 30,
+  "metin": "Bir asit-baz ayracı, batırıldığı çözeltinin pH değerine bağlı olarak asit çözeltilerinde kırmı- zı veya pembe; baz çözeltilerinde yeşil veya sarı oluyor. Bu ayraçtan dört tane kullanılarak yapılan bir deneyde ayraçlar, numaralandırıl- mış kaplardaki çözeltilere batırıldığında ay- raçların batırılan kısımlarında oluşan renkler şekildeki gibidir. 1 2 3 4 Kırmızı Sarı Yeşil Pembe Buna göre, bu çözeltilerin pH değerleriyle ilgili aşağıdakilerden hangisi kesinlikle doğrudur?",
+  "secenekler": {
+   "A": "4'teki çözeltinin pH değeri 1'deki çözelti- nin pH değerinden küçüktür.",
+   "B": "3'teki çözeltinin pH değeri en büyüktür.",
+   "C": "2 ve 3'teki çözeltilerin pH değerleri birbiri- ne eşittir.",
+   "D": "1'deki çözeltinin pH değeri 2'deki çözelti- nin pH değerinden küçüktür. TEST BİTTİ. CEVAPLARINIZI KONTROL EDİNİZ."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2023-LGS-SAYISAL-KITAPCIGI.pdf"
+ }
+]

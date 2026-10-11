@@ -1,0 +1,478 @@
+[
+ {
+  "no_pdf": 1,
+  "sayfa": 2,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. 2019-2020 EĞİTİM - ÖĞRETİM YILI SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV MATEMATİK 2 A 2019-2020 EĞİTİM - ÖĞRETİM YILI 1. a, b birer doğal sayı olmak üzere a b a b 2 = dir. Bir bilye atma oyununa ait, kısa kenar uzunluğu 1 m olan dokuz eş dikdörtgensel bölgeden oluşan oyun parkuru aşağıda verilmiştir. 0 1 m 2 m 3 m 4 m Başlangıç çizgisi 5 m 6 m 7 m 8 m 9 m Mavi Başlangıç çizgisinden atış yapan bir oyuncunun attığı bilye, parkurda gösterilen mavi bölgede kal- mıştır. Buna göre bu bilyenin başlangıç çizgisine uzaklığı metre cinsinden aşağıdakilerden hangisi olamaz?",
+  "secenekler": {
+   "A": "2 10",
+   "B": "3 5",
+   "C": "4 3",
+   "D": "2 13"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 3,
+  "sayfa": 4,
+  "metin": "Bir ondalık gösterimin, basamak değerleri toplamı şeklinde yazılmasına ondalık gösterimin çözüm- lenmesi denir. Bir basketbol takımındaki beş oyuncunun boy uzunluklarının çözümlenmiş şekli aşağıdaki tabloda verilmiştir. Tablo: Oyuncuların Boylarının Uzunlukları İsim Boy Uzunluğu (cm) Ayça 2$102 + 1$100 + 1$10-1 Beyza 1$102 + 7$101 + 5$100 + 5$10-1 Ceyda 1$102 + 8$101 + 4$100 Derya 1$102 + 8$101 + 7$100 + 2$10-1 Esra 1$102 + 8$101 + 5$100 + 6$10-1 Takımın antrenörü, boyu 185 santimetreden kısa olan oyunculardan birini oyun kurucu olarak oyna- tacaktır. Buna göre verilen oyuncular arasında oyun kurucu olarak oynayabilecek kaç oyuncu vardır?",
+  "secenekler": {
+   "A": "4",
+   "B": "3",
+   "C": "2",
+   "D": "1"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 4,
+  "sayfa": 5,
+  "metin": "a, b, c birer doğal sayı olmak üzere . a b a b a b c b a c b dir 2 = + = + _ i Bir şehrin demir yolu hatları üzerindeki istasyonlar aşağıdaki şekilde noktalar ile gösterilmiştir. Aynı hat üzerinde bulunan ardışık iki istasyon arasındaki mesafeler birbirine eşittir. 2 km 5 km 3 km S D M L K C B A Yeşil Hat Mavi Hat Kırmızı Hat A, B, C istasyonlarından hareket eden K, L ve M trenleri ortak olan D istasyonundan sonra yeşil hattı kullanarak S istasyonuna ulaşıyorlar. Bu trenlerin gittikleri yolların uzunluğuna göre doğru sıralanışı aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "K 2 L 2 M",
+   "B": "K 2 M 2 L",
+   "C": "M 2 L 2 K",
+   "D": "M 2 K 2 L"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 5,
+  "sayfa": 6,
+  "metin": "Kenarlarının uzunlukları x metre ve 2x metre olan dikdörtgen şeklindeki oyun parkının planı Şekil I'de verilmiştir. Bu oyun parkının kenarları 2'şer metre uzatılarak Şekil II'deki gibi dikdörtgen biçiminde bir oyun parkı planlanmıştır. x Şekil I 2x Oyun Parkı 2 m Şekil II 2 m Oyun Parkı Buna göre Şekil II'deki oyun parkının alanının Şekil I'deki oyun parkının alanından kaç metre- kare fazla olduğunu veren cebirsel ifade aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "6x + 4",
+   "B": "6x + 6",
+   "C": "3x + 2",
+   "D": "3x + 4"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 6,
+  "sayfa": 7,
+  "metin": "Yükseklikleri santimetre cinsinden birer tam sayı olan aşağıdaki dikdörtgenler prizması şeklindeki kutuların her birinden üçer adet vardır. k cm 3k cm 5k cm 7k cm Bu kutular aşağıdaki gibi üst üste dizilerek üç ayrı blok oluşturulmuştur. 5k cm 7k cm 3k cm k cm 7k cm 3k cm k cm 5k cm k cm 3k cm 5k cm 7k cm Bloklardaki kutuların yerleri değiştirilmeden bu üç blok üst üste konularak bir kule oluşturuluyor. Daha sonra kulenin en üstünde bulunan kutu alınıyor. Son durumda bu kulenin yüksekliğinin santimetre cinsinden değeri aşağıdakilerden hangisi olamaz?",
+  "secenekler": {
+   "A": "94",
+   "B": "90",
+   "C": "86",
+   "D": "82"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 7,
+  "sayfa": 8,
+  "metin": "İstenilen olası durumların sayısı Tüm olası durumların sayısı Bir olayın olma olasılığı = Aşağıdaki tabloda • (nokta) ve - (çizgi) karakterleri kullanılarak tanımlanmış rakamlar verilmiştir. 1 • - - - - 6 - • • • • 2 • • - - - 7 - - • • • 3 • • • - - 8 - - - • • 4 • • • • - 9 - - - - • 5 • • • • • 0 - - - - - Bu rakamlara karşılık gelen karakterlerle oluşturulan iki basamaklı doğal sayıların tamamı aşağıdaki gibi özdeş kartlara yazılıp boş bir torbaya atılmıştır. Örneğin; 12 • - - - - • • - - - 11 • - - - - • - - - - 10 • - - - - - - - - - Bu torbadan rastgele yapılan bir çekilişte üzerindeki • (nokta) sayısı 5 olan kartın çekilme olasılığı kaçtır?",
+  "secenekler": {
+   "A": "90 19",
+   "B": "5 1",
+   "C": "90 17",
+   "D": "6 1"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 8,
+  "sayfa": 9,
+  "metin": "Aşağıda her birinin kütlesi 3 g olan sarı bon- cuklardan ve her birinin kütlesi 5 g olan mavi boncuklardan yeterli sayıda verilmiştir. Bu boncuklar kullanılarak bir kolye yapılmıştır. Kolyedeki mavi boncukların toplam kütlesi sarı boncukların toplam kütlesine eşittir. Kullanılan boncukların toplam kütlesi 230 gramdan az olduğuna göre bu kol- yedeki sarı boncukların sayısı ile mavi boncukların sayısı arasındaki fark en fazla kaçtır?",
+  "secenekler": {
+   "A": "14",
+   "B": "15",
+   "C": "28",
+   "D": "30"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 9,
+  "sayfa": 9,
+  "metin": "Aşağıda her birinin kütlesi 3 g olan sarı bon- cuklardan ve her birinin kütlesi 5 g olan mavi boncuklardan yeterli sayıda verilmiştir. Bu boncuklar kullanılarak bir kolye yapılmıştır. Kolyedeki mavi boncukların toplam kütlesi sarı boncukların toplam kütlesine eşittir. Kullanılan boncukların toplam kütlesi 230 gramdan az olduğuna göre bu kol- yedeki sarı boncukların sayısı ile mavi boncukların sayısı arasındaki fark en fazla kaçtır? A) 14 B) 15 C) 28 D) 30 9. Aşağıda dört farklı renkteki kartların her birinden üçer adet verilmiştir. Aynı renkteki kartların üzerinde aynı kareköklü ifade yaz- maktadır. 0,09 0,25 Mavi Kırmızı 0,64 1,44 Yeşil Turuncu Eymen, bu kartlardan seçerek üstlerinde ya- zan kareköklü ifadeleri topladığında bir doğal sayı elde etmektedir. Buna göre Eymen en fazla kaç kart seç- miştir?",
+  "secenekler": {
+   "A": "8",
+   "B": "9",
+   "C": "10",
+   "D": "11"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 10,
+  "sayfa": 10,
+  "metin": "a ! 0 ve m, n tam sayılar olmak üzere an $ am = an+m ve a a a n m m n = - dir. Bir kenarının uzunluğu 54 cm olan kare şeklindeki kâğıdın bir yüzüne aşağıdaki gibi 12 eş dikdörtgen ve 1 kare çizilmiştir. Bu şekillerden kare ve 2 eş dikdörtgen kırmızıya boyanmıştır. 54 cm Kırmızı Kırmızı Kırmızı Buna göre kırmızı bölgelerin alanları top- lamı kaç santimetrekaredir?",
+  "secenekler": {
+   "A": "2$57",
+   "B": "57",
+   "C": "2$56",
+   "D": "56"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 11,
+  "sayfa": 10,
+  "metin": "a ! 0 ve m, n tam sayılar olmak üzere an $ am = an+m ve a a a n m m n = - dir. Bir kenarının uzunluğu 54 cm olan kare şeklindeki kâğıdın bir yüzüne aşağıdaki gibi 12 eş dikdörtgen ve 1 kare çizilmiştir. Bu şekillerden kare ve 2 eş dikdörtgen kırmızıya boyanmıştır. 54 cm Kırmızı Kırmızı Kırmızı Buna göre kırmızı bölgelerin alanları top- lamı kaç santimetrekaredir? A) 2$57 B) 57 C) 2$56 D) 56 11. Dikdörtgen şeklindeki bir kâğıt, alanları santimetrekare cinsinden 10'dan büyük birer tam kare pozitif tam sayıya eşit olan karesel bölgelere aşağıdaki gibi ayrılmıştır. A A B B C D Eşit alanlı bölgeler aynı harf ile göste- rildiğine göre dikdörtgen şeklindeki bu kâğıdın bir yüzünün alanı en az kaç santi- metrekaredir?",
+  "secenekler": {
+   "A": "168",
+   "B": "255",
+   "C": "364",
+   "D": "392"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 12,
+  "sayfa": 10,
+  "metin": "a ! 0 ve m, n tam sayılar olmak üzere an $ am = an+m ve a a a n m m n = - dir. Bir kenarının uzunluğu 54 cm olan kare şeklindeki kâğıdın bir yüzüne aşağıdaki gibi 12 eş dikdörtgen ve 1 kare çizilmiştir. Bu şekillerden kare ve 2 eş dikdörtgen kırmızıya boyanmıştır. 54 cm Kırmızı Kırmızı Kırmızı Buna göre kırmızı bölgelerin alanları top- lamı kaç santimetrekaredir? A) 2$57 B) 57 C) 2$56 D) 56 11. Dikdörtgen şeklindeki bir kâğıt, alanları santimetrekare cinsinden 10'dan büyük birer tam kare pozitif tam sayıya eşit olan karesel bölgelere aşağıdaki gibi ayrılmıştır. A A B B C D Eşit alanlı bölgeler aynı harf ile göste- rildiğine göre dikdörtgen şeklindeki bu kâğıdın bir yüzünün alanı en az kaç santi- metrekaredir? A) 168 B) 255 C) 364 D) 392 12. Alanı 1050 cm2 olan kare şeklindeki bir pa- noya kenarlarından birinin uzunluğu 5'in tam sayı kuvveti, diğerinin uzunluğu 2'nin tam sayı kuvveti olan dikdörtgen şeklindeki bir afiş, pano yüzeyinden taşmayacak şekilde asılacaktır. Buna göre afişin bir yüzünün alanı en fazla kaç santimetrekaredir?",
+  "secenekler": {
+   "A": "1000",
+   "B": "800",
+   "C": "640",
+   "D": "400"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 13,
+  "sayfa": 11,
+  "metin": "Bir lokantada hazırlanan yemek çeşitleri ve porsiyon sayıları sütun grafiği ile bu yemekler için kullanılan toplam 60 g tuzun yemek çeşitlerine göre dağılımı daire grafiği ile aşağıda gösterilmiştir. Bir çeşit yemeğin her porsiyonunda eşit miktarda tuz bulunmaktadır. 10 0 4 5 6 Porsiyon Sayısı Grafik: Yemek Çeşitleri ve Porsiyon Sayıları Yemek Çeşitleri Grafik: 60 g Tuzun Yemek Çeşitlerine Göre Dağılımı 72° 48° 60° 36° 54° Pilav Çorba Çorba Pilav Musakka Musakka Makarna Makarna Taze Fasulye Taze Fasulye Köfte Köfte Bu lokantada üç farklı yemekten birer porsiyon yiyen bir müşteri toplam 5 g tuz tüketmiştir. Buna göre bu müşterinin yediği yemekler aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "Çorba - Pilav - Musakka",
+   "B": "Pilav - Musakka - Köfte",
+   "C": "Çorba - Musakka - Makarna",
+   "D": "Pilav - Taze Fasulye - Köfte"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 14,
+  "sayfa": 12,
+  "metin": "İstenilen olası durumların sayısı Tüm olası durumların sayısı Bir olayın olma olasılığı = Siyah Sarı Beyaz Kırmızı Mavi Kahverengi Mor Turuncu Yeşil 9 m 1 m Kenarlarının uzunlukları 1 m ve 9 m olan dikdörtgen biçimindeki bir halının ön yüzü, şekildeki gibi farklı renklere boyanmıştır. Bu renklerin her birinin kapladığı karesel bölgenin alanı birbirine eşittir. Bu halı, parçalarda aynı renk olmayacak şekilde iki parçaya bölünecektir. Buna göre bu parçalardan birinin boyalı yüzünün alanının, diğerinin boyalı yüzünün alanının 2 katı olması olasılığı kaçtır?",
+  "secenekler": {
+   "A": "3 1",
+   "B": "4 1",
+   "C": "8 1",
+   "D": "9 1"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 15,
+  "sayfa": 13,
+  "metin": "Aşağıda çevresinin uzunluğu (2x + 2) m olan dikdörtgenlerden yeterli sayıda verilmiştir. Bu dikdörtgenler [AB] boyunca sırasıyla önce uzun kenarı sonra kısa kenarı üzerine aralarında boş- luk kalmayacak şekilde aşağıdaki gibi yerleştirilmiştir. Uzun kenarı üzerine yerleştirilen ilk dikdörtge- nin bir köşesi A noktası ile kısa kenarı üzerine yerleştirilen son dikdörtgenin bir köşesi B noktası ile çakışıktır. B A Bu dikdörtgenler (x + 1) kez kısa kenarı üzerine yerleştirildiğine göre [AB]'nın uzunluğunu metre cinsinden veren cebirsel ifade aşağıdakilerden hangisidir?",
+  "secenekler": {
+   "A": "x2 + x + 2",
+   "B": "2x2 + 1",
+   "C": "x2 + 1",
+   "D": "x2 + 2x + 1"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 16,
+  "sayfa": 14,
+  "metin": "İstenilen olası durumların sayısı Tüm olası durumların sayısı Bir olayın olma olasılığı = Renkleri dışında özdeş olan toplardan 4'ü kırmızı, geri kalanı beyazdır. Bu topların tamamı aşağıda- ki boş A, B ve C torbalarına dağıtılıyor. C B A Bu torbaların her birinden rastgele çekilen bir topun kırmızı olma olasılığı birbirine eşittir. Buna göre başlangıçtaki beyaz top sayısı aşağıdakilerden hangisi olamaz?",
+  "secenekler": {
+   "A": "80",
+   "B": "82",
+   "C": "88",
+   "D": "92"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 17,
+  "sayfa": 15,
+  "metin": "Her birinin kütlesi 40 kg'dan az ve birbirine eşit olan buğday çuvalları aşağıdaki gibi bir kantarda tartıldığında çuvalların toplam kütle- si 720 kg gelmektedir. kg Kantar üzerindeki çuvalların sayısı, bu çuval- larla eşit kütleye sahip çuvallar konularak arttırıldığında toplam kütle 1344 kg olmakta- dır. kg Buna göre kantar üzerine sonradan konu- lan çuvalların sayısı en az kaçtır?",
+  "secenekler": {
+   "A": "52",
+   "B": "39",
+   "C": "26",
+   "D": "13"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 18,
+  "sayfa": 15,
+  "metin": "Her birinin kütlesi 40 kg'dan az ve birbirine eşit olan buğday çuvalları aşağıdaki gibi bir kantarda tartıldığında çuvalların toplam kütle- si 720 kg gelmektedir. kg Kantar üzerindeki çuvalların sayısı, bu çuval- larla eşit kütleye sahip çuvallar konularak arttırıldığında toplam kütle 1344 kg olmakta- dır. kg Buna göre kantar üzerine sonradan konu- lan çuvalların sayısı en az kaçtır? A) 52 B) 39 C) 26 D) 13 18. a ! 0 ve m, n tam sayılar olmak üzere an.am = an+m ve a a a n m m n = - (an)m = an.m dir. Bir fabrikada üretilen mavi ve kırmızı renkli otomobiller bir galeriye iki tır ile taşınmakta- dır. Bu otomobillerin birer adedinin kütleleri Tablo 1'de, tırların taşıdığı otomobillerin sayıları Tablo 2'de gösterilmiştir. Tablo 1: Otomobillerin Kütleleri Otomobil Kütle (kg) Mavi otomobil 45 Kırmızı otomobil 211 Tablo 2: Tırların Taşıdığı Otomobil Sayıları Otomobil Mavi otomobil Kırmızı otomobil A B 4 3 Tır A tırı ile taşınan mavi ve kırmızı otomobillerin sayıları birbirine eşittir. İki tırın taşıdığı otomobillerin toplam küt- lesi 214 kg olduğuna göre A tırı ile taşınan otomobil sayısı kaçtır?",
+  "secenekler": {
+   "A": "2",
+   "B": "4",
+   "C": "6",
+   "D": "8"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 19,
+  "sayfa": 16,
+  "metin": "Kare şeklindeki boş bir panoya kare şeklindeki üç eş mavi karton, köşegenleri panonun köşegeni ile çakışacak şekilde aşağıdaki gibi yerleştirilmiştir. 1 cm2 1 cm2 Mavi Mavi Mavi Panoda boş bırakılan bölgelerin alanları toplamı 6x2 + 36x + 54 santimetrekaredir. Kartonların üst üste gelen bölgelerinin her biri, alanları 1 cm2 olan karesel bölgelerdir. Buna göre panonun çevresinin uzunluğunu santimetre cinsinden veren cebirsel ifade aşağı- dakilerden hangisidir?",
+  "secenekler": {
+   "A": "12x + 40",
+   "B": "12x + 36",
+   "C": "12x + 32",
+   "D": "12x + 28"
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 20,
+  "sayfa": 17,
+  "metin": "Bir okulun Ordu iline düzenleyeceği gezide ziyaret edilecek yerlerle ilgili yapılan anket çalışmasında her bir öğrenci ziyaret edilebilecek yerlerle ilgili yalnız bir tercihte bulunmuştur. Bu anketin sonuçları sütun grafiği ile ankete katılan kız ve erkek öğrencilerin sayılarının dağılımı daire grafiği ile aşağıda gösterilmiştir. Ziyaret Edilecek Yerler Öğrenci Sayısı Grafik: Ziyaret Etmek İstedikleri Yerlere Göre Öğrenci Sayıları Yason Burnu 5 10 15 30 0 Ulugöl Kaya Mezarları Boztepe Grafik: Ankete Katılan Kız ve Erkek Öğrencilerin Sayılarının Dağılımı 150° Erkek Öğrenci Kız Öğrenci Ankete katılan kız ve erkek öğrencilerin sayılarının ziyaret etmek istedikleri yere göre dağılımları aşağıdaki daire grafiklerinde gösterilmiştir. Grafik: Yason Burnu'na Gitmek İsteyen Kız ve Erkek Öğrencilerin Dağılımı Grafik: Ulugöl'e Gitmek İsteyen Kız ve Erkek Öğrencilerin Dağılımı Grafik: Kaya Mezarları'na Gitmek İsteyen Kız ve Erkek Öğrencilerin Dağılımı 216° Kız Öğrenci Erkek Öğrenci 144° Kız Öğrenci Erkek Öğrenci Erkek Öğrenci 108° Kız Öğrenci Yukarıda verilenlere göre Boztepe'yi ziyaret etmek isteyen erkek öğrencilerin sayısı kaçtır?",
+  "secenekler": {
+   "A": "1",
+   "B": "2",
+   "C": "3",
+   "D": "4 MATEMATİK TESTİ BİTTİ. FEN BİLİMLERİ TESTİNE GEÇİNİZ."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 1,
+  "sayfa": 18,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV 18 A 2019-2020 EĞİTİM - ÖĞRETİM YILI 1. Şekilde bir DNA modeli verilmiş ve bir kısmı işaretlenmiştir. DNA modeli T G G A C C G A C C T G T G A A C T G C C G Buna göre bu modelle ilgili aşağıdakiler- den hangisi yanlıştır?",
+  "secenekler": {
+   "A": "DNA'daki baz eşleşmeleri tüm canlılarda aynı şekildedir.",
+   "B": "İşaretlenen kısım genin bir bölgesi olabilir.",
+   "C": "DNA zincirleri nükleotid olarak isimlendiri- len birimlerin birbirine bağlanması sonucu oluşur.",
+   "D": "İşaretlenen kısımdaki nükleotid dizisi tüm canlıların DNA'larında aynıdır."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 1,
+  "sayfa": 18,
+  "metin": "Bu testte 20 soru vardır. 2. Cevaplarınızı, cevap kâğıdına işaretleyiniz. SINAVLA ÖĞRENCİ ALACAK ORTAÖĞRETİM KURUMLARINA İLİŞKİN MERKEZÎ SINAV 18 A 2019-2020 EĞİTİM - ÖĞRETİM YILI 1. Şekilde bir DNA modeli verilmiş ve bir kısmı işaretlenmiştir. DNA modeli T G G A C C G A C C T G T G A A C T G C C G Buna göre bu modelle ilgili aşağıdakiler- den hangisi yanlıştır? A) DNA'daki baz eşleşmeleri tüm canlılarda aynı şekildedir. B) İşaretlenen kısım genin bir bölgesi olabilir. C) DNA zincirleri nükleotid olarak isimlendiri- len birimlerin birbirine bağlanması sonucu oluşur. D) İşaretlenen kısımdaki nükleotid dizisi tüm canlıların DNA'larında aynıdır. 2. Bir araştırmacı bezelye bitkilerini kullanarak yaptığı iki aşamalı çaprazlama sonucunda %50 oranında beyaz çiçekli bezelye bitkisi elde etmek istiyor. Araştırmacı bu amaçla şu çaprazlamaları yapıyor: Mor çiçekli I. Aşama 1. Kuşak Beyaz çiçekli   Mor çiçekli (%100) (1. kuşakta elde edilen mor çiçekli bezelyeler çaprazlanıyor.) Mor çiçekli Mor çiçekli II. Aşama Araştırmacı, II. aşamadaki çaprazlama sonucunda beyaz çiçekli bezelyelerin istediği oranda ortaya çıkmadığını gözlemliyor. Buna göre araştırmacı aşağıdakilerden hangisini yaparsa amacına ulaşabilir?",
+  "secenekler": {
+   "A": "I. aşamadaki beyaz çiçekli bezelye bitkile- rinden iki tanesini çaprazlamalı.",
+   "B": "I. aşamada çaprazlanan mor çiçekli be- zelye bitkisi ile II. aşamada çaprazlamaya alınan mor çiçekli bezelye bitkilerinden birini çaprazlamalı.",
+   "C": "1. kuşakta elde ettiği bir bezelye bitkisi ile beyaz çiçekli bir bezelye bitkisini çapraz- lamalı.",
+   "D": "II. aşamada homozigot mor çiçekli iki bezelye bitkisini çaprazlamalı. )EN %İLİMLERİ )EN %İLİMLERİ"
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 3,
+  "sayfa": 19,
+  "metin": "Modelde bir DNA molekülünün bir kısmı ve bu molekülün kendini eşleme süreci verilmiştir. DNA molekülü T A C G G C A T A T Yeni oluşan DNA molekülleri C C C C C G G C G G G G A T A A T T A T A T A T Bu modele göre DNA'nın kendini eşlemesiyle ilgili aşağıdaki yorumlardan hangisi yanlıştır?",
+  "secenekler": {
+   "A": "Oluşan yeni DNA'lar, eski DNA'ya ait nükleotid dizisi içermez.",
+   "B": "Yeni oluşan DNA iplikleri yeniden ikili sarmal yapı oluşturur.",
+   "C": "Genetik bilgiler DNA'nın kendini eşlemesi ile yeni oluşan DNA moleküllerine aktarılır.",
+   "D": "Eşleşme tamamlandığında oluşan yeni DNA'lar, kalıtsal olarak başlangıçtaki DNA'nın aynısıdır."
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 4,
+  "sayfa": 20,
+  "metin": "Bir araştırmacı bezelyeler arasında çapraz- lamalar yaparak bir öngörüsünü test etmek istiyor. Öngörü: Düzgün tohumlu (genotipi DD veya Dd) iki bezelyenin çaprazlanmasından hem düzgün tohumlu hem de buruşuk tohumlu (genotipi dd) bezelyeler elde edilebilir. Deneme Aşaması: Düzgün tohumlu iki be- zelye çaprazlanmıştır. Sonuç: Oluşan yeni kuşakta sadece düz- gün tohumlu bezelyeler ortaya çıkmıştır. Bu durum öngörüyü doğrulamamıştır. Buna göre araştırmacının deneme aşa- masında yaptığı muhtemel çaprazlama ve öngörüsünü doğrulayabilmesi için yap- ması gereken çaprazlama aşağıdakilerin hangisinde doğru verilmiştir? Deneme aşamasında yaptığı muhtemel çaprazlama Öngörüsünü doğrulayabilmesi için yapması gereken çaprazlama",
+  "secenekler": {
+   "A": "Dd # Dd DD # dd",
+   "B": "DD # dd Dd # Dd",
+   "C": "DD # DD Dd # Dd",
+   "D": "DD # Dd dd # dd"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 5,
+  "sayfa": 20,
+  "metin": "Bir araştırmacı bezelyeler arasında çapraz- lamalar yaparak bir öngörüsünü test etmek istiyor. Öngörü: Düzgün tohumlu (genotipi DD veya Dd) iki bezelyenin çaprazlanmasından hem düzgün tohumlu hem de buruşuk tohumlu (genotipi dd) bezelyeler elde edilebilir. Deneme Aşaması: Düzgün tohumlu iki be- zelye çaprazlanmıştır. Sonuç: Oluşan yeni kuşakta sadece düz- gün tohumlu bezelyeler ortaya çıkmıştır. Bu durum öngörüyü doğrulamamıştır. Buna göre araştırmacının deneme aşa- masında yaptığı muhtemel çaprazlama ve öngörüsünü doğrulayabilmesi için yap- ması gereken çaprazlama aşağıdakilerin hangisinde doğru verilmiştir? Deneme aşamasında yaptığı muhtemel çaprazlama Öngörüsünü doğrulayabilmesi için yapması gereken çaprazlama A) Dd # Dd DD # dd B) DD # dd Dd # Dd C) DD # DD Dd # Dd D) DD # Dd dd # dd 5. Çevre koşullarının değişmesi genlerin işleyi- şini değiştirebilir. Bir tavşan türünde kürk renginden sorumlu olan genin işlevi ortam sıcaklığındaki deği- şimlere bağlı olarak farklılık gösterebilmekte- dir. Bu genin bir aleli tüm vücutta siyah renkli kürkün gelişmesini kontrol eder. Bu alel 35 °C'un üzerindeki sıcaklıklarda etkin değil- dir. Tavşanların vücudunun büyük bir kısmın- da vücut sıcaklığı 35 °C'un üzerinde olduğu için kürk rengi beyazdır. Bununla birlikte ku- lak, burun, kuyruk ve ayaklar 25 °C gibi daha düşük sıcaklıkta olduğundan bu organların üzerindeki kürk rengi siyahtır. Ayrıca yeni doğan tavşanların kürklerinin de vücudun her yerinde beyaz olduğu bilinmektedir. Buna göre hakkında bilgi verilen tavşan türünün kürk rengi ile ilgili aşağıdakiler- den hangisi doğrudur?",
+  "secenekler": {
+   "A": "Beyaz kürklü doğanların, yaşamları bo- yunca tüm vücut kısımlarının kürk renginin beyaz olması beklenir.",
+   "B": "Vücutlarının siyah renkli kürke sahip olan kısımlarındaki hücrelerde kürk rengi ile ilgili alel bulunmaz.",
+   "C": "Yeni doğanların kürklerinin tamamen beyaz olması, embriyonun geliştiği anne vücut sıcaklığının 35 °C'un üzerinde olmasından kaynaklanabilir.",
+   "D": "Beyaz ve siyah renkli kürk oluşumu gen- lerin değil, yalnızca çevresel koşulların kontrolünde gerçekleşir."
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 6,
+  "sayfa": 21,
+  "metin": "Bitkilerde çiçek organlarının (çanak yaprak, taç yaprak, erkek üreme organı, dişi üreme organı) oluşumunda A, B ve C genleri etkilidir. Tabloda A, B ve C genlerinin etkin (işlevsel) olduklarında oluşan çiçek organları verilmiştir. Normal tip Çiçekte oluşan organlar: Etkin genler: A, B, C Dişi üreme organı Erkek üreme organı Taç yaprak Çanak yaprak Dişi üreme organı, erkek üreme organı, taç yapraklar ve çanak yapraklar bulunur. Taç yapraklar ve çanak yapraklar bulunmamaktadır. A geni mutasyona uğramış bitki Erkek üreme organı ve taç yapraklar bulunmamaktadır. B geni mutasyona uğramış bitki Dişi üreme organı ve erkek üreme organı bulunmamaktadır. C geni mutasyona uğramış bitki B, C A, C A, B Tablodaki verilere göre aşağıdakilerden hangisi doğrudur?",
+  "secenekler": {
+   "A": "A geninin işlevsiz olduğu çiçekte, çiçek organlarının tümünün normal gelişim göstermesi beklenir.",
+   "B": "B geninin işlevsiz olduğu çiçekte, üremeden sorumlu hiçbir organın gelişmediği görülür.",
+   "C": "C geninin işlevsiz olduğu çiçeğin, eşeyli üremeyi gerçekleştirmesi beklenir.",
+   "D": "Çiçekte bir organın oluşumu üzerinde birden fazla gen etkili olabilir."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 7,
+  "sayfa": 22,
+  "metin": "Ekili tarlalardaki tarım ürünlerine zarar veren bir böcek türü ile mücadele edebilmek için yapılan uygulamada kimyasal bir ilaç püskürtülmüştür. İlk uygulamada zararlı böcek popülasyonunun büyük bir kısmının ortamdan kalktığı belirlenmiştir. Bölgede zamanla bu böcek popülasyonunun yeniden artmasından sonra aynı kimyasal ilaç tekrar uygulanmıştır. Bu uygulamada ise söz konusu böcekle- rin artık etkilenmediği görülmüştür. Şekilde \" \" ile gösterilen tarım zararlısı böceklerin bulunduğu tarlalarda yapılan uygulamalar ve bu canlıların sayıları verilmiştir. Böcek öldürücü kimyasal ilaç püskürtülür. Böcek öldürücü aynı kimyasal ilaç püskürtülür. I. uygulama II. uygulama Tarlada bulunan zararlı böceklerin sayısı Hayatta kalanların üremesi I. uygulama sonrasında tarlada hayatta kalan zararlı böceklerin sayısı Bir süre sonra tarlada bulunan zararlı böceklerin sayısı II. uygulama sonrasında tarlada bulunan zararlı böceklerin sayısı Bu tarım alanlarında yapılan uygulamalar ve sonuçları ile ilgili aşağıdaki yargılardan hangisi yanlıştır?",
+  "secenekler": {
+   "A": "Birinci uygulama sonrasında hayatta kalan böceklerin, ilgili kimyasal ilaca dirençlilikten sorumlu kalıtsal özelliklerini, üremeleri sırasında yavrularına aktardıkları söylenebilir.",
+   "B": "Birinci uygulama yapılmadan önce böcek popülasyonunda bazı bireylerin ilgili kimyasal ilaca karşı dirençli olduğu söylenebilir.",
+   "C": "Uygulanan kimyasal ilacın, bu böcek popülasyonunda doğal seçilime neden olduğu söylenebilir.",
+   "D": "Birinci uygulama öncesinde zararlı böcek popülasyonunun bireylerinin tamamının aynı kalıtsal yapıda olduğu söylenebilir."
+  },
+  "dogru": "D",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 8,
+  "sayfa": 23,
+  "metin": "Tarım arazilerinde uygun koşulların sağlana- bilmesi için insanlar tarafından çeşitli uygula- malar yapılmaktadır. Bu uygulamaların bazıla- rı sorunlara yol açar. Örneğin sulamanın fazla miktarda yapılması toprağın tuzluluk oranının artmasına neden olabilir. Bazı bitkiler bu ortamda da yaşayabilir. Çünkü hücre sitop- lazmasına giren tuz iyonlarını hücre kofuluna taşıyan bir proteine sahiptir. Bazı bitkilerde, bu proteinin sentezlenmesinden sorumlu gen aktif değildir. Biyoteknoloji uygulamaları ile bu gen; kanola, buğday, domates gibi bitki- lere aktarılmış ve bu bitkilerden domatesin normal seviyeden dört kat daha fazla tuzlu ortamda büyümesi sağlanmıştır. Buna göre bitkilerde gerçekleştirilen bu biyoteknoloji uygulaması ile ilgili aşağıda verilenlerden hangisi doğrudur?",
+  "secenekler": {
+   "A": "Bu uygulamanın yapıldığı bitkilerin su kullanması engellenebilir.",
+   "B": "Bu uygulama ile tuzlu topraklarda bitki üretimi gerçekleştirilebilir.",
+   "C": "Bu uygulama ile domatesin tuzlu topraklar- da verimliliği azalmıştır.",
+   "D": "Bu uygulama, kullanılan bitkilerin bulundu- ğu çevre koşullarını değiştirir."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 9,
+  "sayfa": 23,
+  "metin": "Tarım arazilerinde uygun koşulların sağlana- bilmesi için insanlar tarafından çeşitli uygula- malar yapılmaktadır. Bu uygulamaların bazıla- rı sorunlara yol açar. Örneğin sulamanın fazla miktarda yapılması toprağın tuzluluk oranının artmasına neden olabilir. Bazı bitkiler bu ortamda da yaşayabilir. Çünkü hücre sitop- lazmasına giren tuz iyonlarını hücre kofuluna taşıyan bir proteine sahiptir. Bazı bitkilerde, bu proteinin sentezlenmesinden sorumlu gen aktif değildir. Biyoteknoloji uygulamaları ile bu gen; kanola, buğday, domates gibi bitki- lere aktarılmış ve bu bitkilerden domatesin normal seviyeden dört kat daha fazla tuzlu ortamda büyümesi sağlanmıştır. Buna göre bitkilerde gerçekleştirilen bu biyoteknoloji uygulaması ile ilgili aşağıda verilenlerden hangisi doğrudur? A) Bu uygulamanın yapıldığı bitkilerin su kullanması engellenebilir. B) Bu uygulama ile tuzlu topraklarda bitki üretimi gerçekleştirilebilir. C) Bu uygulama ile domatesin tuzlu topraklar- da verimliliği azalmıştır. D) Bu uygulama, kullanılan bitkilerin bulundu- ğu çevre koşullarını değiştirir. 9. Türkiye'de bir bölgede 21 Temmuz 2015 tarihindeki sağanak yağmur; sel ve su taşkın- larına yol açmıştır. Uzmanlar bu yağışın sel ve su taşkınlarına yol açabileceği konusunda insanları daha önceden uyarmıştır. Bu bölgede yaz aylarının genellikle yağış- sız ve sıcak olmasına rağmen yaşanan bu durum ile ilgili aşağıdaki yorumlardan hangisi doğrudur?",
+  "secenekler": {
+   "A": "Sel olması bölgenin ikliminin değiştiğini gösterir.",
+   "B": "Bu tarihte yağmur yağması bölgenin iklim özelliklerinin bir sonucudur.",
+   "C": "Bu tarihte yağmur yağması bir hava olayı- dır.",
+   "D": "Bu tahmin sadece iklim bilimci tarafından yapılabilir."
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 2,
+  "sayfa": 25,
+  "metin": "Bir odada bulunan şekildeki ranzanın ayakla- rı, üzerinde bulunduğu halı zeminde derin bir iz bırakmıştır. Yer (yatay) Halı Ranzanın ayağı 1. kat 2. kat Yatak Yatak Buna göre aşağıda verilenlerden hangisi yapılırsa ranza ayaklarının halı zeminde bıraktığı izin derinliği artar?",
+  "secenekler": {
+   "A": "Ranzanın birinci katındaki ayaklarının altı- na genişliği, ayakların genişliğinden daha fazla olan bir tahta parçası koyulursa",
+   "B": "Ranzanın ikinci katında bulunan yatak daha ağır olanı ile değiştirilirse",
+   "C": "Ranzanın birinci katında bulunan yatak bulunduğu yerden çıkarılırsa",
+   "D": "Ranzanın ikinci katı alınıp başka bir yere koyulursa"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 15,
+  "sayfa": 28,
+  "metin": "Sıvı basıncı derinlikle artar. Buna göre; II. III. Yer (yatay) I. İçi suyla dolu bir kabın üzerindeki hareketli kapağa kuvvet uygulandığında mantar tıpalarla kapatılan deliklerden tıpaların fırlaması Hareketli kapak Mantar tıpa Mantar tıpa Yer (yatay) İçinde çeşitli sıvıların saklandığı büyük depoların dışında bulunan çelik bantların deponun alt kısmında daha sık aralıklarla sarılması Depo Çelik bant hzerinde delik bulunan, suyla dolu bir şişede su seviyesinin deliğe yaklaşmasıyla delikten çıkan suyun ulaştığı yatay mesafenin de azalması Yer (yatay) durumlarından hangileri \"Sıvı basıncı derinlikle artar.\" bilgisi kullanılarak açıklanabilir?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "Yalnız III",
+   "C": "I ve II",
+   "D": "I, II ve III"
+  },
+  "dogru": "C",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 16,
+  "sayfa": 29,
+  "metin": "Bir öğrenci, yüzey alanları birbirinden fark- lı olan katı bir cisim kullanarak bir deney yapıyor. Öğrenci, cismi Şekil I'deki gibi küçük yüzey alanı süngere değecek şekilde koyu- yor. Daha sonra cismi Şekil II'deki gibi büyük yüzey alanı aynı süngere değecek şekilde koyarak süngerdeki çökme miktarlarını göz- lemliyor. Yer (yatay) Şekil I Şekil II Yer (yatay) Sünger Sünger Buna göre aşağıdakilerden hangisi öğren- cinin bu deneyde sabit tuttuğu (kontrol edilen) değişkenlerden biri değildir?",
+  "secenekler": {
+   "A": "Cismin ağırlığı",
+   "B": "Yüzey alanı",
+   "C": "Zeminin cinsi",
+   "D": "Cismin yapıldığı maddenin cinsi"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 17,
+  "sayfa": 29,
+  "metin": "Bir öğrenci, yüzey alanları birbirinden fark- lı olan katı bir cisim kullanarak bir deney yapıyor. Öğrenci, cismi Şekil I'deki gibi küçük yüzey alanı süngere değecek şekilde koyu- yor. Daha sonra cismi Şekil II'deki gibi büyük yüzey alanı aynı süngere değecek şekilde koyarak süngerdeki çökme miktarlarını göz- lemliyor. Yer (yatay) Şekil I Şekil II Yer (yatay) Sünger Sünger Buna göre aşağıdakilerden hangisi öğren- cinin bu deneyde sabit tuttuğu (kontrol edilen) değişkenlerden biri değildir? A) Cismin ağırlığı B) Yüzey alanı C) Zeminin cinsi D) Cismin yapıldığı maddenin cinsi 17. Bir deneyde katı hâldeki bir bileşik, deney tüpüne konuluyor. Tüpün ağzına yanan bir kibrit Şekil I'deki gibi yaklaştırıldığında alevin parlaklığında değişimin olmadığı gözleniyor. Şekil I Bileşik Bu deney tüpü Şekil II'deki gibi bir süre ısıtıldıktan sonra içindeki bileşiğin kütlesinin azaldığı ve yaklaştırılan kibrit alevinin parlak- lığının arttığı gözleniyor. Şekil II Bileşik Kibrit alevinin parlaklığının artmasının ortamdaki oksijen gazının artmasından kaynaklandığı bilindiğine göre sadece bu deney ile ilgili; I. Bileşiğin yapısında oksijen bulunabilir. II. Isıtma işlemi kimyasal değişime neden olmuş olabilir. III. Bileşiğin yapısındaki atomların türü değişmiş olabilir. çıkarımlarından hangileri doğrudur?",
+  "secenekler": {
+   "A": "Yalnız I",
+   "B": "I ve II",
+   "C": "II ve III",
+   "D": "I, II ve III"
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 19,
+  "sayfa": 30,
+  "metin": "Şekilde bir kısmı verilen periyodik tabloda elementler; metal, ametal, yarımetal ve soy- gaz olma durumlarına göre farklı desenlerle taranarak gösterilmiştir. Bu periyodik tablodan seçilen bir element ve bu elementle aynı grup ve aynı periyotta yer alan komşu iki elementle üçlü gruplar oluşturuluyor. Buna göre aşağıdaki üçlü gruplardan hangisi bu koşulu sağlamaz? A) yarı\u0010 metal yarı\u0010 metal metal B) ametal metal metal D) soygaz soygaz metal yarı\u0010 metal yarı\u0010 metal ametal C) 19. Bir L maddesine uygulanan işlemler ve iş- lemlerin sonuçları şu şekildedir: • Yüksek sıcaklıkta, kuru ve havasız olan fırına saf bir L maddesi konulur. • Bu bölüme oksijen (O2) gönderilerek L maddesinin oksijenle tepkimeye girmesi sağlanır. • Tepkime sonucunda oluşan su (H2O), su tutucu bölüm tarafından tutulur. • Tepkime sonucunda oluşan karbondiok- sit (CO2) ise karbondioksit tutucu bölüm tarafından tutulur. Yüksek sıcaklıktaki fırın H2O tutucu bölüm CO2 tutucu bölüm H2O ayrılır. ayrılır. L maddesi CO2 O2 L maddesinin oksijen ile tepkimesi sonu- cunda H2O tutucu ve CO2 tutucu bölümün kütlesinin arttığı tespit edildiğine göre L maddesi ile ilgili aşağıdakilerden hangisi yanlıştır?",
+  "secenekler": {
+   "A": "L maddesi sadece fiziksel değişime uğra- mıştır.",
+   "B": "L maddesi hidrojen atomu içerir.",
+   "C": "L maddesi karbon atomu içerir.",
+   "D": "L maddesi bileşiktir."
+  },
+  "dogru": "A",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ },
+ {
+  "no_pdf": 20,
+  "sayfa": 31,
+  "metin": "Bir bitkinin kaynayan suda bekletilmesiyle hazırlanan mavi renkli sıvı, maddelerin asit veya baz olma durumlarını tespit etmede kullanılabiliyor. Oda sıcaklığında bu mavi sıvıdan özdeş kaplara eşit miktarlarda konulduktan sonra kaplardan birine limon suyu damlatıldığında sıvının renginin pembeye, diğerine sabunlu su damlatıldığında ise sıvının renginin yeşile döndüğü gözleniyor. Buna göre aşağıda pH değerleri verilen maddeler bu mavi sıvıya eklendiğinde maddelerde oluşan renk hangisinde doğ- ru verilmiştir? Maddenin pH değeri Oluşan renk",
+  "secenekler": {
+   "A": "1 Yeşil",
+   "B": "4 Pembe",
+   "C": "6 Yeşil",
+   "D": "8 Pembe TEST BİTTİ. CEVAPLARINIZI KONTROL EDİNİZ."
+  },
+  "dogru": "B",
+  "kaynak": "cikmis",
+  "dosya": "2020_sayisal_bolum_a.pdf"
+ }
+]

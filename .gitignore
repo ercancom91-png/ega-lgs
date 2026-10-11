@@ -1,0 +1,12 @@
+node_modules/
+.next/
+out/
+build/sayfalar/
+build/ocr_sorular/
+build/*.png
+*.log
+.DS_Store
+.vscode/
+.idea/
+__pycache__/
+*.pyc

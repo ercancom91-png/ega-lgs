@@ -108,10 +108,22 @@ export default function Uretilmis() {
                     className="ders-dot"
                     style={{ background: DERS_RENK[d], marginRight: 6 }}
                   />
+                  <b
+                    style={{
+                      color: dersler.includes(d) ? "var(--acc-ink)" : "var(--muted-2)",
+                      fontSize: 13,
+                    }}
+                  >
+                    {dersler.includes(d) ? "✓" : "◻"}
+                  </b>
                   {DERS_ADI[d]} · {havuzSayisi([d], zorluk)} soru
                 </button>
               ))}
             </div>
+            <p className="small muted" style={{ marginTop: 12 }}>
+              <b style={{ color: "var(--acc)" }}>{dersler.length}</b> ders seçili
+              {dersler.length ? ` · ${dersler.map((d) => DERS_ADI[d]).join(", ")}` : " · en az bir ders seç"}
+            </p>
           </div>
 
           <div className="row">

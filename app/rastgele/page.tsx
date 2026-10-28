@@ -25,6 +25,7 @@ export default function Rastgele() {
   const [soru, setSoru] = useState<Soru | null>(null);
   const [secim, setSecim] = useState<Harf | null>(null);
   const [cevaplandi, setCevaplandi] = useState(false);
+  const [onay, setOnay] = useState(false);
   const [sayac, setSayac] = useState(0);
   const [dogruSay, setDogruSay] = useState(0);
   const [sonuc, setSonuc] = useState<"dogru" | "yanlis" | null>(null);
@@ -44,6 +45,12 @@ export default function Rastgele() {
     setCevaplandi(false);
     setSonuc(null);
   }, [ders, konu, zorluk, soru]);
+
+  /** Konu seçilmediyse kullanıcıya onay modali açar. */
+  const soruIste = () => {
+    if (konu === "hepsi" || ders === "hepsi") setOnay(true);
+    else uret();
+  };
 
   const cevapla = (h: Harf) => {
     if (!soru || cevaplandi) return;
@@ -70,59 +77,114 @@ export default function Rastgele() {
         </p>
       </section>
 
-      <div className="panel panel-pad" style={{ marginBottom: 22 }}>
-        <div className="row" style={{ alignItems: "flex-end", gap: 18 }}>
-          <div>
-            <p className="eyebrow" style={{ marginBottom: 8 }}>
-              DERS
-            </p>
-            <select value={ders} onChange={(e) => { setDers(e.target.value as Ders | "hepsi"); setKonu("hepsi"); }}>
-              <option value="hepsi">Tüm dersler</option>
-              {TUM_DERSLER.map((d) => (
-                <option key={d} value={d}>
-                  {DERS_ADI[d]}
-                </option>
-              ))}
-            </select>
+      <div className="panel filtre-panel" style={{ marginBottom: 24 }}>
+        <div className="filtre-blok">
+          <div className="filtre-baslik">
+            <p className="eyebrow">1 · DERS SEÇ</p>
+            <span className="pill acc">
+              {ders === "hepsi" ? "Tüm dersler" : `${DERS_ADI[ders as Ders]} seçildi`}
+            </span>
           </div>
-          <div>
-            <p className="eyebrow" style={{ marginBottom: 8 }}>
-              KONU
-            </p>
-            <select value={konu} onChange={(e) => setKonu(e.target.value)}>
-              <option value="hepsi">Tüm konular</option>
-              {konuListesi.map((k) => (
-                <option key={k} value={k}>
-                  {k}
-                </option>
-              ))}
-            </select>
+          <div className="chips">
+            <button
+              className={`chip ${ders === "hepsi" ? "on" : ""}`}
+              onClick={() => {
+                setDers("hepsi");
+                setKonu("hepsi");
+              }}
+            >
+              <b style={{ fontSize: 13 }}>{ders === "hepsi" ? "✓" : "◻"}</b> Tüm dersler
+            </button>
+            {TUM_DERSLER.map((d) => (
+              <button
+                key={d}
+                className={`chip ${ders === d ? "on" : ""}`}
+                onClick={() => {
+                  setDers(d);
+                  setKonu("hepsi");
+                }}
+              >
+                <i className="ders-dot" style={{ background: DERS_RENK[d], marginRight: 6 }} />
+                <b style={{ fontSize: 13 }}>{ders === d ? "✓" : "◻"}</b>
+                {DERS_ADI[d]}
+              </button>
+            ))}
           </div>
-          <div>
-            <p className="eyebrow" style={{ marginBottom: 8 }}>
-              ZORLUK
-            </p>
-            <select value={zorluk} onChange={(e) => setZorluk(e.target.value as Zorluk | "hepsi")}>
-              <option value="hepsi">Karışık</option>
-              <option value={1}>Kolay</option>
-              <option value={2}>Orta</option>
-              <option value={3}>Zor</option>
-            </select>
-          </div>
-          <button className="btn btn-primary btn-lg" onClick={uret} disabled={havuz === 0}>
-            🎲 {soru ? "Yeni soru üret" : "Soru üret"}
-          </button>
-          <span className="pill blue" style={{ marginLeft: "auto" }}>
-            Havuzda {havuz} soru
-          </span>
         </div>
 
-        {havuz === 0 && (
-          <p className="small" style={{ color: "var(--red-soft)", marginTop: 14 }}>
-            Bu filtrelere uyan soru yok. Filtreleri gevşetmeyi dene.
-          </p>
-        )}
+        <div className="filtre-blok">
+          <div className="filtre-baslik">
+            <p className="eyebrow">2 · KONU VE ZORLUK (opsiyonel)</p>
+            <span className="pill">
+              {konu === "hepsi" ? "Konu seçilmedi" : `${konu} seçildi`}
+            </span>
+          </div>
+          <div className="filtre-row">
+            <div className="filtre-alan">
+              <label>KONU</label>
+              <select value={konu} onChange={(e) => setKonu(e.target.value)}>
+                <option value="hepsi">Konu seçme · tümü</option>
+                {konuListesi.map((k) => (
+                  <option key={k} value={k}>{k}</option>
+                ))}
+              </select>
+            </div>
+            <div className="filtre-alan">
+              <label>ZORLUK</label>
+              <select value={zorluk} onChange={(e) => setZorluk(e.target.value as Zorluk | "hepsi")}>
+                <option value="hepsi">Karışık</option>
+                <option value={1}>Kolay</option>
+                <option value={2}>Orta</option>
+                <option value={3}>Zor</option>
+              </select>
+            </div>
+            <button className="btn btn-primary btn-lg" onClick={soruIste} disabled={havuz === 0}>
+              🎲 {soru ? "Yeni soru üret" : "Soru üret"}
+            </button>
+            <span className="pill acc" style={{ marginLeft: "auto" }}>
+              Havuzda {havuz} soru
+            </span>
+          </div>
+        </div>
       </div>
+
+      {havuz === 0 && (
+        <p className="small" style={{ color: "var(--red)", marginTop: -10, marginBottom: 18 }}>
+          Bu filtrelere uyan soru yok. Filtreleri gevşetmeyi dene.
+        </p>
+      )}
+
+      {onay && (
+        <div className="modal-bg" onClick={() => setOnay(false)}>
+          <div className="modal" onClick={(e) => e.stopPropagation()}>
+            <p className="eyebrow" style={{ marginBottom: 16 }}>KONU SEÇİLMEDİ</p>
+            <h3>
+              <em>{ders === "hepsi" ? "Tüm dersler" : DERS_ADI[ders as Ders]}</em> genelinde
+              rastgele mi gelsin?
+            </h3>
+            <p>
+              Henüz bir konu seçmedin. Bu durumda seçili dersin{" "}
+              <b style={{ color: "var(--acc)" }}>{konuListesi.length}</b> konusunun hepsinden{" "}
+              <b style={{ color: "var(--acc)" }}>{havuz}</b> soruluk havuzdan rastgele soru
+              getirilecek. Yine de devam etmek istiyor musun?
+            </p>
+            <div className="row wrap">
+              <button className="btn btn-primary" onClick={() => { setOnay(false); uret(); }}>
+                Evet, rastgele getir →
+              </button>
+              <button
+                className="btn ghost"
+                onClick={() => {
+                  setOnay(false);
+                  (document.querySelector(".filtre-alan select") as HTMLElement | null)?.focus();
+                }}
+              >
+                Konu seçeyim
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {sayac > 0 && (
         <div className="grid g-3" style={{ marginBottom: 22 }}>

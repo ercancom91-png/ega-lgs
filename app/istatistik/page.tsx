@@ -71,6 +71,31 @@ export default function Istatistik() {
         </p>
       </section>
 
+      <div className="profil" style={{ marginBottom: 20 }}>
+        <div className="avatar">{(veri.profil.ad || "Ö").slice(0, 1).toUpperCase()}</div>
+        <div>
+          <h2>{veri.profil.ad || "Öğrenci"}</h2>
+          <div className="p-sub">
+            Hedef {veri.profil.hedefPuan} puan · Günlük hedef {veri.profil.hedefGunlukSoru}{" "}
+            soru · {aktifRozetler(veri, ozet).size}/{ROZETLER.length} rozet kazanıldı
+          </div>
+        </div>
+        <div className="p-meta">
+          <div className="pm">
+            <b>{veri.uzunluk}</b>
+            <span>günlük seri</span>
+          </div>
+          <div className="pm">
+            <b>{ozet.enIyiPuan || "—"}</b>
+            <span>en iyi puan</span>
+          </div>
+          <div className="pm">
+            <b>{ozet.toplamSoru}</b>
+            <span>çözülen</span>
+          </div>
+        </div>
+      </div>
+
       <div className="grid g-4">
         <div className="kpi">
           <div className="v">{ozet.toplamSoru}</div>
@@ -98,7 +123,7 @@ export default function Istatistik() {
 
       <div className="grid g-3" style={{ marginTop: 18 }}>
         <div className="kpi">
-          <div className="v" style={{ color: "var(--red)" }}>
+          <div className="v" style={{ color: "var(--acc)" }}>
             {veri.uzunluk} 🔥
           </div>
           <div className="k">Aktif seri (en uzun {veri.enUzun})</div>
@@ -145,7 +170,7 @@ export default function Istatistik() {
                       background:
                         g.cozulen === 0
                           ? "var(--panel-3)"
-                          : "linear-gradient(180deg,var(--red),var(--blue))",
+                          : "linear-gradient(180deg,var(--acc),var(--acc-2))",
                       opacity: bugunMu ? 1 : 0.75,
                     }}
                   />

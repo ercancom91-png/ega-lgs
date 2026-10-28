@@ -6,7 +6,7 @@ altindaki 2021_SAYISAL__p*.png gorselleri latin model OCR ile okunur.
 Cikti: build/ocr_sorular/2021_SAYISAL.json -> [{sayfa, satirlar:[{y,x,t,c}]}]
 Ardindan tools/build_2021.py bu veriyi cikmis.json'a ek soru olarak yazar.
 """
-import fitz, os, json, glob, sys, time
+import fitz, os, json, glob, re, sys, time
 from rapidocr_onnxruntime import RapidOCR
 from huggingface_hub import hf_hub_download
 
@@ -37,7 +37,8 @@ for yol in pencere:
             "c": round(float(conf), 2),
         })
     satirlar.sort(key=lambda s: (s["y"], s["x"]))
-    no = int(os.path.basename(yol).split("p")[-1].split(".")[0])
+    m = re.search(r"p(\d+)\.png$", os.path.basename(yol))
+    no = int(m.group(1)) if m else len(sayfalar) + 1
     sayfalar.append({"sayfa": no, "satirlar": satirlar})
     print(f"p{no} okundu ({len(satirlar)} satir)", end="\r", flush=True)
 

@@ -10,6 +10,7 @@ interface Props {
   geriBildirim?: boolean;
   gizli?: boolean; // sınavda süre dolmadan çözüm gösterilmesin
   isaret?: boolean;
+  onIsaretle?: () => void;
 }
 
 export default function SoruBlok({
@@ -20,9 +21,10 @@ export default function SoruBlok({
   geriBildirim = false,
   gizli = false,
   isaret = false,
+  onIsaretle,
 }: Props) {
   return (
-    <div className="q">
+    <div className="q" data-soru-id={soru.id}>
       <div className="q-head">
         {no !== undefined && <span className="q-no">{no}</span>}
         <span className="pill" style={{ color: DERS_RENK[soru.ders] }}>
@@ -34,7 +36,17 @@ export default function SoruBlok({
         <span className="pill" style={{ marginLeft: "auto" }}>
           {soru.kaynak}
         </span>
-        {isaret && <span className="pill red">⚑ işaretli</span>}
+        {onIsaretle && (
+          <button
+            type="button"
+            className={`flag-btn ${isaret ? "on" : ""}`}
+            onClick={onIsaretle}
+            title="Bu soruyu işaretle"
+          >
+            ⚑ {isaret ? "İşaretli" : "İşaretle"}
+          </button>
+        )}
+        {!onIsaretle && isaret && <span className="pill red">⚑ işaretli</span>}
       </div>
 
       <div

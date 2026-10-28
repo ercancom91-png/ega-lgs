@@ -4,6 +4,8 @@ out/
 build/sayfalar/
 build/ocr_sorular/
 build/*.png
+# indirilen kaynak PDF'leri (1.3 GB) — tools/indir_*.py ile yeniden uretilir
+build/kaynaklar/
 *.log
 .DS_Store
 .vscode/

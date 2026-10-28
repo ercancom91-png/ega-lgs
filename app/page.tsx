@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useVeri, ozetHesapla, profilGuncelle } from "@/lib/store";
-import { gunlukSoz, MOTIVASYON_KARTLARI } from "@/lib/motivasyon";
-import { ROZETLER, aktifRozetler } from "@/lib/rozetler";
-import { sureyiYaz } from "@/lib/scoring";
+import { gunlukSoz } from "@/lib/motivasyon";
+import { aktifRozetler } from "@/lib/rozetler";
 import { BANK, kaynakSayilari } from "@/lib/questions";
 import { CIKMIS_YILLAR } from "@/lib/exams";
 
@@ -66,6 +65,45 @@ const MODULLER = [
   },
 ];
 
+const SLAYTLAR = [
+  {
+    no: "01 · ÇIKMIŞ DENEMELER",
+    baslik: "2018–2025 arası gerçek MEB kitapçıkları.",
+    aciklama:
+      "Elle taranmış, cevap anahtarı doğrulanmış resmî sorular. Sözel ve sayısal oturumlarını kılavuzdaki aynen sürelerle çöz.",
+    cta: "Denemelere git",
+    href: "/denemeler/",
+    etiket: `${CIKMIS_YILLAR.length} yıl · resmî`,
+  },
+  {
+    no: "02 · SORU BANKASI",
+    baslik: "Ders, konu, zorluk ve kaynağa göre süz.",
+    aciklama:
+      "Çıkmış LGS, MEB çalışma kitapları ve banka sorularını tek havuzda birleştir; istediğin kadar sorudan kendi testini kur.",
+    cta: "Test kur",
+    href: "/banka/",
+    etiket: `${BANK.length} soru`,
+  },
+  {
+    no: "03 · DERSLER",
+    baslik: "Altı ders, konu konu ayrıştırıldı.",
+    aciklama:
+      "Dersi seç, konularını gör, üzerine bas ve o konudan soru getir. Çalışma akışını sen belirle.",
+    cta: "Dersleri gör",
+    href: "/dersler/",
+    etiket: "6 ders",
+  },
+  {
+    no: "04 · SINAV SİMÜLASYONU",
+    baslik: "Aynı gün iki oturum, resmî süreler.",
+    aciklama:
+      "09.30'da sözel 50 soru/75 dakika, mola, ardından 11.30'da sayısal 40 soru/80 dakika. Puan MEB formülüyle hesaplanır.",
+    cta: "Simülasyona başla",
+    href: "/sinav/?id=ega-tam",
+    etiket: "Gerçek tempoda",
+  },
+];
+
 export default function AnaSayfa() {
   const veri = useVeri();
   const ozet = ozetHesapla(veri);
@@ -73,6 +111,15 @@ export default function AnaSayfa() {
   const [hedef, setHedef] = useState(veri.profil.hedefPuan);
   const [ad, setAd] = useState(veri.profil.ad);
   const [kuruldu, setKuruldu] = useState(false);
+  const [slayt, setSlayt] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(
+      () => setSlayt((n) => (n + 1) % SLAYTLAR.length),
+      6000
+    );
+    return () => clearInterval(t);
+  }, []);
 
   const kaynaklar = kaynakSayilari();
 
@@ -122,27 +169,47 @@ export default function AnaSayfa() {
         </div>
       </section>
 
-      <div className="marquee">
-        <div className="marquee-track">
-          {[0, 1].map((k) => (
-            <span key={k} style={{ display: "flex", gap: 42 }}>
-              <span>Türkçe</span>
-              <span>·</span>
-              <span>Matematik</span>
-              <span>·</span>
-              <span>Fen Bilimleri</span>
-              <span>·</span>
-              <span>T.C. İnkılap Tarihi</span>
-              <span>·</span>
-              <span>Yabancı Dil</span>
-              <span>·</span>
-              <span>Din Kültürü</span>
-              <span>·</span>
-              <span style={{ color: "var(--red)" }}>
-                09.30 SÖZEL 50/75 DK · 11.30 SAYISAL 40/80 DK
-              </span>
-              <span>·</span>
-            </span>
+      <div className="slider" style={{ margin: "30px 0 26px" }}>
+        <div
+          className="slider-track"
+          style={{ transform: `translateX(-${slayt * 100}%)` }}
+        >
+          {SLAYTLAR.map((s) => (
+            <div className="slide" key={s.no}>
+              <span className="s-no">{s.no}</span>
+              <h2>{s.baslik}</h2>
+              <p>{s.aciklama}</p>
+              <div className="row wrap" style={{ marginTop: 6 }}>
+                <Link href={s.href} className="btn btn-primary">
+                  {s.cta} →
+                </Link>
+                <span className="pill">{s.etiket}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <button
+          className="slider-arrow prev"
+          onClick={() => setSlayt((n) => (n - 1 + SLAYTLAR.length) % SLAYTLAR.length)}
+          aria-label="Önceki"
+        >
+          ‹
+        </button>
+        <button
+          className="slider-arrow next"
+          onClick={() => setSlayt((n) => (n + 1) % SLAYTLAR.length)}
+          aria-label="Sonraki"
+        >
+          ›
+        </button>
+        <div className="slider-nav">
+          {SLAYTLAR.map((s, i) => (
+            <button
+              key={s.no}
+              className={i === slayt ? "on" : ""}
+              onClick={() => setSlayt(i)}
+              aria-label={`${i + 1}. slayt`}
+            />
           ))}
         </div>
       </div>
@@ -153,7 +220,7 @@ export default function AnaSayfa() {
           <div className="k">Havuzdaki soru</div>
         </div>
         <div className="kpi">
-          <div className="v" style={{ color: "var(--red)" }}>
+          <div className="v" style={{ color: "var(--acc)" }}>
             {kaynaklar.cikmis || 0}
           </div>
           <div className="k">Gerçek LGS çıkmış soru</div>
@@ -197,7 +264,7 @@ export default function AnaSayfa() {
             <i
               style={{
                 width: `${ilerleme}%`,
-                background: "linear-gradient(90deg,var(--red),var(--blue))",
+                background: "linear-gradient(90deg,var(--acc),var(--acc-2))",
               }}
             />
           </div>
@@ -242,47 +309,6 @@ export default function AnaSayfa() {
       <div className="divider" />
 
       <div className="between" style={{ marginBottom: 18 }}>
-        <h2 className="h-sec">Resmî sınav yapısı (2026 kılavuzu)</h2>
-        <span className="pill blue">Aynı gün iki oturum</span>
-      </div>
-      <div className="g-2">
-        <div className="panel panel-pad">
-          <p className="eyebrow">1. OTURUM · 09.30</p>
-          <div className="streak" style={{ margin: "10px 0" }}>
-            <b>75</b>
-            <span className="muted small">dakika · 50 soru</span>
-          </div>
-          <div className="chips">
-            <span className="pill">Türkçe 20</span>
-            <span className="pill">İnkılap 10</span>
-            <span className="pill">Din 10</span>
-            <span className="pill">İngilizce 10</span>
-          </div>
-          <p className="small muted" style={{ marginTop: 12 }}>
-            Oturumlar arasında kuru meyveli yulaf barı, ceviz, kuru üzüm ve 330 ml su
-            molası verilir.
-          </p>
-        </div>
-        <div className="panel panel-pad">
-          <p className="eyebrow blue">2. OTURUM · 11.30</p>
-          <div className="streak" style={{ margin: "10px 0" }}>
-            <b>80</b>
-            <span className="muted small">dakika · 40 soru</span>
-          </div>
-          <div className="chips">
-            <span className="pill blue">Matematik 20</span>
-            <span className="pill blue">Fen 20</span>
-          </div>
-          <p className="small muted" style={{ marginTop: 12 }}>
-            Ham puan = doğru − (yanlış ÷ 3). Katsayılar: Türkçe/Matematik/Fen 4,
-            diğerleri 1. Toplam puan 100–500.
-          </p>
-        </div>
-      </div>
-
-      <div className="divider" />
-
-      <div className="between" style={{ marginBottom: 18 }}>
         <h2 className="h-sec">Modüller</h2>
         <span className="pill blue">
           {kuruldu ? `${veri.denemeler.length} deneme kayıtlı` : "—"}
@@ -300,66 +326,6 @@ export default function AnaSayfa() {
             <p>{m.aciklama}</p>
             <span className="go">İncele →</span>
           </Link>
-        ))}
-      </div>
-
-      <div className="divider" />
-
-      <div className="between" style={{ marginBottom: 18 }}>
-        <h2 className="h-sec">Rozetler</h2>
-        <span className="pill">
-          {kazanilan.size} / {ROZETLER.length}
-        </span>
-      </div>
-      <div className="grid g-4">
-        {ROZETLER.map((r) => (
-          <div key={r.id} className={`badge ${kazanilan.has(r.id) ? "on" : "off"}`}>
-            <div className="ico">{r.ikon}</div>
-            <div>
-              <div style={{ fontWeight: 600, fontSize: 14 }}>{r.ad}</div>
-              <div className="small muted">{r.aciklama}</div>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {kuruldu && veri.denemeler[0] && (
-        <>
-          <div className="divider" />
-          <h2 className="h-sec" style={{ marginBottom: 18 }}>
-            Son denemen
-          </h2>
-          <Link href="/istatistik/" className="tile" style={{ display: "block" }}>
-            <div className="between">
-              <div>
-                <div style={{ fontWeight: 700, fontSize: 18 }}>
-                  {veri.denemeler[0].ad}
-                </div>
-                <div className="small muted">
-                  {new Date(veri.denemeler[0].tarih).toLocaleDateString("tr-TR")} · süre{" "}
-                  {sureyiYaz(veri.denemeler[0].sure)} · net {veri.denemeler[0].net}
-                </div>
-              </div>
-              <div className="streak">
-                <b>{veri.denemeler[0].puan}</b>
-                <span className="muted small">puan</span>
-              </div>
-            </div>
-          </Link>
-        </>
-      )}
-
-      <div className="divider" />
-
-      <div className="grid g-2">
-        {MOTIVASYON_KARTLARI.map((k) => (
-          <div key={k.baslik} className="panel panel-pad">
-            <div style={{ fontSize: 26 }}>{k.ikon}</div>
-            <h3 style={{ fontSize: 18, margin: "8px 0 6px" }}>{k.baslik}</h3>
-            <p className="small muted" style={{ margin: 0, lineHeight: 1.7 }}>
-              {k.aciklama}
-            </p>
-          </div>
         ))}
       </div>
     </>

@@ -5,7 +5,7 @@ import Nav from "@/components/Nav";
 export const metadata: Metadata = {
   title: "EGA · LGS Hazırlık Platformu",
   description:
-    "MEB çıkmış LGS denemeleri (2018–2025), çalışma kitapları, 2.500+ soruluk gerçek soru bankası ve resmî sürelerle sınav simülasyonu. Liseye hazırlanan öğrenciler için.",
+    "MEB çıkmış LGS denemeleri (2018–2025), çalışma kitapları, 7.000+ soruluk gerçek soru bankası ve resmî sürelerle sınav simülasyonu. Liseye hazırlanan öğrenciler için.",
 };
 
 export default function RootLayout({

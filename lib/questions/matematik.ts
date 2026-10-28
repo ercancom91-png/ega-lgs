@@ -75,7 +75,7 @@ const MATEMATIK: Soru[] = [
     dogru: "C",
     cozum:
       "Günlük mesafeler 20, 50, 40, 80 ve 100 km'dir. Toplam: 20 + 50 + 40 + 80 + 100 = 290 km. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "mt-05",
@@ -94,7 +94,7 @@ const MATEMATIK: Soru[] = [
     dogru: "B",
     cozum:
       "En çok oy: C adayı 50, en az oy: B adayı 21. Fark: 50 − 21 = 29. Doğru cevap B'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "mt-06",
@@ -113,7 +113,7 @@ const MATEMATIK: Soru[] = [
     dogru: "C",
     cozum:
       "30 × %40 = 30 × 0,40 = 12 öğrenci. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "mt-07",
@@ -492,7 +492,7 @@ const MATEMATIK: Soru[] = [
     dogru: "B",
     cozum:
       "Poğaça: 20 × 15 = 300 TL, simit: 15 × 10 = 150 TL. Toplam 450 TL. Doğru cevap B'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "mt-28",
@@ -619,7 +619,7 @@ const MATEMATIK: Soru[] = [
     dogru: "B",
     cozum:
       "Saatte 3000 ÷ 5 = 600 broşür basılır. 8 saatte 8 × 600 = 4800 broşür. Doğru cevap B'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
 ];
 

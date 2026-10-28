@@ -66,12 +66,24 @@ KONU_ESLEME = [
 ]
 
 
+# konu etiketi olarak kullanilmamasi gereken genel bolum/bolum adlari
+KONU_ARTIK = re.compile(
+    r"(?i)^\W*(alıştırma|etkinlik|test|değerlendirme|degerlendirme|kazanım"
+    r"|kazanim|soru|özet|ozet|cevap anahtarı|ölçme|olcme|bölüm|bolum"
+    r"|ünite|unite|tema|konu)\W*$")
+
+
 def konu_etiketle(ders, konu):
-    k = (konu or "").lower()
+    k = (konu or "").strip()
+    if not k or KONU_ARTIK.match(k):
+        return "Genel"
+    # noktalama/kesik cizgiden ibaret etiketler ("- ----", ".......")
+    if sum(c.isalpha() for c in k) < len(k) * 0.4:
+        return "Genel"
     for kalip, ad in KONU_ESLEME:
-        if re.search(kalip, k):
+        if re.search(kalip, k.lower()):
             return ad
-    return konu or "Genel"
+    return k
 
 
 def zorluk_tahmin(metin, secenekler):
@@ -104,6 +116,8 @@ def yukle():
     for dosya, kaynak, on_ek in [
         ("cikmis.json", "cikmis", "LGS"),
         ("meb.json", "meb", "MEB"),
+        ("sorular.json", "sorular", "SIN"),
+        ("kazanim.json", "kazanim", "KAZ"),
     ]:
         yol = os.path.join(CIKTI, dosya)
         if not os.path.exists(yol):
@@ -119,7 +133,8 @@ def yukle():
             if not all(sec.get(h) for h in "ABCD"):
                 continue
             sorular.append({
-                "id": f"{on_ek}-{s.get('kitapcik', kaynak)[:24]}-{ders[:3]}-{s['no']}",
+                "id": (f"{on_ek}-{s.get('kitapcik', kaynak)[:24]}-{ders[:3]}-"
+                       f"{s['no']}-{parmakizi(s['metin'])[:8]}"),
                 "ders": ders,
                 "konu": konu_etiketle(ders, s.get("konu")),
                 "zorluk": zorluk_tahmin(s["metin"], sec),

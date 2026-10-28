@@ -125,7 +125,7 @@ const INGILIZCE: Soru[] = [
     dogru: "D",
     cozum:
       "Doctor, nurse and dentist are all jobs in a hospital; \"student\" is not. Doğru cevap D'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "in-08",

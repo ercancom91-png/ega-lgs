@@ -88,7 +88,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "Yargıyı (eylemi) bildiren yüklem \"yaşıyordu\"dur; öteki öğeler tümleçtir. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-06",
@@ -106,7 +106,7 @@ const TURKCE: Soru[] = [
     dogru: "B",
     cozum:
       "Gerçek anlam, sözcüğün algılanabilir fiziksel anlamıdadır: fenerin yaydığı aydınlatma. Doğru cevap B'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-07",
@@ -178,7 +178,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "Yol, şehircilik/ulaşım terimi olarak \"cadde ve sokakların tamamı\" anlamında kullanılmıştır. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-11",
@@ -214,7 +214,7 @@ const TURKCE: Soru[] = [
     dogru: "B",
     cozum:
       "Paragraf, uykunun hafıza ve öğrenme üzerindeki destekleyici rolünü vurgular. Doğru cevap B'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-13",
@@ -232,7 +232,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "Duyularla algılanan ortam ayrıntılarıyla anlatıldığı için betimlemedir. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-14",
@@ -268,7 +268,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "Soru cümlesinin içinde bağlaç olarak \"mı\" kullanılırsa kesme işareti gerekir: \"Hangi kitabı okudun mu biliyor musun?\" Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-16",
@@ -304,7 +304,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "Konu ilk cümlede tanıtıldığı için giriş cümlesi C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-18",
@@ -321,7 +321,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "\"Senin ki\" bileşimi bitişik yazılır: \"Seninki\". Niteleme sıfatı olan \"senin\" ile zamir olan \"ki\" birleşince ayrılmaz. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-19",
@@ -357,7 +357,7 @@ const TURKCE: Soru[] = [
     dogru: "D",
     cozum:
       "\"Yurt\" sözcüğü ünlüyle başlayan ek alırken son ünlüsü yumuşar: yurt → yurdu → yurdumuz. \"Yurtumuzda\" değil, <b>yurdumuzda</b> yazılır. Doğru cevap D'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-21",
@@ -393,7 +393,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "Okuyucuyu bir davranışa yöneltmek için kanıt sunulmuş; ikna edici anlatım vardır. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-23",
@@ -429,7 +429,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "Göz bebeği, gözün fizyolojik bir parçasıdır; gerçek anlamdadır. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-25",
@@ -465,7 +465,7 @@ const TURKCE: Soru[] = [
     dogru: "A",
     cozum:
       "Sonuç cümlesi, önceki farklılık betimlemesinin doğal devamıdır. Doğru cevap A'dır.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-27",
@@ -483,7 +483,7 @@ const TURKCE: Soru[] = [
     dogru: "B",
     cozum:
       "\"Kadar\" olumsuz yapılarda \"hâl\" anlamındaki sözcüğün üzerine gelir: \"ayakta duracak hâli kalmamıştı\" yerine \"ayakta duracak kadar yorgundu\" ya da \"ayakta duracak hâli yoktu\" olmalıdır. Doğru cevap B'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-28",
@@ -519,7 +519,7 @@ const TURKCE: Soru[] = [
     dogru: "C",
     cozum:
       "\"iste-miş-im-dir\": kök \"iste\", birleşik fiil \"miş\", yargı bildiren ek \"im\", geniş zaman eki \"dir\". Üç yapı vardır. Doğru cevap C'dir.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
   {
     id: "tr-30",

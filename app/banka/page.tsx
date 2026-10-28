@@ -2,7 +2,17 @@
 
 import { useMemo, useState } from "react";
 import SoruBlok from "@/components/SoruBlok";
-import { filtrele, karistir, konular } from "@/lib/questions";
+import { filtrele, karistir, kaynakSayilari, konular } from "@/lib/questions";
+
+const KAYNAK_ADI: Record<string, string> = {
+  cikmis: "Çıkmış LGS (MEB)",
+  meb: "MEB Kitapları",
+  sorular: "Sinerji Bankası",
+  kazanim: "MEB Kazanım Testleri",
+  "LGS 2024": "EGA Özgün · 2024 tipi",
+  "LGS 2025": "EGA Özgün · 2025 tipi",
+  "EGA Özgün": "EGA Özgün",
+};
 import {
   DERS_ADI,
   DERS_RENK,
@@ -28,24 +38,42 @@ export default function Banka() {
   const [ders, setDers] = useState<Ders | "hepsi">("hepsi");
   const [konu, setKonu] = useState<string | "hepsi">("hepsi");
   const [zorluk, setZorluk] = useState<Zorluk | "hepsi">("hepsi");
+  const [kaynak, setKaynak] = useState<string | "hepsi">("hepsi");
   const [adet, setAdet] = useState(10);
   const [test, setTest] = useState<Soru[]>([]);
   const [cevaplar, setCevaplar] = useState<Record<string, Harf | null>>({});
+  const [isaretler, setIsaretler] = useState<Record<string, boolean>>({});
   const [kesinlesti, setKesinlesti] = useState(false);
 
   const konuListesi = konular(ders === "hepsi" ? undefined : ders);
-  const havuz = useMemo(() => filtrele({ ders, konu, zorluk }), [ders, konu, zorluk]);
+  const havuz = useMemo(
+    () => filtrele({ ders, konu, zorluk, kaynak }),
+    [ders, konu, zorluk, kaynak]
+  );
+  const kaynaklar = useMemo(() => kaynakSayilari(), []);
 
   const testKur = () => {
     const secili = karistir(havuz, Math.random).slice(0, adet);
     setTest(secili);
     setCevaplar({});
+    setIsaretler({});
     setKesinlesti(false);
+    setTimeout(() => {
+      document.getElementById("test-baslangic")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 60);
   };
 
-  const cevapla = (id: string, h: Harf) => {
+  /** Şık işaretlenince bir sonraki soruya kendisi atlar. */
+  const cevapla = (id: string, h: Harf, i: number) => {
     if (kesinlesti) return;
     setCevaplar((c) => ({ ...c, [id]: h }));
+    const sonraki = test[i + 1];
+    if (!sonraki) return;
+    setTimeout(() => {
+      document
+        .querySelector(`[data-soru-id="${sonraki.id}"]`)
+        ?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 220);
   };
 
   const kontrolEt = () => {
@@ -74,127 +102,146 @@ export default function Banka() {
         </p>
       </section>
 
-      <div className="panel panel-pad" style={{ marginBottom: 22 }}>
-        <p className="eyebrow" style={{ marginBottom: 10 }}>
-          DERS
-        </p>
-        <div className="chips" style={{ marginBottom: 18 }}>
-          <button
-            className={`chip ${ders === "hepsi" ? "on" : ""}`}
-            onClick={() => {
-              setDers("hepsi");
-              setKonu("hepsi");
-            }}
-          >
-            Tümü
-          </button>
-          {TUM_DERSLER.map((d) => (
+      <div className="panel filtre-panel" style={{ marginBottom: 24 }}>
+        <div className="filtre-blok">
+          <div className="filtre-baslik">
+            <p className="eyebrow">1 · DERS SEÇ</p>
+            <span className="pill acc">
+              {ders === "hepsi" ? "Tüm dersler" : `${DERS_ADI[ders as Ders]} seçildi`}
+            </span>
+          </div>
+          <div className="chips">
             <button
-              key={d}
-              className={`chip ${ders === d ? "on" : ""}`}
+              className={`chip ${ders === "hepsi" ? "on" : ""}`}
               onClick={() => {
-                setDers(d);
+                setDers("hepsi");
                 setKonu("hepsi");
               }}
             >
-              <i className="ders-dot" style={{ background: DERS_RENK[d], marginRight: 6 }} />
-              {DERS_ADI[d]}
+              <b style={{ fontSize: 13 }}>{ders === "hepsi" ? "✓" : "◻"}</b> Tümü
             </button>
-          ))}
+            {TUM_DERSLER.map((d) => (
+              <button
+                key={d}
+                className={`chip ${ders === d ? "on" : ""}`}
+                onClick={() => {
+                  setDers(d);
+                  setKonu("hepsi");
+                }}
+              >
+                <i
+                  className="ders-dot"
+                  style={{ background: DERS_RENK[d], marginRight: 6 }}
+                />
+                <b style={{ fontSize: 13 }}>{ders === d ? "✓" : "◻"}</b>
+                {DERS_ADI[d]}
+              </button>
+            ))}
+          </div>
         </div>
 
-        <div className="row" style={{ alignItems: "flex-end", gap: 18 }}>
-          <div style={{ flex: 1, minWidth: 200 }}>
-            <p className="eyebrow" style={{ marginBottom: 8 }}>
-              KONU
-            </p>
-            <select
-              value={konu}
-              onChange={(e) => setKonu(e.target.value)}
-              style={{ width: "100%" }}
-            >
-              <option value="hepsi">Tüm konular ({havuz.length} soru)</option>
-              {konuListesi.map((k) => (
-                <option key={k} value={k}>
-                  {k}
-                </option>
-              ))}
-            </select>
+        <div className="filtre-blok">
+          <div className="filtre-baslik">
+            <p className="eyebrow">2 · FİLTRELERİ AYARLA</p>
+            <span className="pill">{havuz.length} soru eşleşti</span>
           </div>
-          <div>
-            <p className="eyebrow" style={{ marginBottom: 8 }}>
-              ZORLUK
-            </p>
-            <select value={zorluk} onChange={(e) => setZorluk(e.target.value as Zorluk | "hepsi")}>
-              <option value="hepsi">Karışık</option>
-              <option value={1}>Kolay</option>
-              <option value={2}>Orta</option>
-              <option value={3}>Zor</option>
-            </select>
+          <div className="filtre-row">
+            <div className="filtre-alan">
+              <label>KONU</label>
+              <select value={konu} onChange={(e) => setKonu(e.target.value)}>
+                <option value="hepsi">Tüm konular ({havuz.length} soru)</option>
+                {konuListesi.map((k) => (
+                  <option key={k} value={k}>{k}</option>
+                ))}
+              </select>
+            </div>
+            <div className="filtre-alan">
+              <label>KAYNAK</label>
+              <select value={kaynak} onChange={(e) => setKaynak(e.target.value)}>
+                <option value="hepsi">Tüm kaynaklar</option>
+                {Object.entries(kaynaklar)
+                  .sort((a, b) => b[1] - a[1])
+                  .map(([k, n]) => (
+                    <option key={k} value={k}>
+                      {KAYNAK_ADI[k] || k} ({n})
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <div className="filtre-alan">
+              <label>ZORLUK</label>
+              <select value={zorluk} onChange={(e) => setZorluk(e.target.value as Zorluk | "hepsi")}>
+                <option value="hepsi">Karışık</option>
+                <option value={1}>Kolay</option>
+                <option value={2}>Orta</option>
+                <option value={3}>Zor</option>
+              </select>
+            </div>
+            <div className="filtre-alan">
+              <label>SORU SAYISI</label>
+              <select value={adet} onChange={(e) => setAdet(Number(e.target.value))}>
+                {[5, 10, 15, 20].map((n) => (
+                  <option key={n} value={n}>{n} soru</option>
+                ))}
+              </select>
+            </div>
+            <button className="btn btn-primary btn-lg" onClick={testKur} disabled={!havuz.length}>
+              Testi kur →
+            </button>
           </div>
-          <div>
-            <p className="eyebrow" style={{ marginBottom: 8 }}>
-              SORU SAYISI
-            </p>
-            <select value={adet} onChange={(e) => setAdet(Number(e.target.value))}>
-              {[5, 10, 15, 20].map((n) => (
-                <option key={n} value={n}>
-                  {n} soru
-                </option>
-              ))}
-            </select>
-          </div>
-          <button className="btn btn-primary" onClick={testKur} disabled={!havuz.length}>
-            Testi kur →
-          </button>
         </div>
 
-        <div className="chips" style={{ marginTop: 16 }}>
-          {[
-            { ad: "Hız testi", d: "hepsi", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 5 },
-            { ad: "Sadece zor sorular", d: "hepsi", k: "hepsi", z: 3 as Zorluk | "hepsi", n: 10 },
-            { ad: "Sadece matematik", d: "Matematik", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 10 },
-            { ad: "Sadece Türkçe", d: "Turkce", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 10 },
-          ].map((h) => (
-            <button
-              key={h.ad}
-              className="chip"
-              onClick={() => {
-                setDers(h.d as Ders | "hepsi");
-                setKonu(h.k);
-                setZorluk(h.z);
-                setAdet(h.n);
-              }}
-            >
-              {h.ad}
-            </button>
-          ))}
+        <div className="filtre-blok">
+          <p className="eyebrow ink" style={{ marginBottom: 14 }}>
+            HAZIR ŞABLONLAR
+          </p>
+          <div className="chips">
+            {[
+              { ad: "Hız testi", d: "hepsi", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 5 },
+              { ad: "Sadece zor sorular", d: "hepsi", k: "hepsi", z: 3 as Zorluk | "hepsi", n: 10 },
+              { ad: "Sadece matematik", d: "Matematik", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 10 },
+              { ad: "Sadece Türkçe", d: "Turkce", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 10 },
+            ].map((h) => {
+              const aktif =
+                ders === h.d && konu === h.k && zorluk === h.z && adet === h.n;
+              return (
+                <button
+                  key={h.ad}
+                  className={`chip ${aktif ? "on" : ""}`}
+                  onClick={() => {
+                    setDers(h.d as Ders | "hepsi");
+                    setKonu(h.k);
+                    setZorluk(h.z);
+                    setAdet(h.n);
+                  }}
+                >
+                  {aktif ? "✓ " : ""}{h.ad}
+                </button>
+              );
+            })}
+          </div>
         </div>
       </div>
 
+      <div id="test-baslangic" />
       {test.length > 0 && (
         <>
-          <div className="between" style={{ marginBottom: 18 }}>
+          <div className="between test-ust" style={{ marginBottom: 18 }}>
             <h2 className="h-sec">Testin ({test.length} soru)</h2>
-            <div className="row">
+            <div className="row wrap">
               {kesinlesti ? (
                 <>
                   <span className="pill green">Doğru {dogru}</span>
                   <span className="pill red">Yanlış {yanlis}</span>
                   <span className="pill">Boş {bos}</span>
-                  <span className="pill blue">Net {net}</span>
-                  <button className="btn btn-sm" onClick={testKur}>
-                    Yeni test kur
-                  </button>
+                  <span className="pill acc">Net {net}</span>
                 </>
               ) : (
                 <>
                   <span className="pill">
                     {Object.keys(cevaplar).length} / {test.length} işaretlendi
                   </span>
-                  <button className="btn btn-sm btn-primary" onClick={kontrolEt}>
-                    Kontrol et ✓
-                  </button>
+                  <span className="pill blue">Cevapladıkça alttaki soruya atlar</span>
                 </>
               )}
             </div>
@@ -207,35 +254,40 @@ export default function Banka() {
                 soru={s}
                 no={i + 1}
                 secim={cevaplar[s.id] ?? null}
-                onSec={(h) => cevapla(s.id, h)}
+                onSec={(h) => cevapla(s.id, h, i)}
                 geriBildirim={kesinlesti}
+                isaret={!!isaretler[s.id]}
+                onIsaretle={() => setIsaretler((v) => ({ ...v, [s.id]: !v[s.id] }))}
               />
             ))}
           </div>
 
-          {kesinlesti && (
-            <div className="panel panel-pad center" style={{ marginTop: 24, padding: 34 }}>
-              <p className="eyebrow">OTURUM ÖZETİ</p>
-              <div className="streak" style={{ margin: "10px 0" }}>
-                <b>{net}</b>
-                <span className="muted small">net · {dogru}/{test.length} doğru</span>
-              </div>
-              <div className="row" style={{ justifyContent: "center" }}>
+          <div className="kontrol-alt">
+            {kesinlesti ? (
+              <div className="row wrap" style={{ justifyContent: "center", gap: 18 }}>
+                <span className="big-score">{net}</span>
+                <span className="muted" style={{ alignSelf: "center" }}>
+                  net · {dogru}/{test.length} doğru
+                </span>
                 <button className="btn btn-primary" onClick={testKur}>
                   Aynı filtrelerle yeni test
                 </button>
-                <button
-                  className="btn"
-                  onClick={() => {
-                    setTest([]);
-                    setCevaplar({});
-                  }}
-                >
+                <button className="btn ghost" onClick={() => { setTest([]); setCevaplar({}); }}>
                   Testi kapat
                 </button>
               </div>
-            </div>
-          )}
+            ) : (
+              <>
+                <button className="btn btn-primary btn-lg" onClick={kontrolEt}>
+                  Kontrol et ✓
+                </button>
+                <p className="small muted" style={{ marginTop: 14 }}>
+                  Yanlışlar kırmızı, doğrular yeşil, boşlar gri işaretlenir; her sorunun
+                  çözümü açılır.
+                </p>
+              </>
+            )}
+          </div>
         </>
       )}
 

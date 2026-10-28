@@ -546,7 +546,7 @@ const FEN: Soru[] = [
     dogru: "A",
     cozum:
       "Enerjinin sisteme girişi üreticilerle olur; üreticiler yok olursa tüm besin zinciri çöker. Doğru cevap A'dır.",
-    kaynak: "Vortex Orijinal",
+    kaynak: "EGA Özgün",
   },
 ];
 

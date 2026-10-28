@@ -10,7 +10,7 @@ Yapi:
                       soru numaralari test icinde 1..N,
                       cevap anahtari "N. Unite: <konu>" + TEST tablolari.
 """
-import json, os, re, sys, unicodedata, collections
+import difflib, json, os, re, sys, unicodedata, collections
 
 ROOT = "/Users/ercan/Documents/Qoder/lgs-hazirlik"
 OCR_DIR = os.path.join(ROOT, "build", "ocr_sorular")
@@ -23,18 +23,42 @@ def norm(s):
     return re.sub(r"[^a-z0-9]+", " ", s.lower()).strip()
 
 
+# konu adlarinda anlam tasimayan durak kelimeler
+DURAK = {"ve", "ile", "icin", "the", "of", "unite", "bolum", "test", "konu"}
+
+
 def eslesme(var, ad):
-    """Sayfa basligi ile anahtar adi eslesir mi? (durak kelimeler atlanir)"""
+    """Sayfa basligi ile anahtar adi eslesir mi?
+
+    OCR hatalarina dayanikli olsun diye hem alt-dizek hem de karakter
+    benzerligi (difflib) kullanilir; esik 0.60.
+    """
     a, b = norm(var), norm(ad)
     if not a or not b:
         return False
     a = re.sub(r"\s+", " ", re.sub(r"\b(ve|ile|icin|the)\b", " ", a)).strip()
     b = re.sub(r"\s+", " ", re.sub(r"\b(ve|ile|icin|the)\b", " ", b)).strip()
-    return a == b or (len(a) > 4 and len(b) > 4 and (a in b or b in a))
+    if a == b or (len(a) > 4 and len(b) > 4 and (a in b or b in a)):
+        return True
+    if not a or not b:
+        return False
+    oran = difflib.SequenceMatcher(None, a, b).ratio()
+    # kelime bazli: anahtar adinin TUM anlami kelimeleri karsilanmali
+    # (ortalama gevsekligi "esitsizlikler" -> "ozdeslikler" gibi yanlis
+    # eslesmelere yol aciyordu)
+    ka, kb = a.split(), b.split()
+    if ka and kb:
+        kelimeler = [
+            max(difflib.SequenceMatcher(None, w, v).ratio() for v in kb)
+            for w in ka
+        ]
+        kelime_oran = sum(kelimeler) / len(kelimeler)
+        oran = max(oran, kelime_oran)
+    return oran >= 0.80
 
 
 NOISE = re.compile(
-    r"(sinerji|hiper\s*ze[qa][ak]|hiper zeka|bankas[ıi]|x\s*bank|\bvisa\b"
+    r"(sinerji|hiper\s*zeka|x\s*bank|\bvisa\b"
     r"|yeni\s*nes[ıi]l|di[ğg]er (sayfaya|soruya)|sayfaya gec|soruya gec"
     r"|^qr\b|www\.|\.com|@|sinif soru)",
     re.I,
@@ -48,6 +72,15 @@ BOLUM_BAS = re.compile(r"b[öoıi]l[üu]m\s*(\d{1,2})\s*:?\s*(.+)", re.I)
 CEVAP_SAYFA = re.compile(r"cevap\s*anahtar", re.I)
 SAYI_TOKEN = re.compile(r"^\d{1,3}$")
 HARF_TOKEN = re.compile(r"^([A-D])$")
+
+# metinle baslayan sorularda kucuk harfle baslayabilen gercek acilislar
+# (tablo satirlari "oyuncu", "adim" gibi uzun kelimelerle baslar -> elenir)
+SAHNE_KELIME = {
+    "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz",
+    "aşağıdaki", "yukarıdaki", "aşagidaki", "yukaridaki", "verilen",
+    "belirtilen", "ölçülen", "sayesinde", "olduğuna", "göre", "buna",
+    "şekilde", "şekildeki", "cümlede", "cümlelerin", "paragrafta",
+}
 
 
 def gurultu_mu(metin):
@@ -92,7 +125,10 @@ def anahtar_ayristir(sayfalar, tur):
                         hedef[no] = harf
             sayilar, harfler = [], []
 
-        for s in sorted(p["satirlar"], key=lambda x: (x["y"], x["x"])):
+        # cevap anahtari sayfalari da iki sutunlu olabilir (tr): once sol
+        # sutun (baslik + bloklar), sonra sag sutun — aksi halde iki unite
+        # basligi ustune biner ve bloklar son basliga yazilir
+        for s in sayfa_sirala(p["satirlar"], tur):
             t = s["t"].strip()
 
             m = BOLUM_BAS.search(t)
@@ -121,14 +157,67 @@ def anahtar_ayristir(sayfalar, tur):
                     if harfler:
                         kapat()
                     sayilar.append(int(tok))
-                elif HARF_TOKEN.match(tok):
-                    if not sayilar:
-                        continue
-                    harfler.append(tok.group(1))
-                    if len(harfler) == len(sayilar):
-                        kapat()
+                else:
+                    mh = HARF_TOKEN.match(tok)
+                    if mh:
+                        if not sayilar:
+                            continue
+                        harfler.append(mh.group(1))
+                        if len(harfler) == len(sayilar):
+                            kapat()
         kapat()
     return sonuc
+
+
+def kelime_eslesme(w, n):
+    """Anahtar kelimesi (w) ile baslik kelimesi (n) eslesir mi?
+
+    Tekil/coolgul ve OCR ekleri icin: kazanim/kazanimlar, sozcuk/sozcukte
+    gibi varyantlarin on ek benzerligiyle karsilanmasi saglanir.
+    """
+    if not w or not n or len(w) < 4 or len(n) < 4:
+        return w == n
+    adaylar = {w}
+    if w.endswith(("lar", "ler")):
+        adaylar.add(w[:-3])
+    else:
+        adaylar.update({w + "lar", w + "ler"})
+    adaylar.update({w[:6], n[:6]})  # ortak 6 karakter on ek
+    return any(
+        a == n or difflib.SequenceMatcher(None, a, n).ratio() > 0.82
+        for a in adaylar
+        if len(a) >= 4
+    )
+
+
+def baslik_benizer(t, anahtar):
+    """Baslik, cevap anahtarindaki bir konu adinin anlami kismini
+    tasiyor mu? (parcali OCR satirlarini ("ANLAM") eler)"""
+    n = norm(t)
+    if len(n) < 5:
+        return False
+    kelimeler = set(n.split())
+    for ad in anahtar:
+        anlamlar = [w for w in norm(ad).split() if w not in DURAK]
+        if not anlamlar:
+            continue
+        eslesen = sum(
+            1 for w in anlamlar if any(kelime_eslesme(w, k) for k in kelimeler)
+        )
+        if eslesen == len(anlamlar) or eslesen >= 2:
+            return True
+    return False
+
+
+def sayfa_sirala(satirlar, tur):
+    """Satirlari okuma sirasina dizer.
+
+    Turkce kitabi iki sutunlu: once sol sutun (x<850) tamamen, sonra sag
+    sutun. Matematik kitabi tek sutun (siklar tum genisligi kaplar).
+    """
+    if tur == "tr":
+        return sorted(satirlar, key=lambda s: (0 if s["x"] < 850 else 1, s["y"], s["x"]))
+    return sorted(satirlar, key=lambda s: (s["y"], s["x"]))
 
 
 # --------------------------------------------------------------- soru akisi
@@ -151,6 +240,7 @@ def sorulari_ayristir(sayfalar, tur, anahtar, ders, kitap, sayfa_esleme):
     sonuc, sayac = [], collections.Counter()
     son_no, bekleyen = 0, None
     aktif_grup = None  # mat: bolum adi / tr: (konu, test)
+    kullanilan = set()  # aktif grupta gercek soru olarak baslayan numaralar
 
     def bitir():
         nonlocal bekleyen
@@ -189,6 +279,19 @@ def sorulari_ayristir(sayfalar, tur, anahtar, ders, kitap, sayfa_esleme):
                 if konu and eslesme(konu, ad):
                     konu_ad = ad
                     cevaplar = anahtar[ad].get(test, {})
+                    # sayfa basligindaki test no'su OCR ile bozulduysa
+                    # cevap YALNIZCA baska bir testte birebir tek ise
+                    # alinir; her test 1..8 numaralandigi icin carpan
+                    # eslesmelerde cevap atamak yanlis olurdu
+                    if s["no"] not in cevaplar:
+                        aday = [
+                            c2[s["no"]] for c2 in anahtar[ad].values()
+                            if s["no"] in c2
+                        ]
+                        if len(set(aday)) == 1:
+                            cevaplar = {s["no"]: aday[0]}
+                        else:
+                            cevaplar = {}
                     break
             konu = konu_ad
 
@@ -212,31 +315,65 @@ def sorulari_ayristir(sayfalar, tur, anahtar, ders, kitap, sayfa_esleme):
         })
 
     for p in sayfalar:
-        satirlar = sorted(p["satirlar"], key=lambda s: (s["y"], s["x"]))
+        satirlar = sayfa_sirala(p["satirlar"], tur)
         if any(CEVAP_SAYFA.search(s["t"]) for s in satirlar):
             bitir()
             son_no = 0
+            kullanilan.clear()
             continue
 
         grup = sayfa_esleme.get((kitap, p["sayfa"]))
+        # bu sayfanin gecerli soru numaralari (cevap anahtarindan) -> sahte
+        # "1." "2." baslangiclarini ve numara atlamalarini eler
+        if tur == "mat":
+            gecerli_no = set(anahtar.get(grup, {}).keys())
+        else:
+            gecerli_no = set()
+            konu_s, test_s = grup if grup else (None, None)
+            for ad in anahtar:
+                if konu_s and eslesme(konu_s, ad):
+                    # test bazli anahtar bir testte OCR ile dusmus olabilir;
+                    # baslangic kontrolu unite geneli birlesimle yapilir,
+                    # cevap bulma yine test oncelikli (fallback'li)
+                    for _t_no, cev in anahtar[ad].items():
+                        gecerli_no |= set(cev.keys())
+                    break
         if grup != aktif_grup:
             bitir()
             son_no = 0
+            kullanilan.clear()
             aktif_grup = grup
 
         for s in satirlar:
-            if s["y"] < 300:
-                continue  # sayfa basligi bandi
+            if s["y"] < 250:
+                continue  # sayfa basligi bandi (baslik y~160-175, icerik y>260)
             t = s["t"].strip()
             if gurultu_mu(t):
                 continue
             m = QNUM.match(t)
-            if m and s["x"] < 200:
+            if m and s["x"] < 1700:
                 no = int(m.group(1))
-                if no == son_no + 1 or (no == 1 and son_no == 0):
+                kalan = t[m.end():].strip()
+                # yalnizca cevap anahtarinda gercekten var olan numaralar
+                # (iki sutunlu sayfalarda tablo ici sahte numaralar da elenir)
+                # ve ayni test icinde daha once kullanilmamis numaralar:
+                # soru icindeki tablo satirlari ("1. cumlede...") boyle elenir
+                gecerli = (
+                    no in gecerli_no and no != son_no and no not in kullanilan
+                )
+                # "22.00" gibi ondalik/saat kaliplari sahte baslangictir
+                if gecerli and kalan and re.match(r"^[.,]\d", kalan):
+                    gecerli = False
+                # metinle baslayan numaralar: uzun kucuk harfli ilk kelime
+                # tablo satiri olabilir ("1. oyuncu", "2. adim") -> reddet
+                if gecerli and kalan:
+                    ilk_kelime = re.match(r"[a-zçğıöşü]{4,}", kalan)
+                    if ilk_kelime and ilk_kelime.group(0) not in SAHNE_KELIME:
+                        gecerli = False
+                if gecerli:
                     bitir()
                     son_no = no
-                    kalan = t[m.end():].strip()
+                    kullanilan.add(no)
                     bekleyen = {
                         "no": no,
                         "sayfa": p["sayfa"],
@@ -259,8 +396,8 @@ def sayfa_eslemesi_kur(sayfalar, tur, anahtar, kitap):
     esleme = {}
     aktif_bolum, aktif_konu, aktif_test = None, None, None
     for p in sayfalar:
-        satirlar = sorted(p["satirlar"], key=lambda s: (s["y"], s["x"]))
-        for s in [x for x in satirlar if x["y"] < 300]:
+        satirlar = sayfa_sirala(p["satirlar"], tur)
+        for s in [x for x in satirlar if x["y"] < 250]:
             t = s["t"].strip()
             if tur == "mat":
                 for b in anahtar:
@@ -271,7 +408,9 @@ def sayfa_eslemesi_kur(sayfalar, tur, anahtar, kitap):
                 m = TEST_BAS.search(t)
                 if m:
                     aktif_test = int(m.group(1))
-                elif not gurultu_mu(t) and len(norm(t)) > 3:
+                elif baslik_benizer(t, anahtar):
+                    # anahtar adina benzeyen tam konu basligi; parcali
+                    # satirlarin ("ANLAM") konuyu bozmasini onler
                     aktif_konu = t
         esleme[(kitap, p["sayfa"])] = (
             aktif_bolum if tur == "mat" else (aktif_konu, aktif_test)

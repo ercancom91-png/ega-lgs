@@ -9,6 +9,7 @@ const LINKLER = [
   { href: "/uretilmis/", ad: "Üretilmiş Denemeler" },
   { href: "/banka/", ad: "Soru Bankası" },
   { href: "/rastgele/", ad: "Rastgele Soru" },
+  { href: "/dersler/", ad: "Dersler" },
   { href: "/meb/", ad: "MEB Çalışma Kitapları" },
   { href: "/istatistik/", ad: "İstatistik" },
 ];

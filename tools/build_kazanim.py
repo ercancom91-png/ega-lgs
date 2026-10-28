@@ -280,8 +280,16 @@ def dis_anahtar_bul(yol):
         if gruplar:
             m = (re.search(r"TEST[-_ ]?(\d+)", stem, re.I)
                  or re.search(r"(\d+)\s*$", stem))
-            if m and int(m.group(1)) in gruplar:
-                return gruplar[int(m.group(1))]
+            if m:
+                no = int(m.group(1))
+                if no in gruplar:
+                    return gruplar[no]
+                # Dosya bir grup/test numarasi belirtiyor (TEST_24, unite_7)
+                # ama anahtarda o grup YOK. Tahmin etmek yanlis cevap
+                # uretir; bu aday guvenli sekilde atlanir.
+                # (Grubu askida birakan devasa rakam yil olabilir -> 2019)
+                if re.search(r"TEST[-_ ]?\d+", stem, re.I) or no <= max(gruplar):
+                    continue
             return gruplar[min(gruplar)]
         duz = {}
         for n, h in CEVAP_CIFT.findall(km):

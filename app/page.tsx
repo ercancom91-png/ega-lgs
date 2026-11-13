@@ -8,63 +8,6 @@ import { aktifRozetler } from "@/lib/rozetler";
 import { BANK, kaynakSayilari } from "@/lib/questions";
 import { CIKMIS_YILLAR } from "@/lib/exams";
 
-const MODULLER = [
-  {
-    href: "/denemeler/",
-    baslik: "Çıkmış Denemeler",
-    aciklama:
-      "2018–2025 MEB resmî kitapçıkları. Gerçek iki oturum: sözel 50 soru/75 dk, sayısal 40 soru/80 dk.",
-    etiket: `${CIKMIS_YILLAR.length} yıl`,
-    sinif: "accent-red",
-    no: "01",
-  },
-  {
-    href: "/uretilmis/",
-    baslik: "Üretilmiş Denemeler",
-    aciklama:
-      "Havuzdan her açılışta yeni kombinasyon üreten denemeler. Tam sınav ve ders sprintleri.",
-    etiket: "Yeni karışım",
-    sinif: "accent-blue",
-    no: "02",
-  },
-  {
-    href: "/banka/",
-    baslik: "Soru Bankası",
-    aciklama:
-      "Ders, konu, zorluk, kaynak ve yıl filtresiyle kendi testini kur. Kontrol anında.",
-    etiket: `${BANK.length} soru`,
-    sinif: "",
-    no: "03",
-  },
-  {
-    href: "/rastgele/",
-    baslik: "Rastgele Soru",
-    aciklama:
-      "Butona bas; ders ve zorluk seçimine göre saniyeler içinde yeni soru gelsin.",
-    etiket: "Sonsuz",
-    sinif: "",
-    no: "04",
-  },
-  {
-    href: "/meb/",
-    baslik: "MEB Çalışma Kitapları",
-    aciklama:
-      "MEB LGS çalışma kitaplarındaki ünite/tema testleri, cevap anahtarlarıyla birlikte.",
-    etiket: "Ünite testleri",
-    sinif: "",
-    no: "05",
-  },
-  {
-    href: "/istatistik/",
-    baslik: "İstatistik",
-    aciklama:
-      "Ders ders doğru-yanlış, zayıf konu analizi, deneme puanların ve rozetlerin tek ekranda.",
-    etiket: "Analiz",
-    sinif: "",
-    no: "06",
-  },
-];
-
 const SLAYTLAR = [
   {
     no: "01 · ÇIKMIŞ DENEMELER",
@@ -138,38 +81,7 @@ export default function AnaSayfa() {
 
   return (
     <>
-      <section className="hero-wrap">
-        <div className="hero-tilt">
-          <p className="eyebrow" style={{ marginBottom: 18 }}>
-            MEB KAYNAKLI · RESMÎ SÜRELERLE · ÜCRETSİZ
-          </p>
-          <h1 className="h-hero">
-            GERÇEK SORULARLA
-            <br />
-            <span className="out">GERÇEK</span> <span className="red">SINAV PROVASI.</span>
-            <br />
-            HEDEFİ YAKALA.
-          </h1>
-        </div>
-
-        <div className="between" style={{ marginTop: 34 }}>
-          <p className="lead">
-            Çıkmış LGS denemeleri, MEB çalışma kitapları, konu konu soru bankası ve
-            kılavuzdaki aynen sürelerle çalışan sınav simülasyonu. Kayıt olmadan, tek
-            ekranda.
-          </p>
-          <div className="row">
-            <Link href="/denemeler/" className="btn btn-primary btn-lg">
-              Denemeye başla →
-            </Link>
-            <Link href="/rastgele/" className="btn btn-ghost btn-lg">
-              🎲 Rastgele soru
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <div className="slider" style={{ margin: "30px 0 26px" }}>
+      <div className="slider slider-hero">
         <div
           className="slider-track"
           style={{ transform: `translateX(-${slayt * 100}%)` }}
@@ -213,6 +125,37 @@ export default function AnaSayfa() {
           ))}
         </div>
       </div>
+
+      <section className="hero-wrap home-hero">
+        <div className="hero-tilt">
+          <p className="eyebrow" style={{ marginBottom: 16 }}>
+            MEB KAYNAKLI · RESMÎ SÜRELERLE · ÜCRETSİZ
+          </p>
+          <h1 className="h-hero">
+            GERÇEK SORULARLA
+            <br />
+            <span className="out">GERÇEK</span> <span className="red">SINAV PROVASI.</span>
+            <br />
+            HEDEFİ YAKALA.
+          </h1>
+        </div>
+
+        <div className="between" style={{ marginTop: 26 }}>
+          <p className="lead">
+            Çıkmış LGS denemeleri, MEB çalışma kitapları, konu konu soru bankası ve
+            kılavuzdaki aynen sürelerle çalışan sınav simülasyonu. Kayıt olmadan, tek
+            ekranda.
+          </p>
+          <div className="row">
+            <Link href="/denemeler/" className="btn btn-primary btn-lg">
+              Denemeye başla →
+            </Link>
+            <Link href="/rastgele/" className="btn btn-ghost btn-lg">
+              🎲 Rastgele soru
+            </Link>
+          </div>
+        </div>
+      </section>
 
       <div className="grid g-4">
         <div className="kpi">
@@ -304,29 +247,6 @@ export default function AnaSayfa() {
             </p>
           )}
         </div>
-      </div>
-
-      <div className="divider" />
-
-      <div className="between" style={{ marginBottom: 18 }}>
-        <h2 className="h-sec">Modüller</h2>
-        <span className="pill blue">
-          {kuruldu ? `${veri.denemeler.length} deneme kayıtlı` : "—"}
-        </span>
-      </div>
-
-      <div className="grid g-3">
-        {MODULLER.map((m) => (
-          <Link key={m.no + m.baslik} href={m.href} className={`tile ${m.sinif}`}>
-            <div className="between">
-              <span className="idx">{m.no}</span>
-              <span className="pill">{m.etiket}</span>
-            </div>
-            <h3 style={{ marginTop: 14 }}>{m.baslik}</h3>
-            <p>{m.aciklama}</p>
-            <span className="go">İncele →</span>
-          </Link>
-        ))}
       </div>
     </>
   );

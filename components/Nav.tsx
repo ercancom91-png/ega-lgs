@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MODAL_OLAY, ModalTur } from "@/lib/modal";
+import { useVeri } from "@/lib/store";
 import RastgeleModal from "./RastgeleModal";
 import DenemeUretModal from "./DenemeUretModal";
 
@@ -16,6 +17,13 @@ const LINKLER = [
 export default function Nav() {
   const yol = usePathname();
   const [modal, setModal] = useState<ModalTur | null>(null);
+  // hydration çakışmasın: avatar harfi ancak kurulduktan sonra localStorage'dan
+  const [kuruldu, setKuruldu] = useState(false);
+  useEffect(() => setKuruldu(true), []);
+  const veri = useVeri();
+  const basHarf = kuruldu
+    ? (veri.profil.ad || "Ö").trim().slice(0, 1).toUpperCase()
+    : "Ö";
 
   // sayfa içi butonlar modalAc() ile haber verir
   useEffect(() => {
@@ -65,6 +73,14 @@ export default function Nav() {
             </button>
             <Link href="/denemeler/" className="nav-cta">
               Deneme Başlat
+            </Link>
+            <Link
+              href="/profil/"
+              className={`nav-profil ${yol.startsWith("/profil") ? "active" : ""}`}
+              title="Profil"
+            >
+              <span className="nav-avatar">{basHarf}</span>
+              <span>Profil</span>
             </Link>
           </div>
         </div>

@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import SoruBlok from "@/components/SoruBlok";
 import { filtrele, karistir, konular } from "@/lib/questions";
@@ -176,43 +175,6 @@ export default function Banka() {
           </div>
         </div>
       </div>
-
-      {/* Çıkmış MEB denemeleri kartı — basınca denemeler sayfası açılır */}
-      <Link
-        href="/denemeler/"
-        className="tile accent-red"
-        style={{ display: "block", marginBottom: 24 }}
-      >
-        <div
-          className="between"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 24,
-            flexWrap: "wrap",
-          }}
-        >
-          <div style={{ flex: 1, minWidth: 260 }}>
-            <p className="eyebrow" style={{ marginBottom: 14 }}>
-              ÇIKMIŞ DENEMELER
-            </p>
-            <h3 style={{ fontSize: 24 }}>
-              MEB’in resmî LGS denemeleri · 2018–2025
-            </h3>
-            <p>
-              8 tam format deneme; gerçek sorular, iki oturum, resmî süreler ve MEB
-              puanlama formülü. Karta bas, denemeler sayfası açılsın.
-            </p>
-            <div className="chips">
-              <span className="pill red">8 resmî deneme</span>
-              <span className="pill">90 soru · 155 dakika</span>
-              <span className="pill blue">Sıralı puan</span>
-            </div>
-          </div>
-          <span className="btn btn-primary btn-lg">Denemeleri aç →</span>
-        </div>
-      </Link>
 
       <div id="test-baslangic" />
       {test.length > 0 && (

@@ -157,8 +157,34 @@ p { margin: 0; }
   transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(255, 212, 0, .2);
 }
 .nav-btn:active { transform: translate(0, 0); box-shadow: none; }
+.nav-profil {
+  flex-shrink: 0; white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--panel-3); color: var(--text);
+  border: 1px solid var(--line-2);
+  padding: 6px 12px 6px 6px; font-size: 13px; font-weight: 700;
+  transition: color .14s, border-color .14s, transform .14s, box-shadow .14s;
+}
+.nav-avatar {
+  width: 26px; height: 26px; flex-shrink: 0;
+  display: grid; place-items: center;
+  background: var(--acc); color: var(--acc-ink);
+  font-family: var(--font-display); font-size: 13px; font-weight: 800;
+}
+.nav-profil:hover {
+  color: var(--acc); border-color: var(--acc);
+  transform: translate(-2px, -2px); box-shadow: 4px 4px 0 rgba(255, 212, 0, .2);
+}
+.nav-profil.active { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); }
+.nav-profil.active .nav-avatar { background: var(--acc-ink); color: var(--acc); }
 @media (max-width: 1080px) {
   .nav-btn { padding: 9px 10px; font-size: 12.5px; }
+  .nav-profil { padding: 5px 9px 5px 5px; font-size: 12.5px; gap: 6px; }
+  .nav-avatar { width: 24px; height: 24px; font-size: 12px; }
+}
+@media (max-width: 720px) {
+  .nav-profil > span:last-child { display: none; }
+  .nav-profil { padding: 5px; }
 }
 
 /* ---------- ortak ---------- */

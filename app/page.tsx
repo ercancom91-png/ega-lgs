@@ -80,7 +80,7 @@ export default function AnaSayfa() {
   );
 
   return (
-    <>
+    <div className="home-wide">
       <div className="slider slider-hero">
         <div
           className="slider-track"
@@ -248,6 +248,6 @@ export default function AnaSayfa() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

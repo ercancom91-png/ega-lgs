@@ -507,9 +507,17 @@ input:focus, select:focus { outline: none; border-color: var(--acc); box-shadow:
   .slider-nav { left: 26px; bottom: 24px; }
 }
 
+/* --- anasayfa: icerik de slider gibi tam genislige acilsin (1200px siniri kaldir) --- */
+.home-wide {
+  --yan: clamp(24px, 4vw, 64px);          /* sag/sol kenar bosluğu */
+  margin-inline: calc(50% - 50vw);
+  padding-inline: var(--yan);
+}
+
 /* --- anasayfa: sayfanin en basinda, tam genislik buyuk slider --- */
 .slider-hero {
-  margin: -14px calc(50% - 50vw) 46px;
+  /* wrapper'in sag/sol padding'ini asar -> slider yine kenardan kenara */
+  margin: -14px calc(-1 * var(--yan, 24px)) 46px;
   border-left: 0;
   border-right: 0;
 }
@@ -517,29 +525,34 @@ input:focus, select:focus { outline: none; border-color: var(--acc); box-shadow:
   min-height: 470px;
   padding-top: 84px;
   padding-bottom: 104px;
-  /* slider tam genislik; icerik ana konteynerle (1152px) hizali kalsin */
-  padding-left: max(24px, calc((100vw - 1152px) / 2));
-  padding-right: max(24px, calc((100vw - 1152px) / 2));
+  /* slider icerigi de sayfa icerigiyle ayni hizada */
+  padding-left: var(--yan, 24px);
+  padding-right: var(--yan, 24px);
 }
 .slider-hero .slide h2 { font-size: clamp(38px, 5.6vw, 74px); max-width: 24ch; }
 .slider-hero .slide p { font-size: 17px; max-width: 60ch; }
 .slider-hero .s-no { font-size: 13px; }
-.slider-hero .slider-nav {
-  left: max(24px, calc((100vw - 1152px) / 2));
-  bottom: 42px;
-}
+.slider-hero .slider-nav { left: var(--yan, 24px); bottom: 42px; }
 @media (max-width: 900px) {
-  .slider-hero { margin: -10px calc(50% - 50vw) 36px; }
-  .slider-hero .slide { min-height: 350px; padding: 48px 26px 92px; }
+  .slider-hero { margin-top: -10px; margin-bottom: 36px; }
+  .slider-hero .slide { min-height: 350px; padding-block: 48px 92px; }
   .slider-hero .slide h2 { font-size: clamp(30px, 8vw, 44px); }
-  .slider-hero .slider-nav { left: 26px; bottom: 30px; }
+  .slider-hero .slider-nav { bottom: 30px; }
 }
 
-/* --- anasayfa basligi: buyuk slider'dan sonra sakin ve rahat --- */
+/* --- anasayfa icerigi: genislige gore yeniden olceklenir --- */
 .home-hero { padding-top: 4px; padding-bottom: 34px; }
-.home-hero .h-hero { font-size: clamp(34px, 4.8vw, 58px); }
-.home-hero .between { margin-top: 26px; }
+.home-hero .h-hero { font-size: clamp(36px, 5vw, 62px); }
+.home-hero .lead { font-size: 17.5px; max-width: 66ch; }
+.home-hero .between { margin-top: 26px; gap: 40px; }
 .home-hero + .grid.g-4 { margin-top: 0; }
+.home-wide .grid.g-4 { gap: 20px; }
+.home-wide .kpi { padding: 30px 24px; }
+.home-wide .kpi .v { font-size: 42px; }
+.home-wide .kpi .k { font-size: 13.5px; }
+.home-wide .grid.g-2 { gap: 20px; }
+.home-wide .panel-pad { padding: 30px 34px; }
+.home-wide .quote { font-size: 21px; }
 
 /* --- modal --- */
 .modal-bg { position: fixed; inset: 0; z-index: 80; background: rgba(0, 0, 0, .82); backdrop-filter: blur(6px); display: grid; place-items: center; padding: 24px; }

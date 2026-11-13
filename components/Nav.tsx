@@ -5,8 +5,7 @@ import { usePathname } from "next/navigation";
 
 const LINKLER = [
   { href: "/", ad: "Ana Sayfa" },
-  { href: "/denemeler/", ad: "Çıkmış Denemeler" },
-  { href: "/uretilmis/", ad: "Üretilmiş Denemeler" },
+  { href: "/denemeler/", ad: "Denemeler" },
   { href: "/banka/", ad: "Soru Bankası" },
   { href: "/rastgele/", ad: "Rastgele Soru" },
   { href: "/dersler/", ad: "Dersler" },

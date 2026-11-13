@@ -279,7 +279,7 @@ export default function Istatistik() {
 
       <div className="between" style={{ marginBottom: 18 }}>
         <h2 className="h-sec">Deneme geçmişi</h2>
-        <Link href="/uretilmis/" className="btn btn-sm btn-blue">
+        <Link href="/denemeler/#uret" className="btn btn-sm btn-blue">
           Yeni deneme üret
         </Link>
       </div>

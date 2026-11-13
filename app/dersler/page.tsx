@@ -1,4 +1,5 @@
 import Link from "next/link";
+import RastgeleButon from "@/components/RastgeleButon";
 import { DERS_BILGI } from "@/lib/dersler";
 import { BANK, konular } from "@/lib/questions";
 import { DERS_ADI } from "@/lib/types";
@@ -49,9 +50,9 @@ export default function DerslerSayfasi() {
         <p className="small muted" style={{ margin: "12px 0 16px", maxWidth: "62ch", lineHeight: 1.75 }}>
           Hangi ders olduğunu bilmiyor musun? Havuzun tamamından rastgele soru üret.
         </p>
-        <Link href="/rastgele/" className="btn btn-primary">
+        <RastgeleButon className="btn btn-primary">
           Rastgele soru üret →
-        </Link>
+        </RastgeleButon>
       </div>
     </>
   );

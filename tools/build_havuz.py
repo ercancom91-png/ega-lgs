@@ -32,6 +32,9 @@ KONU_ESLEME = [
     (r"dönüşüm", "Dönüşüm Geometrisi"),
     (r"geometrik cisim", "Geometrik Cisimler"),
     (r"erdem", "Erdemler"),
+    # daha ozel kurallar genel "atatürk" kuralindan once gelmeli
+    (r"dış politika", "Dış Politika"),
+    (r"çağdaşlaşan", "Çağdaşlaşan Türkiye"),
     (r"millî mücadele|atatürk", "Millî Mücadele"),
     (r"bilim|teknoloji", "Bilim ve Teknoloji"),
     (r"birey|toplum", "Birey ve Toplum"),
@@ -41,7 +44,6 @@ KONU_ESLEME = [
     (r"vatandaşlık", "Vatandaşlık"),
     (r"kahraman|bağımsızlık|destan", "Kurtuluş Savaşı"),
     (r"demokratikleşme", "Demokratikleşme"),
-    (r"dış politika", "Dış Politika"),
     (r"kader", "İman ve Kader"),
     (r"zekât|sadaka", "İbadetler"),
     (r"din ve hayat", "Din ve Hayat"),
@@ -66,6 +68,61 @@ KONU_ESLEME = [
 ]
 
 
+# ODSGM üniteli kitaplarda konu, PDF'in basindaki "2. Ünite" gibi sayisal
+# bir satirdan cikariliyor. Gercek bolum adi kitabin ilk sayfasinda, o satirin
+# hemen ustunde durur -> kitap adina gore gercek konu adina cevrilir.
+KITAP_BASLIK = {
+    "dkab_2.pdf": "Zekât ve Sadaka",
+    "dkab_3.pdf": "Din ve Hayat",
+    "dkab_4.pdf": "Hz. Muhammed'in Örnekliği",
+    "dkab_5.pdf": "Kur'an-ı Kerim ve Özellikleri",
+    "fen_2.pdf": "DNA ve Genetik Kod",
+    "fen_3.pdf": "Basınç",
+    "fen_4.pdf": "Madde ve Endüstri",
+    "fen_5.pdf": "Basit Makineler",
+    "fen_6.pdf": "Enerji Dönüşümleri ve Çevre Bilimi",
+    "ink_2.pdf": "Millî Uyanış: Bağımsızlık Yolunda Atılan Adımlar",
+    "ink_3.pdf": "Millî Bir Destan: Ya İstiklal Ya Ölüm!",
+    "ink_4.pdf": "Atatürkçülük ve Çağdaşlaşan Türkiye",
+    "ink_5.pdf": "Demokratikleşme Çabaları",
+    "ink_6.pdf": "Atatürk Dönemi Türk Dış Politikası",
+    "mat_2.pdf": "Kareköklü İfadeler-Veri Analizi",
+    "mat_3.pdf": "Basit Olayların Olma Olasılığı-Cebirsel İfadeler ve Özdeşlikler",
+    "mat_4.pdf": "Doğrusal Denklemler-Eşitsizlikler",
+    "mat_5.pdf": "Üçgenler-Eşlik ve Benzerlik",
+    "mat_6.pdf": "Dönüşüm Geometrisi-Geometrik Cisimler",
+    "turk_2.pdf": "Millî Mücadele ve Atatürk",
+    "turk_3.pdf": "Bilim ve Teknoloji",
+    "turk_4.pdf": "Birey ve Toplum",
+    "turk_5.pdf": "Zaman ve Mekân",
+    "turk_6.pdf": "Millî Kültürümüz",
+    "turk_7.pdf": "Doğa ve Evren",
+    "turk_8.pdf": "Vatandaşlık",
+}
+
+# Kapagi basligi olmayan bazi kitaplar (turkce_unite_*) ayni MEB mufredatini
+# paylastigi icin ders + etiket ile yedeklenir. Cozulemeyen etiket -> "Genel".
+ETIKET_BASLIK = {
+    ("Turkce", "2. Tema"): "Millî Mücadele ve Atatürk",
+    ("Turkce", "3. Tema"): "Bilim ve Teknoloji",
+    ("Turkce", "4. Tema"): "Birey ve Toplum",
+    ("Turkce", "5. Tema"): "Zaman ve Mekân",
+    ("Turkce", "6. Tema"): "Millî Kültürümüz",
+    ("Turkce", "7. Tema"): "Doğa ve Evren",
+    ("Turkce", "8. Tema"): "Vatandaşlık",
+}
+
+YAPISAL_KONU = re.compile(r"^\d{1,2}\.\s*(ünite|tema|çıkış|unite)\s*$", re.I)
+
+
+def gercek_konu(konu, kitap, ders):
+    """'2. Ünite' gibi sayisal etiketi kitabin gercek bolum adina cevirir."""
+    k = (konu or "").strip()
+    if not YAPISAL_KONU.match(k):
+        return konu
+    return KITAP_BASLIK.get(kitap or "") or ETIKET_BASLIK.get((ders, k)) or ""
+
+
 # konu etiketi olarak kullanilmamasi gereken genel bolum/bolum adlari
 KONU_ARTIK = re.compile(
     r"(?i)^\W*(alıştırma|etkinlik|test|değerlendirme|degerlendirme|kazanım"
@@ -75,6 +132,8 @@ KONU_ARTIK = re.compile(
 
 def konu_etiketle(ders, konu):
     k = (konu or "").strip()
+    # "Ünite: Mevsimler ve İklim" -> "Mevsimler ve İklim" (on ek gurultusu)
+    k = re.sub(r"(?i)^(ünite|unite|tema|bölüm|bolum)\s*[:\-]\s*", "", k).strip()
     if not k or KONU_ARTIK.match(k):
         return "Genel"
     # noktalama/kesik cizgiden ibaret etiketler ("- ----", ".......")
@@ -136,7 +195,8 @@ def yukle():
                 "id": (f"{on_ek}-{s.get('kitapcik', kaynak)[:24]}-{ders[:3]}-"
                        f"{s['no']}-{parmakizi(s['metin'])[:8]}"),
                 "ders": ders,
-                "konu": konu_etiketle(ders, s.get("konu")),
+                "konu": konu_etiketle(
+                    ders, gercek_konu(s.get("konu"), s.get("kitap", ""), ders)),
                 "zorluk": zorluk_tahmin(s["metin"], sec),
                 "metin": " ".join(s["metin"].split()),
                 "secenekler": {h: " ".join((sec.get(h) or "").split()) for h in "ABCD"},

@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import type { CSSProperties } from "react";
 import { BANK } from "@/lib/questions";
-import { DERS_ADI, DERS_RENK, LGS_YAPISI, Ders } from "@/lib/types";
+import { DERS_ADI, DERS_RENK, Ders, LGS_YAPISI } from "@/lib/types";
+import { DERS_BILGI } from "@/lib/dersler";
 
 interface Grup {
   ders: Ders;
@@ -28,23 +30,43 @@ function gruplariTopla(): Grup[] {
     if (s.dogru) g.cevapli++;
     harita.set(k, g);
   });
-  return Array.from(harita.values()).sort(
-    (a, b) =>
-      a.ders.localeCompare(b.ders, "tr") || a.konu.localeCompare(b.konu, "tr")
+  return Array.from(harita.values()).sort((a, b) =>
+    a.konu.localeCompare(b.konu, "tr")
   );
 }
 
 export default function MEBSayfasi() {
   const gruplar = useMemo(gruplariTopla, []);
-  const [ders, setDers] = useState<Ders | "hepsi">("hepsi");
+  const [secili, setSecili] = useState<Ders | null>(null);
 
-  const filtreli = gruplar.filter((g) => ders === "hepsi" || g.ders === ders);
-  const toplam = gruplar.reduce((t, g) => t + g.adet, 0);
-  const dersler = Array.from(new Set(gruplar.map((g) => g.ders)));
+  const toplam = useMemo(
+    () => gruplar.reduce((t, g) => t + g.adet, 0),
+    [gruplar]
+  );
+
+  /* Her ders için toplam soru + konu sayısı (ders kartları) */
+  const dersKartlari = useMemo(() => {
+    const map = new Map<Ders, { adet: number; konu: number }>();
+    gruplar.forEach((g) => {
+      const m = map.get(g.ders) || { adet: 0, konu: 0 };
+      m.adet += g.adet;
+      m.konu += 1;
+      map.set(g.ders, m);
+    });
+    return Array.from(map.entries())
+      .map(([ders, m]) => ({ ders, ...m }))
+      .sort((a, b) => DERS_ADI[a.ders].localeCompare(DERS_ADI[b.ders], "tr"));
+  }, [gruplar]);
+
+  const seciliGruplar = useMemo(
+    () => (secili ? gruplar.filter((g) => g.ders === secili) : []),
+    [gruplar, secili]
+  );
 
   const testAc = (g: Grup) => {
     const soruSayisi = Math.min(20, g.adet);
-    const birSoruSure = (LGS_YAPISI[g.ders].sure / LGS_YAPISI[g.ders].soru) * soruSayisi;
+    const birSoruSure =
+      (LGS_YAPISI[g.ders].sure / LGS_YAPISI[g.ders].soru) * soruSayisi;
     const secim = {
       dersler: [g.ders],
       soruSayisi,
@@ -53,78 +75,111 @@ export default function MEBSayfasi() {
       ad: `MEB · ${g.konu}`,
       konu: g.konu,
     };
-    window.location.href = `/sinav/?ozel=${encodeURIComponent(JSON.stringify(secim))}`;
+    window.location.href = `/sinav/?ozel=${encodeURIComponent(
+      JSON.stringify(secim)
+    )}`;
   };
+
+  const bilgi = secili ? DERS_BILGI.find((b) => b.ders === secili) : null;
 
   return (
     <>
       <section className="page-head">
         <div>
           <p className="eyebrow">MEB ÇALIŞMA KİTAPLARI</p>
-          <h1 style={{ margin: "10px 0 8px" }}>Ünite &amp; Tema Testleri</h1>
+          <h1 style={{ margin: "10px 0 8px" }}>
+            {secili ? DERS_ADI[secili] : "Ders Ders Çalışma Kitapları"}
+          </h1>
           <p className="sub">
-            MEB’in ücretsiz LGS çalışma kitaplarından çıkarılan {toplam} soru; ünite,
-            tema ve konu bazında testlere ayrıldı. Her test cevap anahtarıyla birlikte
-            çalışır.
+            {secili
+              ? `${DERS_ADI[secili]} kitabındaki ${seciliGruplar.length} ünite/tema; her birinde cevap anahtarıyla çalışan test var. Konuyu seç, doğrudan çöz.`
+              : `MEB’in ücretsiz LGS çalışma kitaplarından çıkarılan ${toplam} soru, ${dersKartlari.length} derse göre ayrıldı. Bir ders kartına bas, o derste hangi konular olduğunu gör.`}
           </p>
         </div>
-        <span className="chip red">{toplam} soru</span>
+        <span className="chip red">
+          {secili
+            ? `${seciliGruplar.length} konu`
+            : `${dersKartlari.length} ders · ${toplam} soru`}
+        </span>
       </section>
 
-      <div className="row wrap" style={{ marginBottom: 20 }}>
-        <button
-          className={`chip ${ders === "hepsi" ? "red" : ""}`}
-          onClick={() => setDers("hepsi")}
-        >
-          Tüm dersler
-        </button>
-        {dersler.map((d) => (
-          <button
-            key={d}
-            className={`chip ${ders === d ? "red" : ""}`}
-            onClick={() => setDers(d)}
-            style={{ color: ders === d ? undefined : DERS_RENK[d] }}
-          >
-            {DERS_ADI[d]} ·{" "}
-            {gruplar.filter((g) => g.ders === d).reduce((t, g) => t + g.adet, 0)}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid g-3">
-        {filtreli.map((g) => (
-          <div key={g.ders + g.konu} className="tile">
-            <div className="between">
-              <span className="pill" style={{ color: DERS_RENK[g.ders] }}>
-                <i className="ders-dot" style={{ background: DERS_RENK[g.ders] }} />
-                {DERS_ADI[g.ders]}
-              </span>
-              <span className="pill blue">{g.adet} soru</span>
-            </div>
-            <h3 style={{ marginTop: 12, fontSize: 16 }}>{g.konu}</h3>
-            <p>
-              {g.cevapli === g.adet
-                ? "Cevap anahtarı tam."
-                : `${g.cevapli}/${g.adet} sorunun cevap anahtarı var.`}
-            </p>
-            <div className="row">
+      {secili === null ? (
+        /* ---------------- DERS KARTLARI ---------------- */
+        <div className="grid g-3">
+          {dersKartlari.map((k) => {
+            const d = DERS_BILGI.find((x) => x.ders === k.ders);
+            return (
               <button
-                className="btn btn-sm btn-primary"
-                disabled={g.cevapli < 5}
-                onClick={() => testAc(g)}
+                key={k.ders}
+                className="ders-card"
+                style={
+                  { "--ders-renk": DERS_RENK[k.ders] } as CSSProperties
+                }
+                onClick={() => setSecili(k.ders)}
               >
-                {Math.min(20, g.adet)} soruluk test →
+                <div className="d-ico">{d?.ikon ?? "📘"}</div>
+                <h3>{DERS_ADI[k.ders]}</h3>
+                <p>{d?.aciklama}</p>
+                <div className="d-stat">
+                  <span className="pill">{k.konu} konu</span>
+                  <span className="pill red">{k.adet} soru</span>
+                </div>
+                <div className="d-go">Konuları gör →</div>
               </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {!filtreli.length && (
-        <div className="bos-durum">
-          <div className="ico">📘</div>
-          <p>Bu derste grup bulunamadı.</p>
+            );
+          })}
         </div>
+      ) : (
+        /* ---------------- SEÇİLİ DERSİN KONULARI ---------------- */
+        <>
+          <div className="between" style={{ margin: "4px 0 18px" }}>
+            <button className="btn btn-sm" onClick={() => setSecili(null)}>
+              ← TÜM DERSLER
+            </button>
+            <span className="pill blue">
+              {bilgi?.oturum ?? DERS_ADI[secili]}
+            </span>
+          </div>
+
+          <div className="grid g-3">
+            {seciliGruplar.map((g) => (
+              <div key={g.ders + g.konu} className="tile">
+                <div className="between">
+                  <span className="pill" style={{ color: DERS_RENK[g.ders] }}>
+                    <i
+                      className="ders-dot"
+                      style={{ background: DERS_RENK[g.ders] }}
+                    />
+                    {DERS_ADI[g.ders]}
+                  </span>
+                  <span className="pill blue">{g.adet} soru</span>
+                </div>
+                <h3 style={{ marginTop: 12, fontSize: 16 }}>{g.konu}</h3>
+                <p>
+                  {g.cevapli === g.adet
+                    ? "Cevap anahtarı tam."
+                    : `${g.cevapli}/${g.adet} sorunun cevap anahtarı var.`}
+                </p>
+                <div className="row">
+                  <button
+                    className="btn btn-sm btn-primary"
+                    disabled={g.cevapli < 5}
+                    onClick={() => testAc(g)}
+                  >
+                    {Math.min(20, g.adet)} soruluk test →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {!seciliGruplar.length && (
+            <div className="bos-durum">
+              <div className="ico">📘</div>
+              <p>Bu derste grup bulunamadı.</p>
+            </div>
+          )}
+        </>
       )}
 
       <div className="divider" />
@@ -132,7 +187,10 @@ export default function MEBSayfasi() {
       <div className="grid g-2">
         <div className="panel pad">
           <p className="eyebrow">KAYNAK</p>
-          <ul className="small muted" style={{ lineHeight: 2, margin: "12px 0 0", paddingLeft: 18 }}>
+          <ul
+            className="small muted"
+            style={{ lineHeight: 2, margin: "12px 0 0", paddingLeft: 18 }}
+          >
             <li>LGS Matematik çalışma kitabı (6 ünite)</li>
             <li>LGS Fen Bilimleri çalışma kitabı</li>
             <li>LGS Türkçe çalışma kitabı (8 tema)</li>
@@ -141,7 +199,10 @@ export default function MEBSayfasi() {
         </div>
         <div className="panel pad">
           <p className="eyebrow blue">TAVSİYE</p>
-          <p className="small muted" style={{ lineHeight: 1.9, margin: "12px 0 16px" }}>
+          <p
+            className="small muted"
+            style={{ lineHeight: 1.9, margin: "12px 0 16px" }}
+          >
             Ünite testlerini konu çalışmasından hemen sonra çöz; yanlışların 3’ten
             fazla olduğu üniteyi bir gün sonra tekrar dene.
           </p>

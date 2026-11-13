@@ -2,26 +2,8 @@
 
 import { useMemo, useState } from "react";
 import SoruBlok from "@/components/SoruBlok";
-import { filtrele, karistir, kaynakSayilari, konular } from "@/lib/questions";
-
-const KAYNAK_ADI: Record<string, string> = {
-  cikmis: "Çıkmış LGS (MEB)",
-  meb: "MEB Kitapları",
-  sorular: "Sinerji Bankası",
-  kazanim: "MEB Kazanım Testleri",
-  "LGS 2024": "EGA Özgün · 2024 tipi",
-  "LGS 2025": "EGA Özgün · 2025 tipi",
-  "EGA Özgün": "EGA Özgün",
-};
-import {
-  DERS_ADI,
-  DERS_RENK,
-  Ders,
-  Harf,
-  Soru,
-  ZORLUK_ADI,
-  Zorluk,
-} from "@/lib/types";
+import { filtrele, karistir, konular } from "@/lib/questions";
+import { DERS_ADI, DERS_RENK, Ders, Harf, Soru } from "@/lib/types";
 import { netHesapla } from "@/lib/scoring";
 import { soruKaydet } from "@/lib/store";
 
@@ -37,8 +19,6 @@ const TUM_DERSLER: Ders[] = [
 export default function Banka() {
   const [ders, setDers] = useState<Ders | "hepsi">("hepsi");
   const [konu, setKonu] = useState<string | "hepsi">("hepsi");
-  const [zorluk, setZorluk] = useState<Zorluk | "hepsi">("hepsi");
-  const [kaynak, setKaynak] = useState<string | "hepsi">("hepsi");
   const [adet, setAdet] = useState(10);
   const [test, setTest] = useState<Soru[]>([]);
   const [cevaplar, setCevaplar] = useState<Record<string, Harf | null>>({});
@@ -46,11 +26,7 @@ export default function Banka() {
   const [kesinlesti, setKesinlesti] = useState(false);
 
   const konuListesi = konular(ders === "hepsi" ? undefined : ders);
-  const havuz = useMemo(
-    () => filtrele({ ders, konu, zorluk, kaynak }),
-    [ders, konu, zorluk, kaynak]
-  );
-  const kaynaklar = useMemo(() => kaynakSayilari(), []);
+  const havuz = useMemo(() => filtrele({ ders, konu }), [ders, konu]);
 
   const testKur = () => {
     const secili = karistir(havuz, Math.random).slice(0, adet);
@@ -97,8 +73,9 @@ export default function Banka() {
           Soru Bankası
         </h1>
         <p className="lead">
-          Ders, konu ve zorluk seç; istediğin kadar sorudan kendi testini kur. Kontrol
-          ettiğinde her sorunun çözümü ve doğru cevabı açılır, sonuç istatistiğine işlenir.
+          Ders ve konu seç, kaç soru çözmek istediğini belirle; kendi testini kur.
+          Kontrol ettiğinde her sorunun çözümü ve doğru cevabı açılır, sonuç
+          istatistiğine işlenir.
         </p>
       </section>
 
@@ -156,28 +133,6 @@ export default function Banka() {
               </select>
             </div>
             <div className="filtre-alan">
-              <label>KAYNAK</label>
-              <select value={kaynak} onChange={(e) => setKaynak(e.target.value)}>
-                <option value="hepsi">Tüm kaynaklar</option>
-                {Object.entries(kaynaklar)
-                  .sort((a, b) => b[1] - a[1])
-                  .map(([k, n]) => (
-                    <option key={k} value={k}>
-                      {KAYNAK_ADI[k] || k} ({n})
-                    </option>
-                  ))}
-              </select>
-            </div>
-            <div className="filtre-alan">
-              <label>ZORLUK</label>
-              <select value={zorluk} onChange={(e) => setZorluk(e.target.value as Zorluk | "hepsi")}>
-                <option value="hepsi">Karışık</option>
-                <option value={1}>Kolay</option>
-                <option value={2}>Orta</option>
-                <option value={3}>Zor</option>
-              </select>
-            </div>
-            <div className="filtre-alan">
               <label>SORU SAYISI</label>
               <select value={adet} onChange={(e) => setAdet(Number(e.target.value))}>
                 {[5, 10, 15, 20].map((n) => (
@@ -197,13 +152,12 @@ export default function Banka() {
           </p>
           <div className="chips">
             {[
-              { ad: "Hız testi", d: "hepsi", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 5 },
-              { ad: "Sadece zor sorular", d: "hepsi", k: "hepsi", z: 3 as Zorluk | "hepsi", n: 10 },
-              { ad: "Sadece matematik", d: "Matematik", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 10 },
-              { ad: "Sadece Türkçe", d: "Turkce", k: "hepsi", z: "hepsi" as Zorluk | "hepsi", n: 10 },
+              { ad: "Hız testi", d: "hepsi", k: "hepsi", n: 5 },
+              { ad: "20 soruluk genel", d: "hepsi", k: "hepsi", n: 20 },
+              { ad: "Sadece matematik", d: "Matematik", k: "hepsi", n: 10 },
+              { ad: "Sadece Türkçe", d: "Turkce", k: "hepsi", n: 10 },
             ].map((h) => {
-              const aktif =
-                ders === h.d && konu === h.k && zorluk === h.z && adet === h.n;
+              const aktif = ders === h.d && konu === h.k && adet === h.n;
               return (
                 <button
                   key={h.ad}
@@ -211,7 +165,6 @@ export default function Banka() {
                   onClick={() => {
                     setDers(h.d as Ders | "hepsi");
                     setKonu(h.k);
-                    setZorluk(h.z);
                     setAdet(h.n);
                   }}
                 >

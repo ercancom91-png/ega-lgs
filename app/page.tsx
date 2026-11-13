@@ -7,6 +7,7 @@ import { gunlukSoz } from "@/lib/motivasyon";
 import { aktifRozetler } from "@/lib/rozetler";
 import { BANK, kaynakSayilari } from "@/lib/questions";
 import { CIKMIS_YILLAR } from "@/lib/exams";
+import { modalAc } from "@/lib/modal";
 
 const SLAYTLAR = [
   {
@@ -150,9 +151,13 @@ export default function AnaSayfa() {
             <Link href="/denemeler/" className="btn btn-primary btn-lg">
               Denemeye başla →
             </Link>
-            <Link href="/rastgele/" className="btn btn-ghost btn-lg">
+            <button
+              type="button"
+              className="btn btn-ghost btn-lg"
+              onClick={() => modalAc("rastgele")}
+            >
               🎲 Rastgele soru
-            </Link>
+            </button>
           </div>
         </div>
       </section>

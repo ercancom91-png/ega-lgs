@@ -9,7 +9,7 @@ import DenemeUretModal from "./DenemeUretModal";
 
 const LINKLER = [
   { href: "/dersler/", ad: "Dersler" },
-  { href: "/banka/", ad: "Soru Bankası" },
+  { href: "/banka/", ad: "Test Çöz" },
   { href: "/meb/", ad: "MEB Çalışma Kitapları" },
 ];
 

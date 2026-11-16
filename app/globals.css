@@ -308,6 +308,7 @@ section:first-of-type { padding-top: 8px; }
 input[type="text"],
 input[type="number"],
 input[type="search"],
+input[type="password"],
 select {
   font: inherit;
   padding: 12px 14px;
@@ -736,6 +737,45 @@ button.ders-card { width: 100%; text-align: left; color: inherit; }
   box-shadow: var(--shadow-hard);
 }
 .kontrol-alt .row { justify-content: center; gap: 16px; }
+
+/* ==========================================================================
+   UYGULAMA KİLİDİ (PROFİL KODU) + DENEMELERİM SATIRLARI
+   ========================================================================== */
+
+.kilit {
+  position: fixed; inset: 0; z-index: 300;
+  display: grid; place-items: center; padding: 24px;
+  background: rgba(5, 5, 8, 0.97);
+  backdrop-filter: blur(10px);
+}
+.kilit-kutu { width: min(430px, 100%); }
+.kilit-avatar { width: 46px; height: 46px; font-size: 20px; }
+
+.denemeler-liste { display: flex; flex-direction: column; gap: 12px; }
+.deneme-satir {
+  display: flex; align-items: center; gap: 18px;
+  padding: 16px 18px; border: 1px solid var(--line-2);
+  background: var(--panel-2); box-shadow: var(--shadow);
+  transition: transform .14s, box-shadow .14s, border-color .14s;
+}
+.deneme-satir:hover {
+  border-color: var(--acc); transform: translate(-3px, -3px);
+  box-shadow: 6px 6px 0 rgba(255, 212, 0, 0.18);
+}
+.ds-bas { flex: 1; min-width: 0; }
+.ds-bas b { display: block; font-family: var(--font-display); font-size: 16px; }
+.ds-bas .small { display: block; margin-top: 4px; }
+.ds-sonuc { display: flex; gap: 16px; flex-shrink: 0; }
+.ds-v { display: flex; flex-direction: column; align-items: center; min-width: 46px; font-size: 15px; font-weight: 700; }
+.ds-v i { font-style: normal; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; opacity: .55; }
+@media (max-width: 900px) {
+  .ds-sonuc { gap: 10px; }
+  .ds-v { min-width: 38px; font-size: 14px; }
+}
+@media (max-width: 640px) {
+  .deneme-satir { flex-direction: column; align-items: stretch; gap: 12px; }
+  .ds-sonuc { justify-content: space-between; }
+}
 
 
 

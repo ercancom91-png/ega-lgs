@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Nav from "@/components/Nav";
+import KilitPerdesi from "@/components/KilitPerdesi";
 
 export const metadata: Metadata = {
   title: "EGA · LGS Hazırlık Platformu",
@@ -28,6 +29,7 @@ export default function RootLayout({
           <div className="grid-lines" />
         </div>
         <Nav />
+        <KilitPerdesi />
         <main className="shell">{children}</main>
         <footer className="footer">
           <b>EGA</b> — MEB çıkmış sorular, çalışma kitapları ve resmî LGS kurallarıyla

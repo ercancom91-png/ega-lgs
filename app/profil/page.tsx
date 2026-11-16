@@ -2,9 +2,18 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { ozetHesapla, profilGuncelle, useVeri } from "@/lib/store";
+import {
+  hesapSil,
+  ozetHesapla,
+  profilGuncelle,
+  sifreBelirle,
+  sifreDegistir,
+  sifreKaldir,
+  useVeri,
+} from "@/lib/store";
 import { gunlukSoz } from "@/lib/motivasyon";
 import { ROZETLER, aktifRozetler } from "@/lib/rozetler";
+import { sureyiYaz } from "@/lib/scoring";
 
 export default function Profil() {
   const veri = useVeri();
@@ -12,6 +21,7 @@ export default function Profil() {
   const kazanilan = aktifRozetler(veri, ozet);
   const soz = gunlukSoz();
 
+  /* ---------- profil alanları ---------- */
   const [ad, setAd] = useState(veri.profil.ad);
   const [hedef, setHedef] = useState(veri.profil.hedefPuan);
   const [gunluk, setGunluk] = useState(veri.profil.hedefGunlukSoru);
@@ -29,6 +39,78 @@ export default function Profil() {
     return () => clearTimeout(t);
   }, [kaydedildi]);
 
+  /* ---------- uygulama kilidi ---------- */
+  const kilitli = !!veri.profil.kilit;
+  const [sifreMod, setSifreMod] = useState<"degistir" | "kaldir">("degistir");
+  const [kurKodu, setKurKodu] = useState("");
+  const [mevcutKod, setMevcutKod] = useState("");
+  const [yeniKod, setYeniKod] = useState("");
+  const [sifreMsg, setSifreMsg] = useState<{ tur: "ok" | "hata"; yazi: string } | null>(null);
+  const [yukleniyor, setYukleniyor] = useState(false);
+
+  const sifreBilgi = (tur: "ok" | "hata", yazi: string) => setSifreMsg({ tur, yazi });
+
+  const kodKur = async () => {
+    if (kurKodu.trim().length < 4) {
+      sifreBilgi("hata", "Kod en az 4 karakter olmalı.");
+      return;
+    }
+    setYukleniyor(true);
+    await sifreBelirle(kurKodu);
+    setYukleniyor(false);
+    setKurKodu("");
+    sifreBilgi("ok", "Kilid ayarlandı. Uygulama her yeni oturumda bu kodu soracak.");
+  };
+
+  const kodGuncelle = async () => {
+    if (!mevcutKod.trim()) {
+      sifreBilgi("hata", "Mevcut kodu gir.");
+      return;
+    }
+    if (yeniKod.trim().length < 4) {
+      sifreBilgi("hata", "Yeni kod en az 4 karakter olmalı.");
+      return;
+    }
+    setYukleniyor(true);
+    const tamam = await sifreDegistir(mevcutKod, yeniKod);
+    setYukleniyor(false);
+    if (tamam) {
+      setMevcutKod("");
+      setYeniKod("");
+      sifreBilgi("ok", "Kod güncellendi.");
+    } else {
+      sifreBilgi("hata", "Mevcut kod hatalı.");
+    }
+  };
+
+  const kodKaldir = async () => {
+    if (!mevcutKod.trim()) {
+      sifreBilgi("hata", "Kaldırmak için mevcut kodu gir.");
+      return;
+    }
+    setYukleniyor(true);
+    const tamam = await sifreKaldir(mevcutKod);
+    setYukleniyor(false);
+    if (tamam) {
+      setMevcutKod("");
+      sifreBilgi("ok", "Kilit kaldırıldı. Artık koda gerek yok.");
+    } else {
+      sifreBilgi("hata", "Mevcut kod hatalı.");
+    }
+  };
+
+  /* ---------- hesabı sil ---------- */
+  const [silOnayi, setSilOnayi] = useState(false);
+  const hesabiSil = () => {
+    if (!silOnayi) {
+      setSilOnayi(true);
+      return;
+    }
+    hesapSil();
+    window.location.reload();
+  };
+
+  /* ---------- hedefler ---------- */
   const bas = (veri.profil.ad || "Ö").trim().slice(0, 1).toUpperCase();
   const gunlukYuzde = Math.min(
     100,
@@ -42,7 +124,7 @@ export default function Profil() {
     ? Math.min(100, Math.round((veri.uzunluk / veri.enUzun) * 100))
     : 0;
   const kalan = Math.max(0, veri.profil.hedefGunlukSoru - ozet.bugunCozulen);
-  const sonDeneme = veri.denemeler[0];
+  const denemeler = veri.denemeler;
 
   const kaydet = () => {
     profilGuncelle({
@@ -58,13 +140,195 @@ export default function Profil() {
       <section style={{ padding: "46px 0 26px" }}>
         <p className="eyebrow">PROFİL</p>
         <h1 className="h-sec" style={{ margin: "10px 0 12px" }}>
-          Profil
+          Profil & Ayarlar
         </h1>
         <p className="lead">
-          {veri.profil.ad}, kim olduğunu, hedeflerini ve birikimini tek ekranda gör.
-          Adını ve hedeflerini buradan güncelle; ilerlemen her yerde buna göre yazılır.
+          Adın, hedeflerin ve kilit ayarların burada; hepsi yalnızca bu cihazda
+          saklanır. Aşağıda ilerlemeni ve çözdüğün denemeleri tekrar tekrar açabilirsin.
         </p>
       </section>
+
+      {/* --- PROFİL & AYARLAR (en üstte) --- */}
+      <div className="panel panel-pad" id="ayarlar" style={{ marginBottom: 20 }}>
+        <div className="between" style={{ marginBottom: 18 }}>
+          <div>
+            <p className="eyebrow">KİMLİK & HEDEFLER</p>
+            <p className="small muted" style={{ marginTop: 8, maxWidth: "56ch" }}>
+              Adın menüde, hedefin profil kartında görünür.
+            </p>
+          </div>
+          {kaydedildi && <span className="pill green">Kaydedildi ✓</span>}
+        </div>
+        <div className="row wrap">
+          <div style={{ flex: 1, minWidth: 200 }}>
+            <label className="small muted">Adın</label>
+            <input
+              type="text"
+              value={ad}
+              placeholder="Adın"
+              onChange={(e) => setAd(e.target.value)}
+              style={{ width: "100%", marginTop: 6 }}
+            />
+          </div>
+          <div style={{ width: 150 }}>
+            <label className="small muted">Hedef puan</label>
+            <input
+              type="number"
+              value={hedef}
+              min={100}
+              max={500}
+              onChange={(e) => setHedef(Number(e.target.value))}
+              style={{ width: "100%", marginTop: 6 }}
+            />
+          </div>
+          <div style={{ width: 170 }}>
+            <label className="small muted">Günlük soru hedefi</label>
+            <input
+              type="number"
+              value={gunluk}
+              min={1}
+              max={500}
+              onChange={(e) => setGunluk(Number(e.target.value))}
+              style={{ width: "100%", marginTop: 6 }}
+            />
+          </div>
+          <div style={{ alignSelf: "flex-end" }}>
+            <button className="btn btn-blue" onClick={kaydet}>
+              Kaydet
+            </button>
+          </div>
+        </div>
+
+        {/* --- uygulama kilidi --- */}
+        <div className="divider" style={{ margin: "26px 0" }} />
+        <div className="between" style={{ marginBottom: 14 }}>
+          <div>
+            <p className="eyebrow">UYGULAMA KİLİDİ</p>
+            <p className="small muted" style={{ marginTop: 8, maxWidth: "58ch" }}>
+              {kilitli
+                ? "Kodun açık; her yeni oturumda önce bu kod istenir. Değiştirebilir veya kaldırabilirsin."
+                : "Kod eklersen EGA her yeni oturumda ilk önce bunu sorar. Kodun bu cihazda özetlenerek saklanır."}
+            </p>
+          </div>
+          {kilitli && <span className="pill green">Korunuyor</span>}
+        </div>
+
+        {!kilitli ? (
+          <div className="row wrap">
+            <input
+              type="password"
+              placeholder="Profil kodu (en az 4 karakter)"
+              value={kurKodu}
+              onChange={(e) => setKurKodu(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && kodKur()}
+              style={{ flex: 1, minWidth: 240 }}
+            />
+            <button
+              className="btn btn-primary"
+              disabled={yukleniyor || kurKodu.trim().length < 4}
+              onClick={kodKur}
+            >
+              Kilidi kur
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="chips" style={{ marginBottom: 12 }}>
+              <button
+                className={`chip ${sifreMod === "degistir" ? "on" : ""}`}
+                onClick={() => setSifreMod("degistir")}
+              >
+                Kodu değiştir
+              </button>
+              <button
+                className={`chip ${sifreMod === "kaldir" ? "on" : ""}`}
+                onClick={() => setSifreMod("kaldir")}
+              >
+                Kilidi kaldır
+              </button>
+            </div>
+            <div className="row wrap">
+              <input
+                type="password"
+                placeholder="Mevcut kod"
+                value={mevcutKod}
+                onChange={(e) => setMevcutKod(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && (sifreMod === "degistir" ? kodGuncelle() : kodKaldir())}
+                style={{ width: 200 }}
+              />
+              {sifreMod === "degistir" && (
+                <input
+                  type="password"
+                  placeholder="Yeni kod (en az 4 karakter)"
+                  value={yeniKod}
+                  onChange={(e) => setYeniKod(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && kodGuncelle()}
+                  style={{ flex: 1, minWidth: 220 }}
+                />
+              )}
+              {sifreMod === "degistir" ? (
+                <button
+                  className="btn btn-primary"
+                  disabled={yukleniyor || !mevcutKod.trim() || yeniKod.trim().length < 4}
+                  onClick={kodGuncelle}
+                >
+                  Güncelle
+                </button>
+              ) : (
+                <button
+                  className="btn btn-red"
+                  disabled={yukleniyor || !mevcutKod.trim()}
+                  onClick={kodKaldir}
+                >
+                  Kaldır
+                </button>
+              )}
+            </div>
+          </>
+        )}
+
+        {sifreMsg && (
+          <p
+            className="small"
+            style={{
+              color: sifreMsg.tur === "ok" ? "var(--green)" : "var(--red)",
+              marginTop: 10,
+            }}
+          >
+            {sifreMsg.yazi}
+          </p>
+        )}
+
+        {/* --- tehlikeli bölge --- */}
+        <div className="divider" style={{ margin: "26px 0" }} />
+        <div className="between">
+          <div>
+            <p className="eyebrow" style={{ background: "transparent", color: "var(--red)", boxShadow: "none", padding: 0 }}>
+              TEHLİKELİ BÖLGE
+            </p>
+            <p className="small muted" style={{ marginTop: 8, maxWidth: "56ch" }}>
+              Adın, hedeflerin, soru geçmişin, denemelerin, rozetlerin ve kilit
+              ayarların bu cihazdan kalıcı olarak silinir. Geri yükleme yoktur.
+            </p>
+          </div>
+          <div className="row">
+            {silOnayi ? (
+              <>
+                <button className="btn" onClick={() => setSilOnayi(false)}>
+                  Vazgeç
+                </button>
+                <button className="btn btn-red" onClick={hesabiSil}>
+                  Eminim, hesabımı sil
+                </button>
+              </>
+            ) : (
+              <button className="btn btn-red" onClick={hesabiSil}>
+                Hesabımı sil
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
 
       {/* --- profil kartı --- */}
       <div className="profil" style={{ marginBottom: 20 }}>
@@ -201,75 +465,36 @@ export default function Profil() {
 
       <div className="divider" />
 
-      {/* --- rozetler + deneme özeti --- */}
+      {/* --- rozetler + denemelerim --- */}
       <div className="grid g-2" style={{ alignItems: "start" }}>
-        <div className="panel panel-pad">
-          <div className="between" style={{ marginBottom: 16 }}>
-            <h3 style={{ fontSize: 19 }}>Rozetlerim</h3>
-            <span className="pill">
-              {kazanilan.size} / {ROZETLER.length}
-            </span>
-          </div>
-          {kazanilan.size === 0 ? (
-            <p className="small muted">
-              Henüz rozet kazanmadın. İlk sorunu çözdüğünde “İlk Adım” rozeti senin.
-            </p>
-          ) : (
-            <div className="grid g-3" style={{ gap: 14 }}>
-              {ROZETLER.filter((r) => kazanilan.has(r.id)).map((r) => (
-                <div key={r.id} className="badge on">
-                  <div className="ico">{r.ikon}</div>
-                  <div>
-                    <div style={{ fontWeight: 600, fontSize: 14 }}>{r.ad}</div>
-                    <div className="small muted">{r.aciklama}</div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          )}
-          <Link
-            href="/istatistik/"
-            className="btn btn-sm"
-            style={{ marginTop: 16 }}
-          >
-            Tüm rozetler ve analiz →
-          </Link>
-        </div>
-
         <div className="stack">
           <div className="panel panel-pad">
-            <div className="between" style={{ marginBottom: 14 }}>
-              <h3 style={{ fontSize: 19 }}>Deneme kartım</h3>
-              <span className="pill blue">{ozet.denemeSayisi} deneme</span>
+            <div className="between" style={{ marginBottom: 16 }}>
+              <h3 style={{ fontSize: 19 }}>Rozetlerim</h3>
+              <span className="pill">
+                {kazanilan.size} / {ROZETLER.length}
+              </span>
             </div>
-            {sonDeneme ? (
-              <>
-                <div className="streak" style={{ marginBottom: 8 }}>
-                  <b>{sonDeneme.puan}</b>
-                  <span className="muted">
-                    puan · {sonDeneme.ad} ·{" "}
-                    {new Date(sonDeneme.tarih).toLocaleDateString("tr-TR")}
-                  </span>
-                </div>
-                <p className="small muted">
-                  En iyi {ozet.enIyiPuan || sonDeneme.puan} · Son denemede{" "}
-                  {sonDeneme.dogru} doğru, {sonDeneme.yanlis} yanlış,{" "}
-                  {sonDeneme.bos} boş.
-                </p>
-              </>
-            ) : (
+            {kazanilan.size === 0 ? (
               <p className="small muted">
-                Henüz deneme bitirmedin. İlk denemeni çözdüğünde puanın burada.
+                Henüz rozet kazanmadın. İlk sorunu çözdüğünde “İlk Adım” rozeti senin.
               </p>
+            ) : (
+              <div className="grid g-3" style={{ gap: 14 }}>
+                {ROZETLER.filter((r) => kazanilan.has(r.id)).map((r) => (
+                  <div key={r.id} className="badge on">
+                    <div className="ico">{r.ikon}</div>
+                    <div>
+                      <div style={{ fontWeight: 600, fontSize: 14 }}>{r.ad}</div>
+                      <div className="small muted">{r.aciklama}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             )}
-            <div className="row wrap" style={{ marginTop: 14 }}>
-              <Link href="/denemeler/" className="btn btn-primary btn-sm">
-                Denemeler →
-              </Link>
-              <Link href="/banka/" className="btn btn-sm">
-                Test Çöz
-              </Link>
-            </div>
+            <Link href="/istatistik/" className="btn btn-sm" style={{ marginTop: 16 }}>
+              Tüm rozetler ve analiz →
+            </Link>
           </div>
 
           <div className="panel panel-pad">
@@ -280,60 +505,65 @@ export default function Profil() {
             <p className="small muted">— {soz.kim}</p>
           </div>
         </div>
-      </div>
 
-      <div className="divider" />
+        {/* --- denemelerim --- */}
+        <div className="panel panel-pad">
+          <div className="between" style={{ marginBottom: 16 }}>
+            <h3 style={{ fontSize: 19 }}>Denemelerim</h3>
+            <span className="pill blue">{denemeler.length} deneme</span>
+          </div>
 
-      {/* --- profil ayarları --- */}
-      <div className="panel panel-pad" id="ayarlar">
-        <div className="between" style={{ marginBottom: 18 }}>
-          <div>
-            <h3 style={{ fontSize: 19 }}>Profil ayarları</h3>
-            <p className="small muted" style={{ margin: "6px 0 0", maxWidth: "54ch" }}>
-              İlerlemen bu tarayıcıda saklanır; adın ve hedeflerin her yerde görünür.
+          {denemeler.length === 0 ? (
+            <p className="small muted">
+              Henüz deneme bitirmedin. İlk denemeni çözdüğünde adı, doğru/yanlış/net
+              ve puanı burada listelenir; istediğin gibi tekrar açabilirsin.
             </p>
-          </div>
-          {kaydedildi && (
-            <span className="pill green">Kaydedildi ✓</span>
+          ) : (
+            <div className="denemeler-liste">
+              {denemeler.map((d) => {
+                const yol = d.baslangic ? `/sinav/?${d.baslangic}` : "/denemeler/";
+                return (
+                  <Link href={yol} className="deneme-satir" key={d.id}>
+                    <div className="ds-bas">
+                      <b>{d.ad}</b>
+                      <span className="small muted">
+                        {new Date(d.tarih).toLocaleDateString("tr-TR")} ·{" "}
+                        {d.tur === "cikmis" ? "Çıkmış" : "Üretilmiş"} ·{" "}
+                        {sureyiYaz(d.sure)} · {d.toplamSoru} soru
+                      </span>
+                    </div>
+                    <div className="ds-sonuc">
+                      <span className="ds-v" style={{ color: "var(--green)" }}>
+                        {d.dogru}
+                        <i>D</i>
+                      </span>
+                      <span className="ds-v" style={{ color: "var(--red)" }}>
+                        {d.yanlis}
+                        <i>Y</i>
+                      </span>
+                      <span className="ds-v" style={{ color: "var(--blue-soft)" }}>
+                        {d.net}
+                        <i>N</i>
+                      </span>
+                      <span className="ds-v" style={{ color: "var(--acc)" }}>
+                        {d.puan}
+                        <i>P</i>
+                      </span>
+                    </div>
+                    <span className="small ds-ac">Tekrar aç →</span>
+                  </Link>
+                );
+              })}
+            </div>
           )}
-        </div>
-        <div className="row wrap">
-          <div style={{ flex: 1, minWidth: 200 }}>
-            <label className="small muted">Adın</label>
-            <input
-              type="text"
-              value={ad}
-              placeholder="Adın"
-              onChange={(e) => setAd(e.target.value)}
-              style={{ width: "100%", marginTop: 6 }}
-            />
-          </div>
-          <div style={{ width: 150 }}>
-            <label className="small muted">Hedef puan</label>
-            <input
-              type="number"
-              value={hedef}
-              min={100}
-              max={500}
-              onChange={(e) => setHedef(Number(e.target.value))}
-              style={{ width: "100%", marginTop: 6 }}
-            />
-          </div>
-          <div style={{ width: 170 }}>
-            <label className="small muted">Günlük soru hedefi</label>
-            <input
-              type="number"
-              value={gunluk}
-              min={1}
-              max={500}
-              onChange={(e) => setGunluk(Number(e.target.value))}
-              style={{ width: "100%", marginTop: 6 }}
-            />
-          </div>
-          <div style={{ alignSelf: "flex-end" }}>
-            <button className="btn btn-blue" onClick={kaydet}>
-              Kaydet
-            </button>
+
+          <div className="row wrap" style={{ marginTop: 16 }}>
+            <Link href="/denemeler/" className="btn btn-primary btn-sm">
+              Yeni deneme başlat →
+            </Link>
+            <Link href="/banka/" className="btn btn-sm">
+              Test Çöz
+            </Link>
           </div>
         </div>
       </div>

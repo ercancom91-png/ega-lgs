@@ -14,6 +14,11 @@ export interface Profil {
   ad: string;
   hedefPuan: number;
   hedefGunlukSoru: number;
+  /** Yerel uygulama kilidi — SHA-256 (tuz + şifre) */
+  sifreHash?: string;
+  sifreTuz?: string;
+  /** true ise açılışta şifre sorulur */
+  kilit?: boolean;
 }
 
 export interface Veri {
@@ -58,7 +63,13 @@ export function veriYukle(): Veri {
   let sonuc: Veri;
   try {
     const ham = window.localStorage.getItem(ANAHTAR);
-    sonuc = ham ? { ...BOS, ...JSON.parse(ham) } : { ...BOS };
+    const hamVeri = ham ? JSON.parse(ham) : {};
+    // profil alanını birleştir ki yeni alanlar (sifre, kilit) eski kayıtlarda kaybolmasın
+    sonuc = {
+      ...BOS,
+      ...hamVeri,
+      profil: { ...BOS.profil, ...(hamVeri.profil || {}) },
+    };
   } catch {
     sonuc = { ...BOS };
   }
@@ -148,6 +159,117 @@ export function profilGuncelle(p: Partial<Profil>) {
 
 export function veriSifirla() {
   veriYaz({ ...BOS, gunluk: {}, sorular: {}, denemeler: [], rozetler: [] });
+}
+
+/* ---------- yerel uygulama kilidi (profil kodu) ---------- */
+
+const KILIT_OTURUM = "ega.lgs.kilit";
+
+function rastgeleTuz(): string {
+  const dizi = new Uint8Array(16);
+  crypto.getRandomValues(dizi);
+  return Array.from(dizi, (b) => b.toString(16).padStart(2, "0")).join("");
+}
+
+/** Güvenli bağlamda SHA-256; değilse basit özet (dosya açılışı vb.) */
+async function ozet(metin: string): Promise<string> {
+  if (typeof crypto !== "undefined" && crypto.subtle) {
+    const bayt = new TextEncoder().encode(metin);
+    const dilim = await crypto.subtle.digest("SHA-256", bayt);
+    return Array.from(new Uint8Array(dilim), (b) =>
+      b.toString(16).padStart(2, "0")
+    ).join("");
+  }
+  let h = 5381;
+  for (let i = 0; i < metin.length; i++) h = Math.imul(h ^ metin.charCodeAt(i), 33);
+  return "d" + (h >>> 0).toString(36);
+}
+
+/** Yeni kod kur: kimlik bilgisini tuzla birlikte özetle, metni yazma. */
+export async function sifreBelirle(kod: string): Promise<void> {
+  const tuz = rastgeleTuz();
+  const v = { ...veriYukle() };
+  v.profil = {
+    ...v.profil,
+    sifreTuz: tuz,
+    sifreHash: await ozet(tuz + kod.trim()),
+    kilit: true,
+  };
+  veriYaz(v);
+}
+
+/** Kodu güncelle — eski kod doğruysa yeni tuzla özetle. */
+export async function sifreDegistir(mevcut: string, yeni: string): Promise<boolean> {
+  const p = veriYukle().profil;
+  if (!p.sifreHash || !p.sifreTuz) return false;
+  if ((await ozet(p.sifreTuz + mevcut.trim())) !== p.sifreHash) return false;
+  const tuz = rastgeleTuz();
+  const v = { ...veriYukle() };
+  v.profil = {
+    ...v.profil,
+    sifreTuz: tuz,
+    sifreHash: await ozet(tuz + yeni.trim()),
+  };
+  veriYaz(v);
+  return true;
+}
+
+/** Kodu kaldır — doğrulayan eski kod gerekir. */
+export async function sifreKaldir(mevcut: string): Promise<boolean> {
+  const p = veriYukle().profil;
+  if (!p.sifreHash || !p.sifreTuz) return false;
+  if ((await ozet(p.sifreTuz + mevcut.trim())) !== p.sifreHash) return false;
+  const v = { ...veriYukle() };
+  v.profil = { ...v.profil, sifreHash: undefined, sifreTuz: undefined, kilit: false };
+  veriYaz(v);
+  sessionStorage.removeItem(KILIT_OTURUM);
+  return true;
+}
+
+/** Oturumu kilitle — sekmeye özel; sekme kapanınca kilit geri gelir. */
+export function oturumuKilitle() {
+  try {
+    sessionStorage.removeItem(KILIT_OTURUM);
+  } catch {
+    /* erişim engelli ortam */
+  }
+}
+
+/** Şu an kilit sorgulanması gerekiyorsa döner. */
+export function kilitliMi(): boolean {
+  if (typeof window === "undefined") return false;
+  const p = veriYukle().profil;
+  if (!p.kilit || !p.sifreHash || !p.sifreTuz) return false;
+  return sessionStorage.getItem(KILIT_OTURUM) !== "acik";
+}
+
+/** Doğru kod ise oturumu açılmış olarak işaretle. */
+export async function kilidiAc(kod: string): Promise<boolean> {
+  const p = veriYukle().profil;
+  if (!p.sifreHash || !p.sifreTuz) return true;
+  if ((await ozet(p.sifreTuz + kod.trim())) !== p.sifreHash) return false;
+  try {
+    sessionStorage.setItem(KILIT_OTURUM, "acik");
+  } catch {
+    /* erişim engelli ortam */
+  }
+  return true;
+}
+
+/**
+ * Hesabı sil: ad, hedefler, soru geçmişi, denemeler, rozetler ve kilit
+ * bu cihazdan kalıcı biçimde kalkar. Sunucuda veri tutulmadığı için
+ * geri yükleme yoktur.
+ */
+export function hesapSil() {
+  try {
+    window.localStorage.removeItem(ANAHTAR);
+  } catch {
+    /* erişim engelli ortam */
+  }
+  oturumuKilitle();
+  onbellek = { ...BOS, profil: { ...BOS.profil } };
+  yayinla();
 }
 
 function abone(f: () => void): () => void {

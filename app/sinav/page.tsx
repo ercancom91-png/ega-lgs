@@ -37,8 +37,11 @@ export default function SinavSayfasi() {
   const [baslangic, setBaslangic] = useState(0);
   const [sonuc, setSonuc] = useState<DenemeSonuc | null>(null);
   const [yok, setYok] = useState(false);
+  /** Sınavın açılış sorgusu — sonuç "Tekrar aç" ile aynı sınavı yeniden yüklesin */
+  const kaynakRef = useRef("");
 
   useEffect(() => {
+    kaynakRef.current = window.location.search.replace(/^\?/, "");
     const id = parametre("id");
     const seedParam = parametre("seed");
     const ozelParam = parametre("ozel");
@@ -110,6 +113,7 @@ export default function SinavSayfasi() {
         dersler,
         cevaplar: cev,
         isaretlenenler: isaretlenen,
+        baslangic: kaynakRef.current || undefined,
       };
       sorular.forEach((q) => {
         const c = cev[q.id];

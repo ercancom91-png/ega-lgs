@@ -26,6 +26,8 @@ export interface DenemeSonuc {
   dersler: DersSonuc[];
   cevaplar: Record<string, string | null>;
   isaretlenenler: string[];
+  /** Sınavın açılış sorgusu (id=... / ozel=...&seed=...) — "Tekrar aç" için */
+  baslangic?: string;
 }
 
 /** MEB kuralı: ham puan = doğru − (yanlış / 3) */

@@ -1,8 +1,16 @@
 import { useEffect, useState } from "react";
 import type { DenemeSonuc } from "./scoring";
+import {
+  aktifOturumAl,
+  KullaniciOturumu,
+  supabaseCikisYap,
+  supabaseGirisYap,
+  supabaseKayitOl,
+  supabaseVeriSenkronizeEt,
+} from "./supabase";
+import { oracleDenemeKaydet, oracleProfilSenkronizeEt } from "./oracle";
 
 const ANAHTAR = "ega.lgs.v1";
-const OLAY = "ega-lgs-veri";
 
 export interface Gunluk {
   cozulen: number;
@@ -12,6 +20,10 @@ export interface Gunluk {
 
 export interface Profil {
   ad: string;
+  soyad: string;
+  eposta: string;
+  /** Profil fotoğrafı (JPEG/WebP veri URI'si) */
+  foto?: string;
   hedefPuan: number;
   hedefGunlukSoru: number;
   /** Yerel uygulama kilidi — SHA-256 (tuz + şifre) */
@@ -36,7 +48,13 @@ export interface Veri {
 }
 
 const BOS: Veri = {
-  profil: { ad: "Öğrenci", hedefPuan: 420, hedefGunlukSoru: 30 },
+  profil: {
+    ad: "Öğrenci",
+    soyad: "",
+    eposta: "",
+    hedefPuan: 420,
+    hedefGunlukSoru: 30,
+  },
   aktifGun: null,
   uzunluk: 0,
   enUzun: 0,
@@ -64,7 +82,6 @@ export function veriYukle(): Veri {
   try {
     const ham = window.localStorage.getItem(ANAHTAR);
     const hamVeri = ham ? JSON.parse(ham) : {};
-    // profil alanını birleştir ki yeni alanlar (sifre, kilit) eski kayıtlarda kaybolmasın
     sonuc = {
       ...BOS,
       ...hamVeri,
@@ -77,13 +94,24 @@ export function veriYukle(): Veri {
   return sonuc;
 }
 
-function veriYaz(v: Veri) {
+function bulutSenkronize(v: Veri) {
+  if (typeof window === "undefined") return;
+  const oturum = aktifOturumAl();
+  const uid = oturum?.id || v.profil.eposta || "yerel-ogrenci";
+  void supabaseVeriSenkronizeEt(v);
+  void oracleProfilSenkronizeEt(uid, v);
+}
+
+function veriYaz(v: Veri, bulut = true) {
   onbellek = v;
   if (typeof window !== "undefined") {
     try {
       window.localStorage.setItem(ANAHTAR, JSON.stringify(v));
     } catch {
       /* kota dolu olabilir */
+    }
+    if (bulut) {
+      bulutSenkronize(v);
     }
   }
   yayinla();
@@ -129,7 +157,6 @@ export function denemeKaydet(sonuc: DenemeSonuc) {
   const v = { ...veriYukle() };
   v.denemeler = [sonuc, ...v.denemeler].slice(0, 60);
   sonuc.dersler.forEach((d) => {
-    // ders bazlı ilerleme de günlük akışa işlensin
     const g = bugun();
     const gun = v.gunluk[g] || { cozulen: 0, dogru: 0, yanlis: 0 };
     v.gunluk = {
@@ -141,7 +168,10 @@ export function denemeKaydet(sonuc: DenemeSonuc) {
       },
     };
   });
-  veriYaz(seriGuncelle(v));
+  const yeni = seriGuncelle(v);
+  veriYaz(yeni);
+  const oturum = aktifOturumAl();
+  void oracleDenemeKaydet(oturum?.id || yeni.profil.eposta || "yerel-ogrenci", sonuc);
 }
 
 export function rozetEkle(id: string) {
@@ -161,6 +191,107 @@ export function veriSifirla() {
   veriYaz({ ...BOS, gunluk: {}, sorular: {}, denemeler: [], rozetler: [] });
 }
 
+/* ---------- Supabase & Oracle Hesap İşlemleri ---------- */
+
+export async function kullaniciKayitOl(bilgi: {
+  ad: string;
+  soyad: string;
+  eposta: string;
+  parola: string;
+  foto?: string;
+  hedefPuan?: number;
+  hedefGunlukSoru?: number;
+}): Promise<{ ok: boolean; mesaj: string; oturum?: KullaniciOturumu }> {
+  const yanit = await supabaseKayitOl(bilgi);
+  if (!yanit.ok) return yanit;
+
+  // Parolayı aynı zamanda profil kilidi olarak da özetle
+  const tuz = rastgeleTuz();
+  const hash = await ozet(tuz + bilgi.parola.trim());
+  const v = { ...veriYukle() };
+  v.profil = {
+    ...v.profil,
+    ad: bilgi.ad.trim() || "Öğrenci",
+    soyad: bilgi.soyad.trim(),
+    eposta: bilgi.eposta.trim().toLowerCase(),
+    foto: bilgi.foto ?? v.profil.foto,
+    hedefPuan: bilgi.hedefPuan || v.profil.hedefPuan || 420,
+    hedefGunlukSoru: bilgi.hedefGunlukSoru || v.profil.hedefGunlukSoru || 30,
+    sifreTuz: tuz,
+    sifreHash: hash,
+  };
+  veriYaz(v, true);
+  return yanit;
+}
+
+export async function kullaniciGirisYap(
+  eposta: string,
+  parola: string
+): Promise<{ ok: boolean; mesaj: string; oturum?: KullaniciOturumu }> {
+  const yanit = await supabaseGirisYap(eposta, parola);
+  if (!yanit.ok) return yanit;
+
+  const v = { ...veriYukle() };
+  const kv = yanit.kayitliVeri;
+  const birlesik: Veri = {
+    ...v,
+    ...(kv || {}),
+    profil: {
+      ...v.profil,
+      ...(kv?.profil || {}),
+      ad: kv?.profil?.ad || yanit.oturum?.ad || v.profil.ad,
+      soyad: kv?.profil?.soyad ?? yanit.oturum?.soyad ?? v.profil.soyad,
+      eposta: kv?.profil?.eposta || yanit.oturum?.eposta || eposta.trim().toLowerCase(),
+      foto: kv?.profil?.foto ?? yanit.oturum?.foto ?? v.profil.foto,
+    },
+  };
+  try {
+    sessionStorage.setItem(KILIT_OTURUM, "acik");
+  } catch {
+    /* ignore */
+  }
+  veriYaz(birlesik, true);
+  return yanit;
+}
+
+export async function kullaniciCikisYap(): Promise<void> {
+  await supabaseCikisYap();
+  yayinla();
+}
+
+/**
+ * Yüklenen fotoğraf dosyasını 256x256 boyutunda sıkıştırılmış JPEG veri URI'sine çevirir.
+ */
+export function fotoDosyasiniIsle(dosya: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error("Dosya okunamadı."));
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error("Görsel yüklenemedi."));
+      img.onload = () => {
+        const BOYUT = 256;
+        const canvas = document.createElement("canvas");
+        canvas.width = BOYUT;
+        canvas.height = BOYUT;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+          resolve(String(reader.result));
+          return;
+        }
+        // Merkezden kare kırpma (cover)
+        const minKenar = Math.min(img.width, img.height);
+        const sx = (img.width - minKenar) / 2;
+        const sy = (img.height - minKenar) / 2;
+        ctx.drawImage(img, sx, sy, minKenar, minKenar, 0, 0, BOYUT, BOYUT);
+        resolve(canvas.toDataURL("image/jpeg", 0.84));
+      };
+      img.src = String(reader.result);
+    };
+    reader.readAsDataURL(dosya);
+  });
+}
+
 /* ---------- yerel uygulama kilidi (profil kodu) ---------- */
 
 const KILIT_OTURUM = "ega.lgs.kilit";
@@ -171,7 +302,6 @@ function rastgeleTuz(): string {
   return Array.from(dizi, (b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-/** Güvenli bağlamda SHA-256; değilse basit özet (dosya açılışı vb.) */
 async function ozet(metin: string): Promise<string> {
   if (typeof crypto !== "undefined" && crypto.subtle) {
     const bayt = new TextEncoder().encode(metin);
@@ -181,11 +311,11 @@ async function ozet(metin: string): Promise<string> {
     ).join("");
   }
   let h = 5381;
-  for (let i = 0; i < metin.length; i++) h = Math.imul(h ^ metin.charCodeAt(i), 33);
+  for (let i = 0; i < metin.length; i++)
+    h = Math.imul(h ^ metin.charCodeAt(i), 33);
   return "d" + (h >>> 0).toString(36);
 }
 
-/** Yeni kod kur: kimlik bilgisini tuzla birlikte özetle, metni yazma. */
 export async function sifreBelirle(kod: string): Promise<void> {
   const tuz = rastgeleTuz();
   const v = { ...veriYukle() };
@@ -195,11 +325,18 @@ export async function sifreBelirle(kod: string): Promise<void> {
     sifreHash: await ozet(tuz + kod.trim()),
     kilit: true,
   };
+  try {
+    sessionStorage.setItem(KILIT_OTURUM, "acik");
+  } catch {
+    /* ignore */
+  }
   veriYaz(v);
 }
 
-/** Kodu güncelle — eski kod doğruysa yeni tuzla özetle. */
-export async function sifreDegistir(mevcut: string, yeni: string): Promise<boolean> {
+export async function sifreDegistir(
+  mevcut: string,
+  yeni: string
+): Promise<boolean> {
   const p = veriYukle().profil;
   if (!p.sifreHash || !p.sifreTuz) return false;
   if ((await ozet(p.sifreTuz + mevcut.trim())) !== p.sifreHash) return false;
@@ -214,19 +351,22 @@ export async function sifreDegistir(mevcut: string, yeni: string): Promise<boole
   return true;
 }
 
-/** Kodu kaldır — doğrulayan eski kod gerekir. */
 export async function sifreKaldir(mevcut: string): Promise<boolean> {
   const p = veriYukle().profil;
   if (!p.sifreHash || !p.sifreTuz) return false;
   if ((await ozet(p.sifreTuz + mevcut.trim())) !== p.sifreHash) return false;
   const v = { ...veriYukle() };
-  v.profil = { ...v.profil, sifreHash: undefined, sifreTuz: undefined, kilit: false };
+  v.profil = {
+    ...v.profil,
+    sifreHash: undefined,
+    sifreTuz: undefined,
+    kilit: false,
+  };
   veriYaz(v);
   sessionStorage.removeItem(KILIT_OTURUM);
   return true;
 }
 
-/** Oturumu kilitle — sekmeye özel; sekme kapanınca kilit geri gelir. */
 export function oturumuKilitle() {
   try {
     sessionStorage.removeItem(KILIT_OTURUM);
@@ -235,7 +375,6 @@ export function oturumuKilitle() {
   }
 }
 
-/** Şu an kilit sorgulanması gerekiyorsa döner. */
 export function kilitliMi(): boolean {
   if (typeof window === "undefined") return false;
   const p = veriYukle().profil;
@@ -243,7 +382,6 @@ export function kilitliMi(): boolean {
   return sessionStorage.getItem(KILIT_OTURUM) !== "acik";
 }
 
-/** Doğru kod ise oturumu açılmış olarak işaretle. */
 export async function kilidiAc(kod: string): Promise<boolean> {
   const p = veriYukle().profil;
   if (!p.sifreHash || !p.sifreTuz) return true;
@@ -256,17 +394,13 @@ export async function kilidiAc(kod: string): Promise<boolean> {
   return true;
 }
 
-/**
- * Hesabı sil: ad, hedefler, soru geçmişi, denemeler, rozetler ve kilit
- * bu cihazdan kalıcı biçimde kalkar. Sunucuda veri tutulmadığı için
- * geri yükleme yoktur.
- */
 export function hesapSil() {
   try {
     window.localStorage.removeItem(ANAHTAR);
   } catch {
     /* erişim engelli ortam */
   }
+  void supabaseCikisYap();
   oturumuKilitle();
   onbellek = { ...BOS, profil: { ...BOS.profil } };
   yayinla();

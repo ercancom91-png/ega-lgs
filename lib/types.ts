@@ -22,6 +22,8 @@ export interface Soru {
   zorluk: Zorluk;
   metin: string;
   sekil?: string;
+  gorselUrl?: string;
+  secenekGorselUrl?: string;
   tablo?: string[][];
   secenekler: Secenek[];
   dogru: Harf;

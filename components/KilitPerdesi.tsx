@@ -4,8 +4,7 @@ import { useEffect, useState } from "react";
 import { kilidiAc, kilitliMi, veriYukle } from "@/lib/store";
 
 /**
- * Profil koduna (PIN) sahipse her oturumun başında sorulur.
- * Yalnızca istemci tarafında çalışır; doğru kod oturuma özel hafızada tutulur.
+ * Profil koduna (parola kilidine) sahipse her oturumun başında sorulur.
  */
 export default function KilitPerdesi() {
   const [durum, setDurum] = useState<"bekle" | "kilitli" | "acik">("bekle");
@@ -33,27 +32,34 @@ export default function KilitPerdesi() {
     }
   };
 
-  const ad = veriYukle().profil.ad || "Öğrenci";
-  const bas = ad.trim().slice(0, 1).toUpperCase();
+  const p = veriYukle().profil;
+  const tamAd = [p.ad || "Öğrenci", p.soyad].filter(Boolean).join(" ");
+  const bas = (p.ad || "Ö").trim().slice(0, 1).toUpperCase();
 
   return (
     <div className="kilit">
       <div className="panel panel-pad kilit-kutu">
         <div className="between">
-          <p className="eyebrow">EGA · GİRİŞ</p>
-          <span className="avatar kilit-avatar">{bas}</span>
+          <p className="eyebrow">EGA · GÜVENLİ GİRİŞ</p>
+          <span className="avatar kilit-avatar" style={{ overflow: "hidden" }}>
+            {p.foto ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={p.foto} alt={tamAd} className="avatar-img" />
+            ) : (
+              bas
+            )}
+          </span>
         </div>
-        <h2 style={{ margin: "14px 0 6px", fontSize: 22 }}>{ad}</h2>
+        <h2 style={{ margin: "14px 0 6px", fontSize: 22 }}>{tamAd}</h2>
         <p className="small muted" style={{ marginBottom: 16 }}>
-          Devam etmek için profil kodunu gir. Kodun yalnızca bu cihazda saklanır,
-          hiçbir sunucuya gönderilmez.
+          Devam etmek için profil parolanı gir.
         </p>
 
         <input
           type="password"
           value={kod}
           autoFocus
-          placeholder="Profil kodu"
+          placeholder="Parolan"
           onChange={(e) => {
             setKod(e.target.value);
             setHata(false);
@@ -72,7 +78,7 @@ export default function KilitPerdesi() {
 
         {hata && (
           <p className="small" style={{ color: "var(--red)", marginTop: 8 }}>
-            Kod hatalı, tekrar dene.
+            Parola hatalı, tekrar dene.
           </p>
         )}
 
@@ -80,14 +86,13 @@ export default function KilitPerdesi() {
           className="btn btn-primary"
           disabled={yukleniyor || !kod.trim()}
           onClick={ac}
-          style={{ marginTop: 14, width: "100%" }}
+          style={{ marginTop: 14, width: "100%", justifyContent: "center" }}
         >
-          {yukleniyor ? "Doğrulanıyor…" : "Kilidi aç"}
+          {yukleniyor ? "Doğrulanıyor…" : "Kilidi Aç"}
         </button>
 
         <p className="small muted" style={{ marginTop: 14 }}>
-          Kodunu unuttuysan Profil → Ayarlar’dan kaldırabilirsin; tüm verilerin de
-          bu cihazda saklanır.
+          Parolanı Profil → Ayarlar bölümünden değiştirebilir veya kaldırabilirsin.
         </p>
       </div>
     </div>

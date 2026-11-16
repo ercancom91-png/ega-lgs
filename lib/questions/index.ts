@@ -25,6 +25,8 @@ function donustur(h: HavuzSoru): Soru {
     konu: h.konu,
     zorluk: (h.zorluk || 1) as Zorluk,
     metin: h.metin,
+    gorselUrl: h.gorselUrl,
+    secenekGorselUrl: h.secenekGorselUrl,
     secenekler: ["A", "B", "C", "D"].map((x) => ({
       id: x as Harf,
       text: h.secenekler[x] || "",

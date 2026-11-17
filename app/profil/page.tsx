@@ -521,7 +521,7 @@ export default function Profil() {
           <div className="hedef-secici">
             <div className="between" style={{ marginBottom: 8 }}>
               <span className="hedef-etiket">Günün Motivasyon Sözü</span>
-              <span className="pill">{soz.kim}</span>
+              <span className="hedef-deger-rozet">{soz.kim}</span>
             </div>
             <p className="small" style={{ lineHeight: 1.6, color: "var(--text)" }}>
               “{soz.metin}”
@@ -817,25 +817,26 @@ export default function Profil() {
 
         {/* --- tehlikeli bölge --- */}
         <div className="divider" style={{ margin: "26px 0" }} />
-        <div className="between wrap" style={{ gap: 14 }}>
-          <div>
-            <p
-              className="eyebrow"
-              style={{
-                background: "transparent",
-                color: "var(--red)",
-                boxShadow: "none",
-                padding: 0,
-              }}
-            >
-              TEHLİKELİ BÖLGE
-            </p>
-            <p className="small muted" style={{ marginTop: 8, maxWidth: "56ch" }}>
-              Adın, hedeflerin, soru geçmişin, denemelerin, rozetlerin ve parola
-              ayarların bu cihazdan kalıcı olarak silinir. Geri yükleme yoktur.
-            </p>
-          </div>
-          <div className="row wrap">
+        <div>
+          <p
+            className="eyebrow"
+            style={{
+              background: "transparent",
+              color: "var(--red)",
+              borderColor: "transparent",
+              boxShadow: "none",
+              padding: 0,
+              height: "auto",
+              minHeight: 0,
+            }}
+          >
+            TEHLİKELİ BÖLGE
+          </p>
+          <p className="small muted" style={{ marginTop: 8, maxWidth: "56ch", lineHeight: 1.7 }}>
+            Adın, hedeflerin, soru geçmişin, denemelerin, rozetlerin ve parola
+            ayarların bu cihazdan kalıcı olarak silinir. Geri yükleme yoktur.
+          </p>
+          <div className="row wrap" style={{ marginTop: 20 }}>
             {silOnayi ? (
               <>
                 <button className="btn" onClick={() => setSilOnayi(false)}>

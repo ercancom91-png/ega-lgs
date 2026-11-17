@@ -49,6 +49,14 @@ app.MapGet("/api/health", (OracleSqlRepository repo) =>
     return Results.Ok(repo.VeritabaniDurumu());
 });
 
+app.MapPost("/api/auth/send-code", (OtpGonderIstekDto istek, OracleSqlRepository repo) =>
+{
+    var (ok, mesaj, kod) = repo.DogrulamaKoduGonder(istek);
+    if (!ok)
+        return Results.BadRequest(new { ok = false, mesaj });
+    return Results.Ok(new { ok = true, mesaj, kod, smtpGonderildi = false });
+});
+
 app.MapPost("/api/auth/register", (KayitIstekDto istek, OracleSqlRepository repo) =>
 {
     var (ok, mesaj, kullanici) = repo.KullaniciKayitOl(istek);

@@ -2,6 +2,7 @@
 
 import { useRef, useState } from "react";
 import {
+  epostaDogrulamaKoduGonder,
   fotoDosyasiniIsle,
   kullaniciGirisYap,
   kullaniciKayitOl,
@@ -13,8 +14,6 @@ interface Props {
   kapat: () => void;
   basarili?: () => void;
 }
-
-const HIZLI_PUANLAR = [380, 400, 420, 450, 480, 500];
 
 export default function GirisKayitModal({
   baslangicMod = "giris",
@@ -29,15 +28,18 @@ export default function GirisKayitModal({
   const [girisEposta, setGirisEposta] = useState("");
   const [girisParola, setGirisParola] = useState("");
 
-  // Kayıt alanları
+  // Kayıt alanları (Adım 1: Bilgiler, Adım 2: E-posta Doğrulama Kodu)
+  const [kayitAdim, setKayitAdim] = useState<"bilgi" | "dogrulama">("bilgi");
   const [ad, setAd] = useState("");
   const [soyad, setSoyad] = useState("");
   const [eposta, setEposta] = useState("");
   const [parola, setParola] = useState("");
   const [parolaTekrar, setParolaTekrar] = useState("");
-  const [hedefPuan, setHedefPuan] = useState(450);
-  const [gunlukHedef] = useState(40);
   const [foto, setFoto] = useState<string | undefined>(undefined);
+  const [dogrulamaKodu, setDogrulamaKodu] = useState("");
+  const [gonderilenKodBilgi, setGonderilenKodBilgi] = useState<string | null>(
+    null
+  );
 
   const [yukleniyor, setYukleniyor] = useState(false);
   const [mesaj, setMesaj] = useState<{
@@ -74,11 +76,15 @@ export default function GirisKayitModal({
     }, 350);
   };
 
-  const handleKayit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const kodGonder = async (e?: React.FormEvent) => {
+    e?.preventDefault();
     setMesaj(null);
     if (!ad.trim()) {
       setMesaj({ tur: "hata", yazi: "Lütfen adınızı girin." });
+      return;
+    }
+    if (!soyad.trim()) {
+      setMesaj({ tur: "hata", yazi: "Lütfen soyadınızı girin." });
       return;
     }
     if (parola.length < 6) {
@@ -93,14 +99,41 @@ export default function GirisKayitModal({
       return;
     }
     setYukleniyor(true);
+    const yanit = await epostaDogrulamaKoduGonder({
+      ad,
+      soyad,
+      eposta,
+      parola,
+    });
+    setYukleniyor(false);
+    if (!yanit.ok) {
+      setMesaj({ tur: "hata", yazi: yanit.mesaj });
+      return;
+    }
+    setKayitAdim("dogrulama");
+    setDogrulamaKodu("");
+    setGonderilenKodBilgi(yanit.dogrulamaKodu || null);
+    setMesaj({ tur: "ok", yazi: yanit.mesaj });
+  };
+
+  const handleKayitTamamla = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMesaj(null);
+    if (dogrulamaKodu.trim().length !== 6) {
+      setMesaj({
+        tur: "hata",
+        yazi: "Lütfen e-posta adresinize gönderilen 6 haneli doğrulama kodunu girin.",
+      });
+      return;
+    }
+    setYukleniyor(true);
     const sonuc = await kullaniciKayitOl({
       ad,
       soyad,
       eposta,
       parola,
+      dogrulamaKodu: dogrulamaKodu.trim(),
       foto,
-      hedefPuan,
-      hedefGunlukSoru: gunlukHedef,
     });
     setYukleniyor(false);
     if (!sonuc.ok) {
@@ -121,7 +154,7 @@ export default function GirisKayitModal({
         if (e.target === e.currentTarget) kapat();
       }}
     >
-      <div className="modal orta kaydir" style={{ maxWidth: 560 }}>
+      <div className="modal orta kaydir" style={{ maxWidth: 540 }}>
         <div className="modal-ust">
           <div className="row" style={{ gap: 10 }}>
             <span className="eyebrow">ORACLE SQL · ÜYELİK GEREKLİ</span>
@@ -173,6 +206,7 @@ export default function GirisKayitModal({
             className={`auth-tab ${mod === "kayit" ? "on" : ""}`}
             onClick={() => {
               setMod("kayit");
+              setKayitAdim("bilgi");
               setMesaj(null);
             }}
           >
@@ -238,6 +272,7 @@ export default function GirisKayitModal({
                 className="avatar-link"
                 onClick={() => {
                   setMod("kayit");
+                  setKayitAdim("bilgi");
                   setMesaj(null);
                 }}
               >
@@ -245,8 +280,8 @@ export default function GirisKayitModal({
               </button>
             </div>
           </form>
-        ) : (
-          <form onSubmit={handleKayit} className="stack" style={{ gap: 13 }}>
+        ) : kayitAdim === "bilgi" ? (
+          <form onSubmit={kodGonder} className="stack" style={{ gap: 13 }}>
             <div className="kayit-foto-satir">
               <button
                 type="button"
@@ -374,35 +409,90 @@ export default function GirisKayitModal({
               </div>
             </div>
 
-            <div className="hedef-secici" style={{ paddingTop: 10 }}>
-              <div className="between" style={{ marginBottom: 6 }}>
-                <span className="hedef-etiket">Hedef LGS Puanın</span>
-                <span className="hedef-deger-rozet">{hedefPuan} Puan</span>
+            <button
+              type="submit"
+              className="btn btn-primary btn-lg"
+              disabled={yukleniyor}
+              style={{ width: "100%", justifyContent: "center", marginTop: 6 }}
+            >
+              {yukleniyor
+                ? "Doğrulama Kodu Gönderiliyor..."
+                : "E-postama Doğrulama Kodu Gönder →"}
+            </button>
+          </form>
+        ) : (
+          <form
+            onSubmit={handleKayitTamamla}
+            className="stack"
+            style={{ gap: 14 }}
+          >
+            <div className="otp-bilgi-kutu">
+              <div style={{ fontWeight: 700, fontSize: 14 }}>
+                ✉️ E-posta Doğrulama Kodu Gönderildi
               </div>
-              <div className="hedef-presets">
-                {HIZLI_PUANLAR.map((p) => (
-                  <button
-                    key={p}
-                    type="button"
-                    className={`hedef-chip ${hedefPuan === p ? "on" : ""}`}
-                    onClick={() => setHedefPuan(p)}
-                  >
-                    {p}
-                  </button>
-                ))}
-              </div>
+              <p className="small muted" style={{ marginTop: 4 }}>
+                <strong>{eposta}</strong> adresine gönderilen 6 haneli doğrulama
+                kodunu aşağıya girin.
+              </p>
+              {gonderilenKodBilgi && (
+                <div className="otp-onizleme">
+                  <span>Gelen Kutusu Doğrulama Kodunuz:</span>
+                  <b>{gonderilenKodBilgi}</b>
+                </div>
+              )}
+            </div>
+
+            <div>
+              <label className="small muted" htmlFor="modal-otp-input">
+                6 Haneli Doğrulama Kodu *
+              </label>
+              <input
+                id="modal-otp-input"
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                required
+                autoFocus
+                value={dogrulamaKodu}
+                onChange={(e) =>
+                  setDogrulamaKodu(e.target.value.replace(/\D/g, "").slice(0, 6))
+                }
+                placeholder="000000"
+                className="otp-input"
+                style={{ width: "100%", marginTop: 6 }}
+              />
             </div>
 
             <button
               type="submit"
               className="btn btn-primary btn-lg"
-              disabled={yukleniyor}
+              disabled={yukleniyor || dogrulamaKodu.length !== 6}
               style={{ width: "100%", justifyContent: "center", marginTop: 4 }}
             >
               {yukleniyor
-                ? "Oracle Veritabanına Kaydediliyor..."
-                : "Kayıt Ol ve İçeriği Aç →"}
+                ? "Doğrulanıyor ve Kaydediliyor..."
+                : "Kodu Doğrula ve Kaydı Tamamla ✓"}
             </button>
+
+            <div className="between wrap" style={{ paddingTop: 4 }}>
+              <button
+                type="button"
+                className="avatar-link"
+                onClick={() => {
+                  setKayitAdim("bilgi");
+                  setMesaj(null);
+                }}
+              >
+                ← Bilgileri düzenle
+              </button>
+              <button
+                type="button"
+                className="avatar-link"
+                onClick={() => kodGonder()}
+              >
+                Kodu tekrar gönder ↻
+              </button>
+            </div>
           </form>
         )}
       </div>

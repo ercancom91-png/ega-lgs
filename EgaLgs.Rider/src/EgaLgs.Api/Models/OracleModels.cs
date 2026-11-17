@@ -92,6 +92,16 @@ public sealed class EgaKullaniciRozetRow
 }
 
 /// <summary>
+/// EGA_DOGRULAMA_KODLARI (E-posta OTP) tablosu varlık modeli.
+/// </summary>
+public sealed class EgaDogrulamaKoduRow
+{
+    public string Eposta { get; set; } = string.Empty;
+    public string Kod { get; set; } = string.Empty;
+    public DateTimeOffset GecerlilikTarihi { get; set; } = DateTimeOffset.UtcNow.AddMinutes(10);
+}
+
+/// <summary>
 /// Tüm Oracle tablolarının yerel diskteki ilişkisel yansıması (Oracle sunucusu kapalıyken de 100% çalışır).
 /// </summary>
 public sealed class OracleRelationalStore
@@ -102,9 +112,16 @@ public sealed class OracleRelationalStore
     public List<EgaGunlukAktiviteRow> EgaGunlukAktivite { get; set; } = [];
     public List<EgaDenemeSonucRow> EgaDenemeSonuclari { get; set; } = [];
     public List<EgaKullaniciRozetRow> EgaKullaniciRozetleri { get; set; } = [];
+    public List<EgaDogrulamaKoduRow> EgaDogrulamaKodlari { get; set; } = [];
 }
 
 // --- İSTEK / YANIT DTO MODELLERİ ---
+
+public sealed class OtpGonderIstekDto
+{
+    [JsonPropertyName("eposta")] public string Eposta { get; set; } = string.Empty;
+    [JsonPropertyName("ad")] public string Ad { get; set; } = "Öğrenci";
+}
 
 public sealed class KayitIstekDto
 {
@@ -112,6 +129,7 @@ public sealed class KayitIstekDto
     [JsonPropertyName("soyad")] public string Soyad { get; set; } = string.Empty;
     [JsonPropertyName("eposta")] public string Eposta { get; set; } = string.Empty;
     [JsonPropertyName("parola")] public string Parola { get; set; } = string.Empty;
+    [JsonPropertyName("dogrulamaKodu")] public string? DogrulamaKodu { get; set; }
     [JsonPropertyName("foto")] public string? Foto { get; set; }
     [JsonPropertyName("hedefPuan")] public int? HedefPuan { get; set; }
     [JsonPropertyName("hedefGunlukSoru")] public int? HedefGunlukSoru { get; set; }

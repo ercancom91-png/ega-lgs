@@ -66,6 +66,49 @@ export function oracleSenkronKaydet(
 }
 
 /**
+ * Rider C# Oracle SQL API üzerinden e-posta doğrulama kodu (OTP) gönderir.
+ */
+export async function oracleApiDogrulamaKoduGonder(
+  eposta: string,
+  ad: string
+): Promise<{
+  ulasildi: boolean;
+  ok: boolean;
+  mesaj?: string;
+  kod?: string;
+  smtpGonderildi?: boolean;
+}> {
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 2500);
+    const res = await fetch(`${ORACLE_API_BASE}/auth/send-code`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ eposta, ad }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    const data = await res.json();
+    if (!res.ok) {
+      return {
+        ulasildi: true,
+        ok: false,
+        mesaj: data?.mesaj || "Doğrulama kodu gönderilemedi.",
+      };
+    }
+    return {
+      ulasildi: true,
+      ok: true,
+      mesaj: data?.mesaj,
+      kod: data?.kod,
+      smtpGonderildi: data?.smtpGonderildi,
+    };
+  } catch {
+    return { ulasildi: false, ok: false };
+  }
+}
+
+/**
  * Rider C# Oracle SQL API üzerinden yeni kullanıcı kaydı (EGA_KULLANICILAR tablosu).
  */
 export async function oracleApiKayitOl(bilgi: {
@@ -73,6 +116,7 @@ export async function oracleApiKayitOl(bilgi: {
   soyad: string;
   eposta: string;
   parola: string;
+  dogrulamaKodu?: string;
   foto?: string;
   hedefPuan?: number;
   hedefGunlukSoru?: number;
@@ -175,8 +219,7 @@ export async function oracleApiGirisYap(
 }
 
 /**
- * Oracle SQL Veritabanı (EGA_KULLANICILAR, EGA_COZULEN_SORULAR, EGA_GUNLUK_AKTIVITE, EGA_KULLANICI_ROZETLERI)
- * ile öğrenci profilini ve soru istatistiklerini senkronize eder.
+ * Oracle SQL Veritabanı ile öğrenci profilini ve soru istatistiklerini senkronize eder.
  */
 export async function oracleProfilSenkronizeEt(
   kullaniciId: string,

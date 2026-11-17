@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import {
+  epostaDogrulamaKoduGonder,
   fotoDosyasiniIsle,
   kullaniciCikisYap,
   kullaniciGirisYap,
@@ -12,8 +13,6 @@ import {
 } from "@/lib/store";
 import { aktifOturumAl, supabaseYapilandirildiMi } from "@/lib/supabase";
 import { oracleDurumAl } from "@/lib/oracle";
-
-const HIZLI_PUANLAR = [380, 400, 420, 450, 480, 500];
 
 export default function GirisSayfasi() {
   const router = useRouter();
@@ -27,18 +26,24 @@ export default function GirisSayfasi() {
   const [girisEposta, setGirisEposta] = useState("");
   const [girisParola, setGirisParola] = useState("");
 
-  // Kayıt alanları
+  // Kayıt alanları (Adım 1: Bilgiler, Adım 2: E-posta Doğrulama Kodu)
+  const [kayitAdim, setKayitAdim] = useState<"bilgi" | "dogrulama">("bilgi");
   const [ad, setAd] = useState("");
   const [soyad, setSoyad] = useState("");
   const [eposta, setEposta] = useState("");
   const [parola, setParola] = useState("");
   const [parolaTekrar, setParolaTekrar] = useState("");
-  const [hedefPuan, setHedefPuan] = useState(450);
-  const [gunlukHedef, setGunlukHedef] = useState(40);
   const [foto, setFoto] = useState<string | undefined>(undefined);
+  const [dogrulamaKodu, setDogrulamaKodu] = useState("");
+  const [gonderilenKodBilgi, setGonderilenKodBilgi] = useState<string | null>(
+    null
+  );
 
   const [yukleniyor, setYukleniyor] = useState(false);
-  const [mesaj, setMesaj] = useState<{ tur: "ok" | "hata"; yazi: string } | null>(null);
+  const [mesaj, setMesaj] = useState<{
+    tur: "ok" | "hata";
+    yazi: string;
+  } | null>(null);
 
   useEffect(() => {
     setOturum(aktifOturumAl());
@@ -72,14 +77,18 @@ export default function GirisSayfasi() {
     }
     setOturum(sonuc.oturum || null);
     setMesaj({ tur: "ok", yazi: sonuc.mesaj });
-    setTimeout(() => router.push("/profil/"), 600);
+    setTimeout(() => router.push("/profil/"), 500);
   };
 
-  const handleKayit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const kodGonder = async (e?: React.FormEvent) => {
+    e?.preventDefault();
     setMesaj(null);
     if (!ad.trim()) {
       setMesaj({ tur: "hata", yazi: "Lütfen adınızı girin." });
+      return;
+    }
+    if (!soyad.trim()) {
+      setMesaj({ tur: "hata", yazi: "Lütfen soyadınızı girin." });
       return;
     }
     if (parola.length < 6) {
@@ -87,7 +96,38 @@ export default function GirisSayfasi() {
       return;
     }
     if (parola !== parolaTekrar) {
-      setMesaj({ tur: "hata", yazi: "Girdiğiniz parolalar birbiriyle eşleşmiyor." });
+      setMesaj({
+        tur: "hata",
+        yazi: "Girdiğiniz parolalar birbiriyle eşleşmiyor.",
+      });
+      return;
+    }
+    setYukleniyor(true);
+    const yanit = await epostaDogrulamaKoduGonder({
+      ad,
+      soyad,
+      eposta,
+      parola,
+    });
+    setYukleniyor(false);
+    if (!yanit.ok) {
+      setMesaj({ tur: "hata", yazi: yanit.mesaj });
+      return;
+    }
+    setKayitAdim("dogrulama");
+    setDogrulamaKodu("");
+    setGonderilenKodBilgi(yanit.dogrulamaKodu || null);
+    setMesaj({ tur: "ok", yazi: yanit.mesaj });
+  };
+
+  const handleKayitTamamla = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setMesaj(null);
+    if (dogrulamaKodu.trim().length !== 6) {
+      setMesaj({
+        tur: "hata",
+        yazi: "Lütfen e-posta adresinize gönderilen 6 haneli doğrulama kodunu girin.",
+      });
       return;
     }
     setYukleniyor(true);
@@ -96,9 +136,8 @@ export default function GirisSayfasi() {
       soyad,
       eposta,
       parola,
+      dogrulamaKodu: dogrulamaKodu.trim(),
       foto,
-      hedefPuan,
-      hedefGunlukSoru: gunlukHedef,
     });
     setYukleniyor(false);
     if (!sonuc.ok) {
@@ -107,7 +146,7 @@ export default function GirisSayfasi() {
     }
     setOturum(sonuc.oturum || null);
     setMesaj({ tur: "ok", yazi: sonuc.mesaj });
-    setTimeout(() => router.push("/profil/"), 700);
+    setTimeout(() => router.push("/profil/"), 600);
   };
 
   const oracle = oracleDurumAl();
@@ -124,27 +163,28 @@ export default function GirisSayfasi() {
           </h1>
           <p className="lead" style={{ fontSize: 15.5 }}>
             Hesabını oluşturarak çözdüğün çıkmış LGS denemelerini, konu testlerini,
-            hedef puanını ve rozetlerini <strong>Supabase Auth</strong> ve{" "}
-            <strong>Oracle Veritabanı</strong> altyapısıyla senkronize et.
+            hedef puanını ve rozetlerini <strong>Oracle SQL Veritabanı</strong>{" "}
+            altyapısıyla senkronize et.
           </p>
 
           <div className="auth-ozellik-liste">
             <div className="auth-ozellik">
-              <span className="auth-ico">🔐</span>
+              <span className="auth-ico">✉️</span>
               <div>
-                <b>Supabase Kimlik Doğrulama</b>
+                <b>E-posta Doğrulama Kodu ile Güvenli Üyelik</b>
                 <p className="small muted">
-                  E-posta ve SHA-256 korumalı parolanla güvenli kayıt ve oturum yönetimi.
+                  Kayıt sırasında e-posta adresine gönderilen 6 haneli doğrulama
+                  kodu ile hesabın güvence altına alınır.
                 </p>
               </div>
             </div>
             <div className="auth-ozellik">
               <span className="auth-ico">🗄️</span>
               <div>
-                <b>Oracle Autonomous Database</b>
+                <b>Oracle SQL Veritabanı</b>
                 <p className="small muted">
-                  Deneme sonuçların, netlerin ve soru istatistiklerin kurumsal veritabanı
-                  şemasıyla saklanır.
+                  Deneme sonuçların, netlerin ve soru istatistiklerin kurumsal
+                  veritabanı şemasıyla saklanır.
                 </p>
               </div>
             </div>
@@ -153,8 +193,8 @@ export default function GirisSayfasi() {
               <div>
                 <b>Kişiselleştirilmiş Hedef & Profil Fotoğrafı</b>
                 <p className="small muted">
-                  Profil fotoğrafını yükle, hedef LGS puanını belirle ve gelişimini anlık
-                  izle.
+                  Profil fotoğrafını yükle, Profil sekmesinden hedef LGS puanını
+                  belirle ve gelişimini anlık izle.
                 </p>
               </div>
             </div>
@@ -162,10 +202,10 @@ export default function GirisSayfasi() {
 
           <div className="auth-db-durum">
             <span className="pill green">
-              ● Supabase Auth {supaBagli ? "Bulut" : "Aktif"}
+              ● Doğrulama Servisi {supaBagli ? "Bulut" : "Aktif"}
             </span>
             <span className="pill blue">
-              ● Oracle DB ({oracle.toplamKayit} senkron işlem)
+              ● Oracle SQL ({oracle.toplamKayit} senkron işlem)
             </span>
           </div>
         </div>
@@ -175,7 +215,10 @@ export default function GirisSayfasi() {
           {oturum && (
             <div className="auth-aktif-oturum">
               <div className="row" style={{ gap: 12 }}>
-                <div className="nav-avatar" style={{ width: 42, height: 42, fontSize: 17 }}>
+                <div
+                  className="nav-avatar"
+                  style={{ width: 42, height: 42, fontSize: 17 }}
+                >
                   {veri.profil.foto ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -189,7 +232,10 @@ export default function GirisSayfasi() {
                 </div>
                 <div style={{ flex: 1 }}>
                   <div style={{ fontWeight: 700 }}>
-                    {[veri.profil.ad || oturum.ad, veri.profil.soyad || oturum.soyad]
+                    {[
+                      veri.profil.ad || oturum.ad,
+                      veri.profil.soyad || oturum.soyad,
+                    ]
                       .filter(Boolean)
                       .join(" ")}
                   </div>
@@ -230,6 +276,7 @@ export default function GirisSayfasi() {
               className={`auth-tab ${mod === "kayit" ? "on" : ""}`}
               onClick={() => {
                 setMod("kayit");
+                setKayitAdim("bilgi");
                 setMesaj(null);
               }}
             >
@@ -282,7 +329,11 @@ export default function GirisSayfasi() {
                 type="submit"
                 className="btn btn-primary btn-lg"
                 disabled={yukleniyor}
-                style={{ width: "100%", justifyContent: "center", marginTop: 6 }}
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  marginTop: 6,
+                }}
               >
                 {yukleniyor ? "Giriş yapılıyor..." : "Hesabıma Giriş Yap →"}
               </button>
@@ -294,6 +345,7 @@ export default function GirisSayfasi() {
                   className="avatar-link"
                   onClick={() => {
                     setMod("kayit");
+                    setKayitAdim("bilgi");
                     setMesaj(null);
                   }}
                 >
@@ -301,8 +353,8 @@ export default function GirisSayfasi() {
                 </button>
               </div>
             </form>
-          ) : (
-            <form onSubmit={handleKayit} className="stack" style={{ gap: 15 }}>
+          ) : kayitAdim === "bilgi" ? (
+            <form onSubmit={kodGonder} className="stack" style={{ gap: 15 }}>
               {/* Profil Fotoğrafı Seçimi */}
               <div className="kayit-foto-satir">
                 <button
@@ -415,7 +467,10 @@ export default function GirisSayfasi() {
                   />
                 </div>
                 <div>
-                  <label className="small muted" htmlFor="kayit-parola-tekrar">
+                  <label
+                    className="small muted"
+                    htmlFor="kayit-parola-tekrar"
+                  >
                     Parola Tekrar *
                   </label>
                   <input
@@ -431,48 +486,100 @@ export default function GirisSayfasi() {
                 </div>
               </div>
 
-              {/* Hedef Puan Seçimi */}
-              <div className="hedef-secici" style={{ marginTop: 4 }}>
-                <div className="between" style={{ marginBottom: 8 }}>
-                  <span className="hedef-etiket">Hedef LGS Puanın</span>
-                  <span className="hedef-deger-rozet">{hedefPuan} Puan</span>
+              <button
+                type="submit"
+                className="btn btn-primary btn-lg"
+                disabled={yukleniyor}
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  marginTop: 4,
+                }}
+              >
+                {yukleniyor
+                  ? "Doğrulama Kodu Gönderiliyor..."
+                  : "E-postama Doğrulama Kodu Gönder →"}
+              </button>
+            </form>
+          ) : (
+            <form
+              onSubmit={handleKayitTamamla}
+              className="stack"
+              style={{ gap: 15 }}
+            >
+              <div className="otp-bilgi-kutu">
+                <div style={{ fontWeight: 700, fontSize: 14 }}>
+                  ✉️ E-posta Doğrulama Kodu Gönderildi
                 </div>
-                <div className="hedef-presets">
-                  {HIZLI_PUANLAR.map((p) => (
-                    <button
-                      key={p}
-                      type="button"
-                      className={`hedef-chip ${hedefPuan === p ? "on" : ""}`}
-                      onClick={() => setHedefPuan(p)}
-                    >
-                      {p}
-                    </button>
-                  ))}
-                </div>
-                <div className="hedef-slider-satir" style={{ marginTop: 8 }}>
-                  <input
-                    type="range"
-                    min={200}
-                    max={500}
-                    step={5}
-                    value={hedefPuan}
-                    onChange={(e) => setHedefPuan(Number(e.target.value))}
-                    className="hedef-range"
-                  />
-                  <span className="small muted" style={{ whiteSpace: "nowrap" }}>
-                    Günlük {gunlukHedef} soru
-                  </span>
-                </div>
+                <p className="small muted" style={{ marginTop: 4 }}>
+                  <strong>{eposta}</strong> adresine gönderilen 6 haneli
+                  doğrulama kodunu aşağıya girin.
+                </p>
+                {gonderilenKodBilgi && (
+                  <div className="otp-onizleme">
+                    <span>Gelen Kutusu Doğrulama Kodunuz:</span>
+                    <b>{gonderilenKodBilgi}</b>
+                  </div>
+                )}
+              </div>
+
+              <div>
+                <label className="small muted" htmlFor="kayit-otp-input">
+                  6 Haneli Doğrulama Kodu *
+                </label>
+                <input
+                  id="kayit-otp-input"
+                  type="text"
+                  inputMode="numeric"
+                  maxLength={6}
+                  required
+                  autoFocus
+                  value={dogrulamaKodu}
+                  onChange={(e) =>
+                    setDogrulamaKodu(
+                      e.target.value.replace(/\D/g, "").slice(0, 6)
+                    )
+                  }
+                  placeholder="000000"
+                  className="otp-input"
+                  style={{ width: "100%", marginTop: 6 }}
+                />
               </div>
 
               <button
                 type="submit"
                 className="btn btn-primary btn-lg"
-                disabled={yukleniyor}
-                style={{ width: "100%", justifyContent: "center", marginTop: 4 }}
+                disabled={yukleniyor || dogrulamaKodu.length !== 6}
+                style={{
+                  width: "100%",
+                  justifyContent: "center",
+                  marginTop: 4,
+                }}
               >
-                {yukleniyor ? "Kaydediliyor..." : "Supabase ile Kayıt Ol →"}
+                {yukleniyor
+                  ? "Doğrulanıyor ve Kaydediliyor..."
+                  : "Kodu Doğrula ve Kaydı Tamamla ✓"}
               </button>
+
+              <div className="between wrap" style={{ paddingTop: 4 }}>
+                <button
+                  type="button"
+                  className="avatar-link"
+                  onClick={() => {
+                    setKayitAdim("bilgi");
+                    setMesaj(null);
+                  }}
+                >
+                  ← Bilgileri düzenle
+                </button>
+                <button
+                  type="button"
+                  className="avatar-link"
+                  onClick={() => kodGonder()}
+                >
+                  Kodu tekrar gönder ↻
+                </button>
+              </div>
             </form>
           )}
         </div>

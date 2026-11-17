@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { DenemeSonuc } from "./scoring";
 import {
   aktifOturumAl,
+  epostaDogrulamaKoduGonder,
   KullaniciOturumu,
   supabaseCikisYap,
   supabaseGirisYap,
@@ -9,6 +10,8 @@ import {
   supabaseVeriSenkronizeEt,
 } from "./supabase";
 import { oracleDenemeKaydet, oracleProfilSenkronizeEt } from "./oracle";
+
+export { epostaDogrulamaKoduGonder };
 
 const ANAHTAR = "ega.lgs.v1";
 
@@ -198,6 +201,7 @@ export async function kullaniciKayitOl(bilgi: {
   soyad: string;
   eposta: string;
   parola: string;
+  dogrulamaKodu?: string;
   foto?: string;
   hedefPuan?: number;
   hedefGunlukSoru?: number;

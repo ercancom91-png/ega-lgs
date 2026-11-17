@@ -144,8 +144,8 @@ export default function AnaSayfa() {
         <div className="between" style={{ marginTop: 26 }}>
           <p className="lead">
             Çıkmış LGS denemeleri, MEB çalışma kitapları, konu konu soru bankası ve
-            kılavuzdaki aynen sürelerle çalışan sınav simülasyonu. Kayıt olmadan, tek
-            ekranda.
+            kılavuzdaki aynen sürelerle çalışan sınav simülasyonu. Ücretsiz hesabınla
+            tüm cihazlarda, tek ekranda.
           </p>
           <div className="row">
             <Link href="/denemeler/" className="btn btn-primary btn-lg">

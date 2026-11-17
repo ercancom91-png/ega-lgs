@@ -193,12 +193,14 @@ p { margin: 0; }
 .page-head .sub { color: var(--muted); font-size: 14.5px; margin-top: 8px; max-width: 64ch; line-height: 1.7; }
 
 .eyebrow {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11.5px; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--acc-ink); background: var(--acc); padding: 6px 12px;
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 30px; min-height: 30px; padding: 0 12px;
+  font-size: 11.5px; font-weight: 800; line-height: 1; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--acc-ink); background: var(--acc);
+  border: 1px solid var(--acc);
   box-shadow: 4px 4px 0 rgba(255, 212, 0, 0.22);
 }
-.eyebrow.blue { color: var(--text); background: var(--blue-deep); box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.06); }
+.eyebrow.blue { color: var(--text); background: var(--blue-deep); border-color: var(--blue-deep); box-shadow: 4px 4px 0 rgba(255, 255, 255, 0.06); }
 .eyebrow.ink { color: var(--muted); background: var(--panel-3); box-shadow: none; border: 1px solid var(--line-2); }
 
 .btn {
@@ -254,7 +256,7 @@ p { margin: 0; }
 .card-sub { font-size: 13.5px; color: var(--muted); margin-top: 6px; line-height: 1.7; }
 .row { display: flex; align-items: center; gap: 10px; }
 .wrap { flex-wrap: wrap; }
-.between { justify-content: space-between; }
+.between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .stack { display: flex; flex-direction: column; gap: 14px; }
 .spacer { flex: 1; }
 .center { display: grid; place-items: center; text-align: center; }
@@ -356,16 +358,17 @@ input:focus, select:focus { outline: none; border-color: var(--acc); box-shadow:
 
 /* --- pill / chips --- */
 .pill {
-  display: inline-flex; align-items: center; gap: 7px;
-  padding: 6px 12px;
-  font-size: 12px; font-weight: 700; letter-spacing: .02em;
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  height: 30px; min-height: 30px; padding: 0 12px;
+  font-size: 11.5px; font-weight: 800; line-height: 1; letter-spacing: .02em;
   background: var(--panel-3); color: var(--text);
   border: 1px solid var(--line-2);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.22);
 }
 .pill.red { background: var(--red-wash); color: var(--red-soft); border-color: rgba(255, 77, 79, .3); }
 .pill.blue { background: var(--blue-wash); color: var(--blue-soft); border-color: var(--line); }
 .pill.green { background: var(--green-wash); color: var(--green); border-color: rgba(61, 220, 151, .28); }
-.pill.acc { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); }
+.pill.acc { background: var(--acc); color: var(--acc-ink); border-color: var(--acc); box-shadow: 4px 4px 0 rgba(255, 212, 0, 0.22); }
 .chips { display: flex; flex-wrap: wrap; gap: 9px; }
 .ders-dot { width: 9px; height: 9px; display: inline-block; }
 
@@ -927,14 +930,23 @@ button.ders-card { width: 100%; text-align: left; color: inherit; }
 .hedef-kart {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 .hedef-kart.aktif-kart {
   border-color: var(--acc);
+}
+.hedef-kart > p.small.muted {
+  min-height: 40px;
+  margin-bottom: 14px;
 }
 .hedef-secici {
   margin-top: auto;
   padding-top: 16px;
   border-top: 1px solid var(--line);
+  min-height: 128px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .hedef-etiket {
   font-size: 11.5px;
@@ -944,12 +956,18 @@ button.ders-card { width: 100%; text-align: left; color: inherit; }
   color: var(--muted);
 }
 .hedef-deger-rozet {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  min-height: 28px;
   font-family: var(--font-display);
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 800;
+  line-height: 1;
   background: var(--acc);
   color: var(--acc-ink);
-  padding: 3px 9px;
+  padding: 0 10px;
 }
 .hedef-presets {
   display: flex;
@@ -1305,6 +1323,85 @@ button.ders-card { width: 100%; text-align: left; color: inherit; }
   background: var(--acc);
   color: var(--acc-ink);
   border-color: var(--acc);
+}
+
+/* --- Profil İkonu Açılır Menüsü (Profil & Çıkış Yap) --- */
+.nav-profil-kapsam {
+  position: relative;
+  display: inline-flex;
+}
+.nav-profil-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 175px;
+  background: var(--panel);
+  border: 1px solid var(--acc);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.78);
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+}
+.nav-profil-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  transition: background 0.14s, color 0.14s;
+}
+.nav-profil-item:last-child {
+  border-bottom: 0;
+}
+.nav-profil-item:hover {
+  background: var(--panel-3);
+  color: var(--acc);
+}
+.nav-profil-item.cikis {
+  color: var(--red-soft);
+}
+.nav-profil-item.cikis:hover {
+  background: var(--red-wash);
+  color: var(--red);
+}
+
+/* --- E-posta Doğrulama Kodu (OTP) Kutusu --- */
+.otp-bilgi-kutu {
+  padding: 14px 16px;
+  background: var(--panel-2);
+  border: 1px solid var(--line-2);
+  border-left: 4px solid var(--acc);
+}
+.otp-onizleme {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--panel-3);
+  border: 1px dashed var(--acc);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 12.5px;
+}
+.otp-onizleme b {
+  font-family: var(--font-display);
+  font-size: 18px;
+  letter-spacing: 0.22em;
+  color: var(--acc);
+}
+.otp-input {
+  text-align: center;
+  font-family: var(--font-display) !important;
+  font-size: 24px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.34em;
 }
 
 

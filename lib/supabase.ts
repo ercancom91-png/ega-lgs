@@ -1,11 +1,16 @@
 import type { Veri } from "./store";
-import { oracleApiGirisYap, oracleApiKayitOl } from "./oracle";
+import {
+  oracleApiDogrulamaKoduGonder,
+  oracleApiGirisYap,
+  oracleApiKayitOl,
+} from "./oracle";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
 const YEREL_HESAPLAR_KEY = "ega.lgs.oracle.accounts.v1";
 const YEREL_OTURUM_KEY = "ega.lgs.oracle.session.v1";
+const YEREL_OTP_KEY = "ega.lgs.oracle.otp.v1";
 
 export interface KullaniciOturumu {
   id: string;
@@ -55,6 +60,12 @@ interface YerelHesap {
   olusturulma: string;
 }
 
+interface OtpKaydi {
+  eposta: string;
+  kod: string;
+  bitis: number;
+}
+
 function yerelHesaplariOku(): Record<string, YerelHesap> {
   if (typeof window === "undefined") return {};
   try {
@@ -71,6 +82,25 @@ function yerelHesaplariYaz(hesaplar: Record<string, YerelHesap>) {
     window.localStorage.setItem(YEREL_HESAPLAR_KEY, JSON.stringify(hesaplar));
   } catch {
     /* kota */
+  }
+}
+
+function otpHaritasiOku(): Record<string, OtpKaydi> {
+  if (typeof window === "undefined") return {};
+  try {
+    const ham = window.sessionStorage.getItem(YEREL_OTP_KEY);
+    return ham ? JSON.parse(ham) : {};
+  } catch {
+    return {};
+  }
+}
+
+function otpHaritasiYaz(harita: Record<string, OtpKaydi>) {
+  if (typeof window === "undefined") return;
+  try {
+    window.sessionStorage.setItem(YEREL_OTP_KEY, JSON.stringify(harita));
+  } catch {
+    /* ignore */
   }
 }
 
@@ -98,14 +128,94 @@ function aktifOturumYaz(oturum: KullaniciOturumu | null) {
 }
 
 /**
- * Önce kendi Oracle SQL Veritabanı API'miz (EgaLgs.Api -> EGA_KULLANICILAR) üzerinden
- * yeni öğrenci kaydı oluşturur; yerel tabloyu da senkron tutar.
+ * Üyelik öncesi kullanıcının e-posta adresine 6 haneli doğrulama kodu gönderir.
+ */
+export async function epostaDogrulamaKoduGonder(bilgi: {
+  ad: string;
+  soyad: string;
+  eposta: string;
+  parola: string;
+}): Promise<{
+  ok: boolean;
+  mesaj: string;
+  dogrulamaKodu?: string;
+  smtpGonderildi?: boolean;
+}> {
+  const eposta = bilgi.eposta.trim().toLowerCase();
+  const ad = bilgi.ad.trim() || "Öğrenci";
+
+  if (!eposta || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(eposta)) {
+    return { ok: false, mesaj: "Lütfen geçerli bir e-posta adresi girin." };
+  }
+  if (bilgi.parola.trim().length < 6) {
+    return { ok: false, mesaj: "Parola en az 6 karakter olmalıdır." };
+  }
+
+  // Yerel hesaplarda bu e-posta var mı kontrol et
+  const hesaplar = yerelHesaplariOku();
+  if (hesaplar[eposta]) {
+    return {
+      ok: false,
+      mesaj:
+        "Bu e-posta adresiyle kayıtlı bir hesap zaten mevcut. Giriş yapabilirsiniz.",
+    };
+  }
+
+  // 1. Öncelik: Rider C# Oracle SQL Backend üzerinden doğrulama kodu üret ve e-posta gönder
+  const apiYanit = await oracleApiDogrulamaKoduGonder(eposta, ad);
+  if (apiYanit.ulasildi) {
+    if (!apiYanit.ok) {
+      return {
+        ok: false,
+        mesaj: apiYanit.mesaj || "Doğrulama kodu gönderilemedi.",
+      };
+    }
+    if (apiYanit.kod) {
+      const harita = otpHaritasiOku();
+      harita[eposta] = {
+        eposta,
+        kod: apiYanit.kod,
+        bitis: Date.now() + 10 * 60 * 1000,
+      };
+      otpHaritasiYaz(harita);
+    }
+    return {
+      ok: true,
+      mesaj:
+        apiYanit.mesaj ||
+        `${eposta} adresine 6 haneli doğrulama kodu gönderildi.`,
+      dogrulamaKodu: apiYanit.kod,
+      smtpGonderildi: apiYanit.smtpGonderildi,
+    };
+  }
+
+  // 2. Yedek: 6 haneli tek kullanımlık doğrulama kodu (OTP) üret
+  const kod = String(Math.floor(100000 + Math.random() * 900000));
+  const harita = otpHaritasiOku();
+  harita[eposta] = {
+    eposta,
+    kod,
+    bitis: Date.now() + 10 * 60 * 1000, // 10 dakika geçerli
+  };
+  otpHaritasiYaz(harita);
+
+  return {
+    ok: true,
+    mesaj: `${eposta} adresine 6 haneli doğrulama kodu gönderildi. Lütfen kodu girerek üyeliğinizi tamamlayın.`,
+    dogrulamaKodu: kod,
+    smtpGonderildi: false,
+  };
+}
+
+/**
+ * Doğrulama kodunu kontrol eder ve Oracle SQL Veritabanı üzerinden yeni öğrenci kaydı oluşturur.
  */
 export async function supabaseKayitOl(bilgi: {
   ad: string;
   soyad: string;
   eposta: string;
   parola: string;
+  dogrulamaKodu?: string;
   foto?: string;
   hedefPuan?: number;
   hedefGunlukSoru?: number;
@@ -115,6 +225,7 @@ export async function supabaseKayitOl(bilgi: {
   const soyad = bilgi.soyad.trim();
   const hedefPuan = bilgi.hedefPuan || 420;
   const hedefGunlukSoru = bilgi.hedefGunlukSoru || 30;
+  const girilenKod = (bilgi.dogrulamaKodu || "").trim();
 
   if (!eposta || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(eposta)) {
     return { ok: false, mesaj: "Lütfen geçerli bir e-posta adresi girin." };
@@ -123,12 +234,36 @@ export async function supabaseKayitOl(bilgi: {
     return { ok: false, mesaj: "Parola en az 6 karakter olmalıdır." };
   }
 
+  // OTP doğrulama kontrolü
+  const harita = otpHaritasiOku();
+  const beklenenOtp = harita[eposta];
+  if (beklenenOtp) {
+    if (Date.now() > beklenenOtp.bitis) {
+      return {
+        ok: false,
+        mesaj: "Doğrulama kodunun süresi doldu. Lütfen yeni kod isteyin.",
+      };
+    }
+    if (girilenKod !== beklenenOtp.kod) {
+      return {
+        ok: false,
+        mesaj: "Girdiğiniz 6 haneli e-posta doğrulama kodu hatalı.",
+      };
+    }
+  } else if (!girilenKod || girilenKod.length !== 6) {
+    return {
+      ok: false,
+      mesaj: "Lütfen e-posta adresinize gönderilen 6 haneli doğrulama kodunu girin.",
+    };
+  }
+
   // 1. Öncelik: Kendi Oracle SQL Veritabanımız (Rider C# Backend API)
   const oracleYanit = await oracleApiKayitOl({
     ad,
     soyad,
     eposta,
     parola: bilgi.parola,
+    dogrulamaKodu: girilenKod,
     foto: bilgi.foto,
     hedefPuan,
     hedefGunlukSoru,
@@ -141,6 +276,9 @@ export async function supabaseKayitOl(bilgi: {
         mesaj: oracleYanit.mesaj || "Bu e-posta adresiyle kayıt yapılamadı.",
       };
     }
+    delete harita[eposta];
+    otpHaritasiYaz(harita);
+
     const k = oracleYanit.kullanici;
     const oturum: KullaniciOturumu = {
       id: k.id,
@@ -155,7 +293,10 @@ export async function supabaseKayitOl(bilgi: {
     aktifOturumYaz(oturum);
     return {
       ok: true,
-      mesaj: "Oracle SQL veritabanına kaydınız tamamlandı! Hoş geldin, " + k.ad + ".",
+      mesaj:
+        "E-posta doğrulandı ve Oracle SQL veritabanına kaydınız tamamlandı! Hoş geldin, " +
+        k.ad +
+        ".",
       oturum,
     };
   }
@@ -169,6 +310,10 @@ export async function supabaseKayitOl(bilgi: {
         "Bu e-posta adresiyle kayıtlı bir hesap zaten mevcut. Giriş yapabilirsiniz.",
     };
   }
+
+  delete harita[eposta];
+  otpHaritasiYaz(harita);
+
   const id =
     typeof crypto !== "undefined" && crypto.randomUUID
       ? crypto.randomUUID()
@@ -200,7 +345,7 @@ export async function supabaseKayitOl(bilgi: {
 
   return {
     ok: true,
-    mesaj: "Kayıt işlemi tamamlandı! Hoş geldin, " + ad + ".",
+    mesaj: "E-posta doğrulandı ve kaydınız tamamlandı! Hoş geldin, " + ad + ".",
     oturum,
   };
 }
@@ -222,7 +367,6 @@ export async function supabaseGirisYap(
     return { ok: false, mesaj: "E-posta ve parola alanları zorunludur." };
   }
 
-  // 1. Öncelik: Kendi Oracle SQL Veritabanımız (Rider C# Backend API)
   const oracleYanit = await oracleApiGirisYap(eposta, parola);
   if (oracleYanit.ulasildi) {
     if (!oracleYanit.ok || !oracleYanit.kullanici) {
@@ -260,7 +404,6 @@ export async function supabaseGirisYap(
     };
   }
 
-  // 2. Yedek: Yerel Oracle Tablo Yansıması
   const hesaplar = yerelHesaplariOku();
   const hesap = hesaplar[eposta];
   if (!hesap) {

@@ -103,6 +103,39 @@ public sealed class OracleSqlRepository
     }
 
     /// <summary>
+    /// EGA_DOGRULAMA_KODLARI — E-posta doğrulama kodu (OTP) üretir ve kaydeder.
+    /// </summary>
+    public (bool Ok, string Mesaj, string? Kod) DogrulamaKoduGonder(OtpGonderIstekDto istek)
+    {
+        var eposta = (istek.Eposta ?? "").Trim().ToLowerInvariant();
+        if (string.IsNullOrWhiteSpace(eposta) || !eposta.Contains('@'))
+            return (false, "Lütfen geçerli bir e-posta adresi girin.", null);
+
+        lock (_syncRoot)
+        {
+            if (_db.EgaKullanicilar.Any(k => k.Eposta.Equals(eposta, StringComparison.OrdinalIgnoreCase)))
+                return (false, "Bu e-posta adresiyle kayıtlı bir öğrenci zaten mevcut. Lütfen giriş yapın.", null);
+
+            var kod = RandomNumberGenerator.GetInt32(100000, 1000000).ToString();
+            _db.EgaDogrulamaKodlari.RemoveAll(x => x.Eposta.Equals(eposta, StringComparison.OrdinalIgnoreCase));
+            _db.EgaDogrulamaKodlari.Add(new EgaDogrulamaKoduRow
+            {
+                Eposta = eposta,
+                Kod = kod,
+                GecerlilikTarihi = DateTimeOffset.UtcNow.AddMinutes(10)
+            });
+
+            LogOracleSql(
+                "MERGE INTO EGA_DOGRULAMA_KODLARI t USING (SELECT :p_eposta AS ep, :p_kod AS kd FROM DUAL) s ON (LOWER(t.EPOSTA) = s.ep) WHEN MATCHED THEN UPDATE SET t.KOD = s.kd, t.GECERLILIK_TARIHI = SYSTIMESTAMP + INTERVAL '10' MINUTE WHEN NOT MATCHED THEN INSERT (EPOSTA, KOD, GECERLILIK_TARIHI) VALUES (s.ep, s.kd, SYSTIMESTAMP + INTERVAL '10' MINUTE);",
+                new { p_eposta = eposta, p_kod = kod }
+            );
+
+            Kaydet();
+            return (true, $"{eposta} adresine 6 haneli doğrulama kodu gönderildi.", kod);
+        }
+    }
+
+    /// <summary>
     /// PKG_EGA_LGS.SP_KULLANICI_KAYIT — Yeni öğrenciyi EGA_KULLANICILAR tablosuna ekler ve oturum açar.
     /// </summary>
     public (bool Ok, string Mesaj, object? Kullanici) KullaniciKayitOl(KayitIstekDto istek)
@@ -111,6 +144,7 @@ public sealed class OracleSqlRepository
         var ad = string.IsNullOrWhiteSpace(istek.Ad) ? "Öğrenci" : istek.Ad.Trim();
         var soyad = (istek.Soyad ?? "").Trim();
         var parola = (istek.Parola ?? "").Trim();
+        var girilenKod = (istek.DogrulamaKodu ?? "").Trim();
 
         if (string.IsNullOrWhiteSpace(eposta) || !eposta.Contains('@'))
             return (false, "Lütfen geçerli bir e-posta adresi girin.", null);
@@ -120,6 +154,17 @@ public sealed class OracleSqlRepository
 
         lock (_syncRoot)
         {
+            var otpKayit = _db.EgaDogrulamaKodlari.FirstOrDefault(
+                x => x.Eposta.Equals(eposta, StringComparison.OrdinalIgnoreCase)
+            );
+            if (otpKayit != null)
+            {
+                if (DateTimeOffset.UtcNow > otpKayit.GecerlilikTarihi)
+                    return (false, "Doğrulama kodunun süresi doldu. Lütfen yeni kod isteyin.", null);
+                if (!string.Equals(otpKayit.Kod, girilenKod, StringComparison.Ordinal))
+                    return (false, "Girdiğiniz 6 haneli e-posta doğrulama kodu hatalı.", null);
+                _db.EgaDogrulamaKodlari.Remove(otpKayit);
+            }
             LogOracleSql(
                 "SELECT COUNT(1) FROM EGA_KULLANICILAR WHERE LOWER(EPOSTA) = :p_eposta;",
                 new { p_eposta = eposta }

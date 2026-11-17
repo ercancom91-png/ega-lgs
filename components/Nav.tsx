@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { MODAL_OLAY, ModalDetay, ModalTur } from "@/lib/modal";
 import { kullaniciCikisYap, useVeri } from "@/lib/store";
@@ -18,9 +19,12 @@ const LINKLER = [
 
 export default function Nav() {
   const yol = usePathname();
+  const router = useRouter();
   const [modal, setModal] = useState<ModalTur | null>(null);
   const [modalUyari, setModalUyari] = useState<string | undefined>(undefined);
   const [mobilAcik, setMobilAcik] = useState(false);
+  const [profilMenuAcik, setProfilMenuAcik] = useState(false);
+  const profilMenuRef = useRef<HTMLDivElement | null>(null);
   const [kuruldu, setKuruldu] = useState(false);
   const veri = useVeri();
   const [oturumVar, setOturumVar] = useState(false);
@@ -29,6 +33,20 @@ export default function Nav() {
     setKuruldu(true);
     setOturumVar(Boolean(aktifOturumAl()));
   }, [yol, veri.profil.eposta, veri.profil.ad]);
+
+  // Profil açılır menüsünü dışarı tıklanınca kapat
+  useEffect(() => {
+    const disTiklama = (e: MouseEvent) => {
+      if (
+        profilMenuRef.current &&
+        !profilMenuRef.current.contains(e.target as Node)
+      ) {
+        setProfilMenuAcik(false);
+      }
+    };
+    document.addEventListener("mousedown", disTiklama);
+    return () => document.removeEventListener("mousedown", disTiklama);
+  }, []);
 
   const basHarf = kuruldu
     ? (veri.profil.ad || "Ö").trim().slice(0, 1).toUpperCase()
@@ -72,7 +90,6 @@ export default function Nav() {
       const hedef = e.target as HTMLElement | null;
       if (!hedef) return;
 
-      // Giriş modalının kendi içindeki tıklamalara veya /giris sayfasındaki formlara izin ver
       if (
         hedef.closest(".giris-modal-kapsam") ||
         hedef.closest(".auth-form-kutu") ||
@@ -81,23 +98,16 @@ export default function Nav() {
         return;
       }
 
-      // Anasayfa vitrin slider okları yalnızca görsel slayt geçişi yapar -> izin ver
       if (hedef.closest(".slider-arrow") || hedef.closest(".slider-nav")) {
         return;
       }
 
-      // Üst menüdeki sekme gezintisine sadece sayfaları "görüntülemek" için izin ver,
-      // ancak içerik / sınav / ders detay / aksiyon tıklamalarını yakala ve modal aç
       const aksiyonElemani = hedef.closest(
         "button, a, input, select, .ders-card, .konu-card, .tile, .opt, .hedef-chip, .hedef-step"
       ) as HTMLElement | null;
 
       if (!aksiyonElemani) return;
 
-      // Sadece ana görünüm sekmelerine (Ana sayfa, Dersler, Test Çöz, MEB, Denemeler, Profil)
-      // geçiş yapılmasına izin ver ki kullanıcı sayfaları görüntüleyebilsin;
-      // ancak /sinav/ veya /dersler/[ders] gibi içerik detaylarına ve sayfa içi tüm butonlara basıldığında
-      // sayfa değişmeden modal aç!
       if (aksiyonElemani.tagName === "A") {
         const href = aksiyonElemani.getAttribute("href") || "";
         const saltGoruntulemeRotalari = new Set([
@@ -110,20 +120,17 @@ export default function Nav() {
           "/meb/",
           "/denemeler",
           "/denemeler/",
-          "/profil",
-          "/profil/",
           "/istatistik",
           "/istatistik/",
         ]);
         const ustMenuLinkiMi = Boolean(
-          aksiyonElemani.closest(".brand, .nav-links, .nav-profil, .nav-mobil-links")
+          aksiyonElemani.closest(".brand, .nav-links, .nav-mobil-links")
         );
         if (ustMenuLinkiMi && saltGoruntulemeRotalari.has(href)) {
           return;
         }
       }
 
-      // Bunun dışındaki TÜM içerik, test, soru, deneme ve ayar etkileşimlerini durdur -> sayfa değişmeden modal aç!
       e.preventDefault();
       e.stopPropagation();
       setModalUyari(
@@ -138,6 +145,7 @@ export default function Nav() {
 
   useEffect(() => {
     setMobilAcik(false);
+    setProfilMenuAcik(false);
   }, [yol]);
 
   const modalOnAc = (tur: ModalTur, uyari?: string) => {
@@ -150,6 +158,15 @@ export default function Nav() {
     }
     setModalUyari(uyari);
     setModal(tur);
+  };
+
+  const handleCikis = async () => {
+    await kullaniciCikisYap();
+    setOturumVar(false);
+    setProfilMenuAcik(false);
+    if (yol.startsWith("/profil")) {
+      router.push("/");
+    }
   };
 
   return (
@@ -195,7 +212,9 @@ export default function Nav() {
             <Link href="/denemeler/" className="nav-cta">
               Deneme Başlat
             </Link>
-            {!oturumVar ? (
+
+            {/* Giriş yapılmamışsa Profil sekmesi gizlenir, yalnızca Giriş / Kayıt butonu görünür */}
+            {kuruldu && !oturumVar && (
               <button
                 type="button"
                 className="nav-btn"
@@ -203,37 +222,59 @@ export default function Nav() {
               >
                 🔐 Giriş / Kayıt
               </button>
-            ) : (
-              <button
-                type="button"
-                className="nav-btn nav-hide-md"
-                onClick={async () => {
-                  await kullaniciCikisYap();
-                  setOturumVar(false);
-                }}
-              >
-                Çıkış Yap
-              </button>
             )}
-            <Link
-              href="/profil/"
-              className={`nav-profil ${yol.startsWith("/profil") ? "active" : ""}`}
-              title="Profil"
-            >
-              <span className="nav-avatar">
-                {profilFoto && oturumVar ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={profilFoto}
-                    alt={kisaAd}
-                    className="avatar-img"
-                  />
-                ) : (
-                  basHarf
+
+            {/* Giriş yapılmışsa Profil ikonu görünür ve tıklanınca "Profil" + "Çıkış Yap" menüsü açılır */}
+            {kuruldu && oturumVar && (
+              <div className="nav-profil-kapsam" ref={profilMenuRef}>
+                <button
+                  type="button"
+                  className={`nav-profil ${yol.startsWith("/profil") || profilMenuAcik ? "active" : ""}`}
+                  onClick={() => setProfilMenuAcik((v) => !v)}
+                  aria-expanded={profilMenuAcik}
+                  title="Profil Menüsü"
+                >
+                  <span className="nav-avatar">
+                    {profilFoto ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={profilFoto}
+                        alt={kisaAd}
+                        className="avatar-img"
+                      />
+                    ) : (
+                      basHarf
+                    )}
+                  </span>
+                  <span>{kisaAd}</span>
+                  <span style={{ fontSize: 10, opacity: 0.8 }}>▾</span>
+                </button>
+
+                {profilMenuAcik && (
+                  <div className="nav-profil-menu" role="menu">
+                    <Link
+                      href="/profil/"
+                      className="nav-profil-item"
+                      role="menuitem"
+                      onClick={() => setProfilMenuAcik(false)}
+                    >
+                      <span>👤</span>
+                      <span>Profil</span>
+                    </Link>
+                    <button
+                      type="button"
+                      className="nav-profil-item cikis"
+                      role="menuitem"
+                      onClick={handleCikis}
+                    >
+                      <span>🚪</span>
+                      <span>Çıkış Yap</span>
+                    </button>
+                  </div>
                 )}
-              </span>
-              <span>{kisaAd}</span>
-            </Link>
+              </div>
+            )}
+
             <button
               type="button"
               className="nav-burger"
@@ -300,13 +341,24 @@ export default function Nav() {
               >
                 İstatistik & Rozetler
               </Link>
-              <Link
-                href="/profil/"
-                className={`nav-mobil-link ${yol.startsWith("/profil") ? "active" : ""}`}
-              >
-                Profil & Hedefler ({kisaAd})
-              </Link>
-              {!oturumVar && (
+              {oturumVar ? (
+                <>
+                  <Link
+                    href="/profil/"
+                    className={`nav-mobil-link ${yol.startsWith("/profil") ? "active" : ""}`}
+                  >
+                    👤 Profil ({kisaAd})
+                  </Link>
+                  <button
+                    type="button"
+                    className="nav-mobil-link"
+                    style={{ textAlign: "left", color: "var(--red-soft)" }}
+                    onClick={handleCikis}
+                  >
+                    🚪 Çıkış Yap
+                  </button>
+                </>
+              ) : (
                 <button
                   type="button"
                   className="nav-mobil-link"

@@ -1273,6 +1273,40 @@ button.ders-card { width: 100%; text-align: left; color: inherit; }
   }
 }
 
+/* --- Misafir (Salt Görüntüleme) Uyarı Şeridi --- */
+.misafir-serit {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 8px var(--yan, 24px);
+  background: var(--acc-wash);
+  border-top: 1px solid var(--acc);
+  font-size: 12.5px;
+  color: var(--text);
+}
+.misafir-serit strong {
+  color: var(--acc);
+}
+.misafir-serit-btn {
+  padding: 5px 11px;
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--panel-2);
+  color: var(--text);
+  border: 1px solid var(--line-2);
+}
+.misafir-serit-btn:hover {
+  border-color: var(--acc);
+  color: var(--acc);
+}
+.misafir-serit-btn.vurgu {
+  background: var(--acc);
+  color: var(--acc-ink);
+  border-color: var(--acc);
+}
+
 
 
 

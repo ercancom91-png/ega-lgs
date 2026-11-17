@@ -1,29 +1,27 @@
 import type { Veri } from "./store";
 import type { DenemeSonuc } from "./scoring";
 
+/**
+ * Rider ASP.NET Core Oracle SQL Backend API adresi (varsayılan: http://localhost:5180/api)
+ * ve Oracle ORDS bulut adresi.
+ */
+export const ORACLE_API_BASE =
+  process.env.NEXT_PUBLIC_ORACLE_API_URL || "http://localhost:5180/api";
 const ORACLE_ORDS_URL = process.env.NEXT_PUBLIC_ORACLE_ORDS_URL || "";
 const ORACLE_SYNC_LOG_KEY = "ega.lgs.oracle.sync.v1";
 
 export interface OracleDurum {
   aktif: boolean;
-  mod: "ords-cloud" | "api-route" | "hibrit-yerel";
+  mod: "rider-oracle-api" | "ords-cloud" | "yerel-oracle-sema";
   sonSenkronizasyon: string | null;
   toplamKayit: number;
-}
-
-export function oracleYapilandirildiMi(): boolean {
-  return Boolean(
-    ORACLE_ORDS_URL &&
-      ORACLE_ORDS_URL.startsWith("https://") &&
-      !ORACLE_ORDS_URL.includes("oraclecloudapps.com/ords/ega_lgs")
-  );
 }
 
 export function oracleDurumAl(): OracleDurum {
   if (typeof window === "undefined") {
     return {
       aktif: true,
-      mod: oracleYapilandirildiMi() ? "ords-cloud" : "hibrit-yerel",
+      mod: "rider-oracle-api",
       sonSenkronizasyon: null,
       toplamKayit: 0,
     };
@@ -33,27 +31,31 @@ export function oracleDurumAl(): OracleDurum {
     const kayit = ham ? JSON.parse(ham) : {};
     return {
       aktif: true,
-      mod: oracleYapilandirildiMi() ? "ords-cloud" : "hibrit-yerel",
+      mod: kayit.mod || "rider-oracle-api",
       sonSenkronizasyon: kayit.sonSenkronizasyon || null,
       toplamKayit: kayit.toplamKayit || 0,
     };
   } catch {
     return {
       aktif: true,
-      mod: "hibrit-yerel",
+      mod: "rider-oracle-api",
       sonSenkronizasyon: null,
       toplamKayit: 0,
     };
   }
 }
 
-function oracleSenkronKaydet(ekSayi = 1) {
+export function oracleSenkronKaydet(
+  ekSayi = 1,
+  mod: OracleDurum["mod"] = "rider-oracle-api"
+) {
   if (typeof window === "undefined") return;
   try {
     const mevcut = oracleDurumAl();
     window.localStorage.setItem(
       ORACLE_SYNC_LOG_KEY,
       JSON.stringify({
+        mod,
         sonSenkronizasyon: new Date().toISOString(),
         toplamKayit: (mevcut.toplamKayit || 0) + ekSayi,
       })
@@ -64,7 +66,116 @@ function oracleSenkronKaydet(ekSayi = 1) {
 }
 
 /**
- * Oracle Autonomous Database (EGA_PROFILLER tablosu / EGA_PROFIL_SENKRONIZE_ET prosedürü)
+ * Rider C# Oracle SQL API üzerinden yeni kullanıcı kaydı (EGA_KULLANICILAR tablosu).
+ */
+export async function oracleApiKayitOl(bilgi: {
+  ad: string;
+  soyad: string;
+  eposta: string;
+  parola: string;
+  foto?: string;
+  hedefPuan?: number;
+  hedefGunlukSoru?: number;
+}): Promise<{
+  ulasildi: boolean;
+  ok: boolean;
+  mesaj?: string;
+  kullanici?: {
+    id: string;
+    ad: string;
+    soyad: string;
+    eposta: string;
+    foto?: string;
+    hedefPuan: number;
+    hedefGunlukSoru: number;
+    token: string;
+  };
+}> {
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 2500);
+    const res = await fetch(`${ORACLE_API_BASE}/auth/register`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(bilgi),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    const data = await res.json();
+    if (!res.ok) {
+      return {
+        ulasildi: true,
+        ok: false,
+        mesaj: data?.mesaj || "Oracle SQL kayıt işlemi başarısız oldu.",
+      };
+    }
+    oracleSenkronKaydet(1, "rider-oracle-api");
+    return {
+      ulasildi: true,
+      ok: true,
+      mesaj: data?.mesaj,
+      kullanici: data?.kullanici,
+    };
+  } catch {
+    return { ulasildi: false, ok: false };
+  }
+}
+
+/**
+ * Rider C# Oracle SQL API üzerinden kullanıcı girişi (EGA_KULLANICILAR & EGA_OTURUMLAR).
+ */
+export async function oracleApiGirisYap(
+  eposta: string,
+  parola: string
+): Promise<{
+  ulasildi: boolean;
+  ok: boolean;
+  mesaj?: string;
+  kullanici?: {
+    id: string;
+    ad: string;
+    soyad: string;
+    eposta: string;
+    foto?: string;
+    hedefPuan: number;
+    hedefGunlukSoru: number;
+    token: string;
+  };
+  veri?: Partial<Veri>;
+}> {
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 2500);
+    const res = await fetch(`${ORACLE_API_BASE}/auth/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ eposta, parola }),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    const data = await res.json();
+    if (!res.ok) {
+      return {
+        ulasildi: true,
+        ok: false,
+        mesaj: data?.mesaj || "E-posta veya parola hatalı.",
+      };
+    }
+    oracleSenkronKaydet(1, "rider-oracle-api");
+    return {
+      ulasildi: true,
+      ok: true,
+      mesaj: data?.mesaj,
+      kullanici: data?.kullanici,
+      veri: data?.veri,
+    };
+  } catch {
+    return { ulasildi: false, ok: false };
+  }
+}
+
+/**
+ * Oracle SQL Veritabanı (EGA_KULLANICILAR, EGA_COZULEN_SORULAR, EGA_GUNLUK_AKTIVITE, EGA_KULLANICI_ROZETLERI)
  * ile öğrenci profilini ve soru istatistiklerini senkronize eder.
  */
 export async function oracleProfilSenkronizeEt(
@@ -72,37 +183,56 @@ export async function oracleProfilSenkronizeEt(
   veri: Veri
 ): Promise<boolean> {
   const payload = {
-    kullanici_id: kullaniciId || veri.profil.eposta || "yerel-ogrenci",
+    kullaniciId: kullaniciId || veri.profil.eposta || "yerel-ogrenci",
     ad: veri.profil.ad,
     soyad: veri.profil.soyad,
     eposta: veri.profil.eposta,
-    foto_clob: veri.profil.foto || null,
-    hedef_puan: veri.profil.hedefPuan,
-    hedef_gunluk_soru: veri.profil.hedefGunlukSoru,
-    aktif_gun: veri.aktifGun,
-    seri_uzunluk: veri.uzunluk,
-    en_uzun_seri: veri.enUzun,
-    rozetler_json: JSON.stringify(veri.rozetler),
-    gunluk_json: JSON.stringify(veri.gunluk),
-    sorular_json: JSON.stringify(veri.sorular),
-    guncellenme_tarihi: new Date().toISOString(),
+    foto: veri.profil.foto || null,
+    hedefPuan: veri.profil.hedefPuan,
+    hedefGunlukSoru: veri.profil.hedefGunlukSoru,
+    aktifGun: veri.aktifGun,
+    uzunluk: veri.uzunluk,
+    enUzun: veri.enUzun,
+    rozetler: veri.rozetler,
+    gunluk: veri.gunluk,
+    sorular: veri.sorular,
   };
 
-  oracleSenkronKaydet(1);
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 2200);
+    const res = await fetch(`${ORACLE_API_BASE}/progress/sync`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    if (res.ok) {
+      oracleSenkronKaydet(1, "rider-oracle-api");
+      return true;
+    }
+  } catch {
+    /* Rider API kapalıysa ORDS veya yerel şema */
+  }
 
-  if (oracleYapilandirildiMi()) {
+  if (ORACLE_ORDS_URL && ORACLE_ORDS_URL.startsWith("https://")) {
     try {
       const res = await fetch(`${ORACLE_ORDS_URL}/profiller/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      if (res.ok) return true;
+      if (res.ok) {
+        oracleSenkronKaydet(1, "ords-cloud");
+        return true;
+      }
     } catch {
-      /* fallback */
+      /* ignore */
     }
   }
 
+  oracleSenkronKaydet(1, "yerel-oracle-sema");
   return true;
 }
 
@@ -114,36 +244,40 @@ export async function oracleDenemeKaydet(
   sonuc: DenemeSonuc
 ): Promise<boolean> {
   const payload = {
-    deneme_sonuc_id: sonuc.id,
-    kullanici_id: kullaniciId || "yerel-ogrenci",
-    deneme_ad: sonuc.ad,
-    deneme_tur: sonuc.tur,
-    toplam_soru: sonuc.toplamSoru,
-    dogru_sayisi: sonuc.dogru,
-    yanlis_sayisi: sonuc.yanlis,
-    bos_sayisi: sonuc.bos,
-    net_sayisi: sonuc.net,
-    lgs_puani: sonuc.puan,
-    sure_saniye: sonuc.sure,
-    dersler_json: JSON.stringify(sonuc.dersler),
-    baslangic_param: sonuc.baslangic || null,
-    cozulme_tarihi: sonuc.tarih,
+    id: sonuc.id,
+    kullaniciId: kullaniciId || "yerel-ogrenci",
+    ad: sonuc.ad,
+    tur: sonuc.tur,
+    toplamSoru: sonuc.toplamSoru,
+    dogru: sonuc.dogru,
+    yanlis: sonuc.yanlis,
+    bos: sonuc.bos,
+    net: sonuc.net,
+    puan: sonuc.puan,
+    sure: sonuc.sure,
+    dersler: sonuc.dersler,
+    baslangic: sonuc.baslangic || null,
+    tarih: sonuc.tarih,
   };
 
-  oracleSenkronKaydet(1);
-
-  if (oracleYapilandirildiMi()) {
-    try {
-      const res = await fetch(`${ORACLE_ORDS_URL}/denemeler/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      if (res.ok) return true;
-    } catch {
-      /* fallback */
+  try {
+    const ctrl = new AbortController();
+    const timer = setTimeout(() => ctrl.abort(), 2200);
+    const res = await fetch(`${ORACLE_API_BASE}/exams`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      signal: ctrl.signal,
+    });
+    clearTimeout(timer);
+    if (res.ok) {
+      oracleSenkronKaydet(1, "rider-oracle-api");
+      return true;
     }
+  } catch {
+    /* fallback */
   }
 
+  oracleSenkronKaydet(1, "yerel-oracle-sema");
   return true;
 }

@@ -1,0 +1,9 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="EgaLgs.Api (Oracle SQL + Web)" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
+    <option name="PROJECT_FILE_PATH" value="$PROJECT_DIR$/src/EgaLgs.Api/EgaLgs.Api.csproj" />
+    <option name="LAUNCH_SETTINGS_PROFILE_NAME" value="EgaLgs.OracleWeb" />
+    <method v="2">
+      <option name="Build" />
+    </method>
+  </configuration>
+</component>

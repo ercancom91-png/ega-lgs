@@ -222,16 +222,24 @@ export default function Profil() {
             {oturum ? (
               <>
                 <span className="pill green">
-                  ● Bulut Senkron Aktif ({oturum.eposta})
+                  ● Oracle SQL Oturumu Aktif ({oturum.eposta})
                 </span>
                 <button className="btn btn-sm" onClick={oturumKapat}>
                   Oturumu Kapat
                 </button>
               </>
             ) : (
-              <Link href="/giris/" className="btn btn-primary">
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={() => {
+                  window.dispatchEvent(
+                    new CustomEvent("ega-modal", { detail: { tur: "giris" } })
+                  );
+                }}
+              >
                 Giriş Yap / Kayıt Ol →
-              </Link>
+              </button>
             )}
           </div>
         </div>

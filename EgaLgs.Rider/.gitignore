@@ -1,0 +1,6 @@
+bin/
+obj/
+wwwroot/
+.idea/
+Database/egalgs_oracle_storage.json
+Database/oracle_sql_executed.log

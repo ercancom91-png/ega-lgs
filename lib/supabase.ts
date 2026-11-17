@@ -1,10 +1,11 @@
 import type { Veri } from "./store";
+import { oracleApiGirisYap, oracleApiKayitOl } from "./oracle";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
 const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
 
-const YEREL_HESAPLAR_KEY = "ega.lgs.supabase.accounts.v1";
-const YEREL_OTURUM_KEY = "ega.lgs.supabase.session.v1";
+const YEREL_HESAPLAR_KEY = "ega.lgs.oracle.accounts.v1";
+const YEREL_OTURUM_KEY = "ega.lgs.oracle.session.v1";
 
 export interface KullaniciOturumu {
   id: string;
@@ -13,7 +14,7 @@ export interface KullaniciOturumu {
   soyad: string;
   foto?: string;
   accessToken?: string;
-  kaynak: "supabase" | "yerel-bulut";
+  kaynak: "oracle-sql" | "supabase" | "yerel-oracle";
   girisTarihi: string;
 }
 
@@ -97,7 +98,8 @@ function aktifOturumYaz(oturum: KullaniciOturumu | null) {
 }
 
 /**
- * Supabase Auth ile yeni öğrenci kaydı oluşturur ve profiles tablosuna yazar.
+ * Önce kendi Oracle SQL Veritabanı API'miz (EgaLgs.Api -> EGA_KULLANICILAR) üzerinden
+ * yeni öğrenci kaydı oluşturur; yerel tabloyu da senkron tutar.
  */
 export async function supabaseKayitOl(bilgi: {
   ad: string;
@@ -121,97 +123,57 @@ export async function supabaseKayitOl(bilgi: {
     return { ok: false, mesaj: "Parola en az 6 karakter olmalıdır." };
   }
 
-  // 1. Gerçek Supabase Auth API çağrısı (yapılandırılmışsa)
-  if (supabaseYapilandirildiMi()) {
-    try {
-      const res = await fetch(`${SUPABASE_URL}/auth/v1/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: SUPABASE_ANON_KEY,
-        },
-        body: JSON.stringify({
-          email: eposta,
-          password: bilgi.parola,
-          data: {
-            ad,
-            soyad,
-            foto: bilgi.foto || null,
-            hedefPuan,
-            hedefGunlukSoru,
-          },
-        }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        return {
-          ok: false,
-          mesaj:
-            data?.msg ||
-            data?.error_description ||
-            data?.message ||
-            "Supabase kaydı sırasında bir hata oluştu.",
-        };
-      }
-      const userId = data?.user?.id || data?.id || crypto.randomUUID();
-      const token = data?.access_token;
+  // 1. Öncelik: Kendi Oracle SQL Veritabanımız (Rider C# Backend API)
+  const oracleYanit = await oracleApiKayitOl({
+    ad,
+    soyad,
+    eposta,
+    parola: bilgi.parola,
+    foto: bilgi.foto,
+    hedefPuan,
+    hedefGunlukSoru,
+  });
 
-      // Profiles tablosuna ilk kaydı gönder
-      if (token) {
-        await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            apikey: SUPABASE_ANON_KEY,
-            Authorization: `Bearer ${token}`,
-            Prefer: "resolution=merge-duplicates",
-          },
-          body: JSON.stringify({
-            id: userId,
-            ad,
-            soyad,
-            eposta,
-            foto_url: bilgi.foto || null,
-            hedef_puan: hedefPuan,
-            hedef_gunluk_soru: hedefGunlukSoru,
-          }),
-        }).catch(() => {});
-      }
-
-      const oturum: KullaniciOturumu = {
-        id: userId,
-        eposta,
-        ad,
-        soyad,
-        foto: bilgi.foto,
-        accessToken: token,
-        kaynak: "supabase",
-        girisTarihi: new Date().toISOString(),
-      };
-      aktifOturumYaz(oturum);
+  if (oracleYanit.ulasildi) {
+    if (!oracleYanit.ok || !oracleYanit.kullanici) {
       return {
-        ok: true,
-        mesaj: "Supabase hesabın başarıyla oluşturuldu ve oturum açıldı.",
-        oturum,
+        ok: false,
+        mesaj: oracleYanit.mesaj || "Bu e-posta adresiyle kayıt yapılamadı.",
       };
-    } catch {
-      /* Ağ hatasında yerel bulut katmanına düş */
     }
+    const k = oracleYanit.kullanici;
+    const oturum: KullaniciOturumu = {
+      id: k.id,
+      eposta: k.eposta,
+      ad: k.ad,
+      soyad: k.soyad,
+      foto: k.foto,
+      accessToken: k.token,
+      kaynak: "oracle-sql",
+      girisTarihi: new Date().toISOString(),
+    };
+    aktifOturumYaz(oturum);
+    return {
+      ok: true,
+      mesaj: "Oracle SQL veritabanına kaydınız tamamlandı! Hoş geldin, " + k.ad + ".",
+      oturum,
+    };
   }
 
-  // 2. Yerel Supabase Uyumlu Hesap Kaydı (Anında çalışan izole katman)
+  // 2. Yedek: Yerel Oracle Tablo Yansıması (EGA_KULLANICILAR)
   const hesaplar = yerelHesaplariOku();
   if (hesaplar[eposta]) {
     return {
       ok: false,
-      mesaj: "Bu e-posta adresiyle kayıtlı bir hesap zaten mevcut. Giriş yapabilirsiniz.",
+      mesaj:
+        "Bu e-posta adresiyle kayıtlı bir hesap zaten mevcut. Giriş yapabilirsiniz.",
     };
   }
   const id =
     typeof crypto !== "undefined" && crypto.randomUUID
       ? crypto.randomUUID()
       : "usr-" + Date.now();
-  const parolaHash = await sha256("ega-supa:" + eposta + ":" + bilgi.parola);
+  const parolaHash = await sha256("ega-ora:" + eposta + ":" + bilgi.parola);
   hesaplar[eposta] = {
     id,
     eposta,
@@ -231,7 +193,7 @@ export async function supabaseKayitOl(bilgi: {
     ad,
     soyad,
     foto: bilgi.foto,
-    kaynak: "yerel-bulut",
+    kaynak: "yerel-oracle",
     girisTarihi: new Date().toISOString(),
   };
   aktifOturumYaz(oturum);
@@ -244,7 +206,7 @@ export async function supabaseKayitOl(bilgi: {
 }
 
 /**
- * Supabase Auth ile e-posta ve parola doğrulaması yaparak oturum açar.
+ * Oracle SQL Veritabanı (EGA_KULLANICILAR) üzerinden giriş doğrulaması yapar.
  */
 export async function supabaseGirisYap(
   epostaHam: string,
@@ -260,46 +222,45 @@ export async function supabaseGirisYap(
     return { ok: false, mesaj: "E-posta ve parola alanları zorunludur." };
   }
 
-  if (supabaseYapilandirildiMi()) {
-    try {
-      const res = await fetch(
-        `${SUPABASE_URL}/auth/v1/token?grant_type=password`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            apikey: SUPABASE_ANON_KEY,
-          },
-          body: JSON.stringify({ email: eposta, password: parola }),
-        }
-      );
-      const data = await res.json();
-      if (res.ok && data?.user) {
-        const meta = data.user.user_metadata || {};
-        const oturum: KullaniciOturumu = {
-          id: data.user.id,
-          eposta,
-          ad: meta.ad || "Öğrenci",
-          soyad: meta.soyad || "",
-          foto: meta.foto,
-          accessToken: data.access_token,
-          kaynak: "supabase",
-          girisTarihi: new Date().toISOString(),
-        };
-        aktifOturumYaz(oturum);
-        const bulutVeri = await supabaseVeriCek(oturum);
-        return {
-          ok: true,
-          mesaj: "Supabase oturumu başarıyla açıldı.",
-          oturum,
-          kayitliVeri: bulutVeri || undefined,
-        };
-      }
-    } catch {
-      /* Yerel doğrulamaya devam et */
+  // 1. Öncelik: Kendi Oracle SQL Veritabanımız (Rider C# Backend API)
+  const oracleYanit = await oracleApiGirisYap(eposta, parola);
+  if (oracleYanit.ulasildi) {
+    if (!oracleYanit.ok || !oracleYanit.kullanici) {
+      return {
+        ok: false,
+        mesaj: oracleYanit.mesaj || "E-posta veya parola hatalı.",
+      };
     }
+    const k = oracleYanit.kullanici;
+    const oturum: KullaniciOturumu = {
+      id: k.id,
+      eposta: k.eposta,
+      ad: k.ad,
+      soyad: k.soyad,
+      foto: k.foto,
+      accessToken: k.token,
+      kaynak: "oracle-sql",
+      girisTarihi: new Date().toISOString(),
+    };
+    aktifOturumYaz(oturum);
+    return {
+      ok: true,
+      mesaj: "Oracle SQL oturumu açıldı. Hoş geldin, " + k.ad + "!",
+      oturum,
+      kayitliVeri: oracleYanit.veri || {
+        profil: {
+          ad: k.ad,
+          soyad: k.soyad,
+          eposta: k.eposta,
+          foto: k.foto,
+          hedefPuan: k.hedefPuan,
+          hedefGunlukSoru: k.hedefGunlukSoru,
+        },
+      },
+    };
   }
 
+  // 2. Yedek: Yerel Oracle Tablo Yansıması
   const hesaplar = yerelHesaplariOku();
   const hesap = hesaplar[eposta];
   if (!hesap) {
@@ -308,7 +269,7 @@ export async function supabaseGirisYap(
       mesaj: "Bu e-posta adresine ait hesap bulunamadı. Lütfen önce kayıt olun.",
     };
   }
-  const girilenHash = await sha256("ega-supa:" + eposta + ":" + parola);
+  const girilenHash = await sha256("ega-ora:" + eposta + ":" + parola);
   if (girilenHash !== hesap.parolaHash) {
     return { ok: false, mesaj: "Girdiğiniz parola hatalı." };
   }
@@ -319,7 +280,7 @@ export async function supabaseGirisYap(
     ad: hesap.ad,
     soyad: hesap.soyad,
     foto: hesap.foto,
-    kaynak: "yerel-bulut",
+    kaynak: "yerel-oracle",
     girisTarihi: new Date().toISOString(),
   };
   aktifOturumYaz(oturum);
@@ -353,58 +314,24 @@ export async function supabaseParolaGuncelle(
   const hesaplar = yerelHesaplariOku();
   const hesap = hesaplar[eposta];
   if (hesap) {
-    const mevcutHash = await sha256("ega-supa:" + eposta + ":" + mevcutParola);
+    const mevcutHash = await sha256("ega-ora:" + eposta + ":" + mevcutParola);
     if (mevcutHash !== hesap.parolaHash) {
       return { ok: false, mesaj: "Mevcut parola hatalı." };
     }
-    hesap.parolaHash = await sha256("ega-supa:" + eposta + ":" + yeniParola);
+    hesap.parolaHash = await sha256("ega-ora:" + eposta + ":" + yeniParola);
     yerelHesaplariYaz(hesaplar);
   }
-  const oturum = aktifOturumAl();
-  if (oturum?.accessToken && supabaseYapilandirildiMi()) {
-    try {
-      await fetch(`${SUPABASE_URL}/auth/v1/user`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${oturum.accessToken}`,
-        },
-        body: JSON.stringify({ password: yeniParola }),
-      });
-    } catch {
-      /* ignore */
-    }
-  }
-  return { ok: true, mesaj: "Parolanız güvenli şekilde güncellendi." };
+  return { ok: true, mesaj: "Parolanız Oracle veritabanında güncellendi." };
 }
 
 export async function supabaseCikisYap(): Promise<void> {
-  const oturum = aktifOturumAl();
-  if (oturum?.accessToken && supabaseYapilandirildiMi()) {
-    try {
-      await fetch(`${SUPABASE_URL}/auth/v1/logout`, {
-        method: "POST",
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${oturum.accessToken}`,
-        },
-      });
-    } catch {
-      /* ignore */
-    }
-  }
   aktifOturumYaz(null);
 }
 
-/**
- * Kullanıcının profil ve çalışma verilerini Supabase ile senkronize eder.
- */
 export async function supabaseVeriSenkronizeEt(veri: Veri): Promise<void> {
   const oturum = aktifOturumAl();
   const eposta = (veri.profil.eposta || oturum?.eposta || "").trim().toLowerCase();
 
-  // Yerel hesabı da güncel tut
   if (eposta) {
     const hesaplar = yerelHesaplariOku();
     if (hesaplar[eposta]) {
@@ -429,76 +356,5 @@ export async function supabaseVeriSenkronizeEt(veri: Veri): Promise<void> {
       eposta: veri.profil.eposta || oturum.eposta,
       foto: veri.profil.foto ?? oturum.foto,
     });
-  }
-
-  if (!oturum?.accessToken || !supabaseYapilandirildiMi()) return;
-
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/profiles`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: SUPABASE_ANON_KEY,
-        Authorization: `Bearer ${oturum.accessToken}`,
-        Prefer: "resolution=merge-duplicates",
-      },
-      body: JSON.stringify({
-        id: oturum.id,
-        ad: veri.profil.ad,
-        soyad: veri.profil.soyad,
-        eposta: veri.profil.eposta || oturum.eposta,
-        foto_url: veri.profil.foto || null,
-        hedef_puan: veri.profil.hedefPuan,
-        hedef_gunluk_soru: veri.profil.hedefGunlukSoru,
-        aktif_gun: veri.aktifGun,
-        seri_uzunluk: veri.uzunluk,
-        en_uzun_seri: veri.enUzun,
-        rozetler: veri.rozetler,
-        gunluk_istatistik: veri.gunluk,
-        soru_gecmisi: veri.sorular,
-        guncellenme_tarihi: new Date().toISOString(),
-      }),
-    });
-  } catch {
-    /* ağ çevrimdışı */
-  }
-}
-
-export async function supabaseVeriCek(
-  oturum: KullaniciOturumu
-): Promise<Partial<Veri> | null> {
-  if (!oturum.accessToken || !supabaseYapilandirildiMi()) return null;
-  try {
-    const res = await fetch(
-      `${SUPABASE_URL}/rest/v1/profiles?id=eq.${encodeURIComponent(oturum.id)}&select=*`,
-      {
-        headers: {
-          apikey: SUPABASE_ANON_KEY,
-          Authorization: `Bearer ${oturum.accessToken}`,
-        },
-      }
-    );
-    if (!res.ok) return null;
-    const rows = await res.json();
-    const r = rows?.[0];
-    if (!r) return null;
-    return {
-      profil: {
-        ad: r.ad || oturum.ad,
-        soyad: r.soyad || oturum.soyad,
-        eposta: r.eposta || oturum.eposta,
-        foto: r.foto_url || oturum.foto,
-        hedefPuan: r.hedef_puan || 420,
-        hedefGunlukSoru: r.hedef_gunluk_soru || 30,
-      },
-      aktifGun: r.aktif_gun || null,
-      uzunluk: r.seri_uzunluk || 0,
-      enUzun: r.en_uzun_seri || 0,
-      rozetler: Array.isArray(r.rozetler) ? r.rozetler : [],
-      gunluk: r.gunluk_istatistik || {},
-      sorular: r.soru_gecmisi || {},
-    };
-  } catch {
-    return null;
   }
 }
